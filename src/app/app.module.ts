@@ -2,15 +2,13 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { Login } from '../pages/login/login';
-import { ItemDetailsPage } from '../pages/item-details/item-details';
-import { ListPage } from '../pages/list/list';
+import { ReferedPage} from '../pages/refered/refered';
 
 @NgModule({
   declarations: [
     MyApp,
     Login,
-    ItemDetailsPage,
-    ListPage
+    ReferedPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -19,8 +17,7 @@ import { ListPage } from '../pages/list/list';
   entryComponents: [
     MyApp,
     Login,
-    ItemDetailsPage,
-    ListPage
+    ReferedPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

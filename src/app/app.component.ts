@@ -5,7 +5,8 @@ import { Platform, MenuController, Nav } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { Login } from '../pages/login/login';
-import { ListPage } from '../pages/list/list';
+import { ReferedPage} from '../pages/refered/refered';
+
 
 
 @Component({
@@ -27,7 +28,7 @@ export class MyApp {
     // set our app's pages
     this.pages = [
       { title: 'Login', component: Login },
-      { title: 'My First List', component: ListPage }
+      { title: 'Refered', component: ReferedPage}
     ];
   }
 
