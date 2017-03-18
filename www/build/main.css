@@ -24519,3 +24519,16 @@ page-login #gmail {
   border: 1px solid red;
   height: 10vh;
 }
+
+page-refered #vCenter {
+  margin-top: 25vh;
+}
+
+page-refered #sendButton {
+  border: 1px solid #13c13e;
+}
+
+page-refered #denyButton {
+  background: #d1d655;
+  border: 1px solid #c7cc4b;
+}
