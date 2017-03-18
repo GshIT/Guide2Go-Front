@@ -24498,23 +24498,23 @@ ion-navbar.toolbar {
   }
 }
 
-page-hello-ionic #main {
+page-login #main {
   border: 1px solid black;
   text-align: center;
   height: 70vh;
 }
 
-page-hello-ionic #inside {
-  margin-top: 24vh;
+page-login #inside {
+  margin-top: 25vh;
 }
 
-page-hello-ionic #facebook {
+page-login #facebook {
   background: #3b5998;
   border: 1px solid #4268f4;
   height: 10vh;
 }
 
-page-hello-ionic #gmail {
+page-login #gmail {
   background: #c71610;
   border: 1px solid red;
   height: 10vh;
