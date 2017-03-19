@@ -9,11 +9,11 @@ import { ReferedPage} from '../refered/refered';
 export class Login {
   constructor(private menu: MenuController, private navCtrl : NavController) {}
 
-    ionViewDidEnter() {
-      this.menu.enable(false);
-    }
+  ionViewDidEnter() {
+  	this.menu.enable(false);
+  }
 
-    refered() {
-        this.navCtrl.push(ReferedPage);
-    }
+  refered() {
+  	this.navCtrl.push(ReferedPage);
+  }
 }

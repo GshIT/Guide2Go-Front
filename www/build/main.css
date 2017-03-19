@@ -24520,6 +24520,19 @@ page-login #gmail {
   height: 10vh;
 }
 
+page-refered #vCenter {
+  margin-top: 25vh;
+}
+
+page-refered #sendButton {
+  border: 1px solid #13c13e;
+}
+
+page-refered #denyButton {
+  background: #d1d655;
+  border: 1px solid #c7cc4b;
+}
+
 page-zones .thumb-img {
   font-size: 70px;
 }
