@@ -24519,3 +24519,11 @@ page-login #gmail {
   border: 1px solid red;
   height: 10vh;
 }
+
+page-zones .thumb-img {
+  font-size: 70px;
+}
+
+page-zones .profile-img {
+  font-size: 30px;
+}

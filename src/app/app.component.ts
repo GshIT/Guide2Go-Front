@@ -6,8 +6,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { Login } from '../pages/login/login';
 import { ReferedPage} from '../pages/refered/refered';
-
-
+import { ZonesPage } from '../pages/zones/zones';
 
 @Component({
   templateUrl: 'app.html'
@@ -16,7 +15,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   // make Login the root (or first) page
-  rootPage: any = Login;
+  rootPage: any = ZonesPage;
   pages: Array<{title: string, component: any}>;
 
   constructor(
@@ -28,7 +27,8 @@ export class MyApp {
     // set our app's pages
     this.pages = [
       { title: 'Login', component: Login },
-      { title: 'Refered', component: ReferedPage}
+      { title: 'Refered', component: ReferedPage},
+      { title: 'Zones', component: ZonesPage }
     ];
   }
 
