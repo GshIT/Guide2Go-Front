@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
-import { ZonesPage } from '../zones/zones';
+import { MainPage } from '../main/main';
 
 @Component({
   selector: 'page-refered',
@@ -10,8 +10,9 @@ import { ZonesPage } from '../zones/zones';
 export class ReferedPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
-  zonesMain() {
-  	this.navCtrl.setRoot(ZonesPage);
+  MainView() {
+  	this.navCtrl.setRoot(MainPage, {}, {
+  		animate: true
+  	});
   }
-
 }

@@ -10,6 +10,7 @@ export class Login {
   constructor(private menu: MenuController, private navCtrl : NavController) {}
 
   ionViewDidEnter() {
+  	// Cerrar sesion cuando entra para estar seguros.
   	this.menu.enable(false);
   }
 

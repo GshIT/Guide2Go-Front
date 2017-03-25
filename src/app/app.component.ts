@@ -5,8 +5,8 @@ import { Platform, MenuController, Nav } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { Login } from '../pages/login/login';
-import { ReferedPage} from '../pages/refered/refered';
 import { ZonesPage } from '../pages/zones/zones';
+import { MainPage } from '../pages/main/main';
 
 @Component({
   templateUrl: 'app.html'
@@ -15,7 +15,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   // make Login the root (or first) page
-  rootPage: any = Login;
+  rootPage: any = MainPage;
   pages: Array<{title: string, component: any}>;
 
   constructor(
@@ -26,9 +26,11 @@ export class MyApp {
 
     // set our app's pages
     this.pages = [
-      { title: 'Login', component: Login },
-      { title: 'Refered', component: ReferedPage},
-      { title: 'Zones', component: ZonesPage }
+      { title: 'Mi Perfil', component: null },
+      { title: 'Mis Zonas', component: null },
+      { title: 'Recomendar', component: null },
+      { title: 'Todas las Zonas', component: ZonesPage },
+      { title: 'Cerrar Sesion', component: Login }
     ];
   }
 
@@ -45,6 +47,12 @@ export class MyApp {
     // close the menu when clicking a link from the menu
     this.menu.close();
     // navigate to the new page if it is not the current page
-    this.nav.setRoot(page.component);
+    this.nav.setRoot(page.component, {}, {
+      animate: true,
+      direction: 'back'
+    })
+    .catch(() => {
+      console.log('Esa pagina no existe todavia...');
+    })
   }
 }
