@@ -1,5 +1,7 @@
 node_modules/
 temp/
+platforms/
+plugins/
 www/
 *.DS_Store
 *.log
