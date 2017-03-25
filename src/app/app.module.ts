@@ -7,6 +7,7 @@ import { Login } from '../pages/login/login';
 import { ReferedPage} from '../pages/refered/refered';
 import { ZonesPage } from '../pages/zones/zones';
 import { MainPage } from '../pages/main/main';
+import { RecommendPage } from '../pages/recommend/recommend';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { MainPage } from '../pages/main/main';
     Login,
     ReferedPage,
     ZonesPage,
-    MainPage
+    MainPage,
+    RecommendPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -25,7 +27,8 @@ import { MainPage } from '../pages/main/main';
     Login,
     ReferedPage,
     ZonesPage,
-    MainPage
+    MainPage,
+    RecommendPage
   ],
   providers: [{
     provide: ErrorHandler,

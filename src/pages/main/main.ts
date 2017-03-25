@@ -17,6 +17,10 @@ export class MainPage {
 
 	loader: Loading;
 
+  /* Estoy planeando hacer de esta clase una especie 
+  de intermidiario entre las paginas para no repetir
+  codigo */
+
   constructor(
   	public loadCtrl: LoadingController,
   	public menuCtrl: MenuController,
