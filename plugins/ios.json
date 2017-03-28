@@ -8,25 +8,28 @@
     },
     "installed_plugins": {
         "cordova-plugin-console": {
-            "PACKAGE_NAME": "io.ionic.starter"
-        },
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "io.ionic.starter"
-        },
-        "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "io.ionic.starter"
-        },
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "io.ionic.starter"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "io.ionic.starter"
-        },
-        "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "io.ionic.starter"
+            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
         },
         "cordova-plugin-crosswalk-webview": {
-            "PACKAGE_NAME": "io.ionic.starter"
+            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
         }
     },
     "dependent_plugins": {}

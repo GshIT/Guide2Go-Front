@@ -8,6 +8,7 @@ import { Login } from '../pages/login/login';
 import { ZonesPage } from '../pages/zones/zones';
 import { MainPage } from '../pages/main/main';
 import { RecommendPage } from '../pages/recommend/recommend';
+import { UserZonesPage } from '../pages/user-zones/user-zones';
 
 @Component({
   templateUrl: 'app.html'
@@ -28,7 +29,7 @@ export class MyApp {
     // set our app's pages
     this.pages = [
       { title: 'Mi Perfil', component: null },
-      { title: 'Mis Zonas', component: null },
+      { title: 'Mis Zonas', component: UserZonesPage },
       { title: 'Recomendar', component: RecommendPage },
       { title: 'Todas las Zonas', component: ZonesPage },
       { title: 'Cerrar Sesion', component: Login }

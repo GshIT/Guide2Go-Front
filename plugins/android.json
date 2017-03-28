@@ -21,6 +21,9 @@
         "cordova-plugin-device": {
             "PACKAGE_NAME": "com.ionicframework.guide2go674784"
         },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
+        },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.ionicframework.guide2go674784"
         },
