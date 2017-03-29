@@ -32,8 +32,8 @@ export class MyApp {
       { title: 'Mis Zonas', component: null },
       { title: 'Recomendar', component: RecommendPage },
       { title: 'Todas las Zonas', component: ZonesPage },
-      { title: 'Cerrar Sesion', component: Login },
-      { title: 'Mapa', component: MapaPage }
+      { title: 'Mapa', component: MapaPage },
+      { title: 'Cerrar Sesion', component: Login }
     ];
   }
 
