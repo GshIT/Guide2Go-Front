@@ -52,7 +52,16 @@ export class MapaPage {
      Geolocation.getCurrentPosition().then((position) => {
 
       this.latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
       this.map.setCenter(this.latLng);
+
+      var marker = new google.maps.Marker({
+        position: this.latLng,
+        title:"Hello World!"
+      });
+
+      marker.setMap(this.map);
+
  
     }, (err) => {
       console.log(err);
