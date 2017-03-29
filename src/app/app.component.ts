@@ -8,6 +8,7 @@ import { Login } from '../pages/login/login';
 import { ZonesPage } from '../pages/zones/zones';
 import { MainPage } from '../pages/main/main';
 import { RecommendPage } from '../pages/recommend/recommend';
+import { MapaPage } from '../pages/mapa/mapa';
 
 @Component({
   templateUrl: 'app.html'
@@ -31,7 +32,8 @@ export class MyApp {
       { title: 'Mis Zonas', component: null },
       { title: 'Recomendar', component: RecommendPage },
       { title: 'Todas las Zonas', component: ZonesPage },
-      { title: 'Cerrar Sesion', component: Login }
+      { title: 'Cerrar Sesion', component: Login },
+      { title: 'Mapa', component: MapaPage }
     ];
   }
 
