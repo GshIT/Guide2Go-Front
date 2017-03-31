@@ -8,6 +8,7 @@ import { ReferedPage} from '../pages/refered/refered';
 import { ZonesPage } from '../pages/zones/zones';
 import { MainPage } from '../pages/main/main';
 import { RecommendPage } from '../pages/recommend/recommend';
+import { UserZonesPage } from '../pages/user-zones/user-zones';
 import { MapaPage } from '../pages/mapa/mapa';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { MapaPage } from '../pages/mapa/mapa';
     ZonesPage,
     MainPage,
     RecommendPage,
+    UserZonesPage,
     MapaPage
   ],
   imports: [
@@ -31,6 +33,7 @@ import { MapaPage } from '../pages/mapa/mapa';
     ZonesPage,
     MainPage,
     RecommendPage,
+    UserZonesPage,
     MapaPage
   ],
   providers: [{

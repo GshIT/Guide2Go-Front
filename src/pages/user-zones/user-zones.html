@@ -1,5 +1,5 @@
 <!--
-  Generated template for the Zones page.
+  Generated template for the UserZones page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
@@ -27,14 +27,20 @@
 <ion-content padding>
 
 	<ion-list>
-
-		<ion-item *ngFor="let zone of zones">
+		<ion-item>
 			<ion-thumbnail item-left>
 				<ion-icon class="thumb-img" name="ios-image-outline"></ion-icon>
 			</ion-thumbnail>
-			<h1>{{ zone.name }}</h1>
-			<p>{{ zone.points }} puntos</p>
-			<button [navPush]="mapPage" [navParams]="setZone(zone)" ion-button clear item-right>Mostrar</button>
+			<h1>Cuzco</h1>
+			<p>80 puntos</p>
+		</ion-item>
+
+		<ion-item>
+			<ion-thumbnail item-left>
+				<ion-icon class="thumb-img" name="ios-image-outline"></ion-icon>
+			</ion-thumbnail>
+			<h1>Cuzco</h1>
+			<p>80 puntos</p>
 		</ion-item>
 
 	</ion-list>

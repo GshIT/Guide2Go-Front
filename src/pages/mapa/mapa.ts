@@ -1,12 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import { NavParams, NavController } from 'ionic-angular';
 import { Geolocation } from 'ionic-native';
 
+import { Zones } from '../../providers/zones';
 
 @Component({
   selector: 'page-mapa',
-  templateUrl: 'mapa.html'
+  templateUrl: 'mapa.html',
+  providers: [Zones]
 })
 export class MapaPage {
 
@@ -15,19 +17,29 @@ export class MapaPage {
   latLng: any;
   intervalId: any;
   marker: any;
+  follow: boolean;
+  zone: any;
 
-  constructor(public navCtrl: NavController) {
-    this.latLng = new google.maps.LatLng(-34.9290, 138.6010);
+  constructor(
+    public zonesProvider: Zones,
+    public params: NavParams,
+    public navCtrl: NavController) {
+
+    this.zone = params.get('zone');
+    this.follow = (typeof(this.zone) !== 'undefined') ? false : true;
+    
+    const coords = zonesProvider.getZoneLatLng(this.zone);
+
+    /* -13.163109, -72.544961 */
+    this.latLng = new google.maps.LatLng(coords.lat, coords.lng);
     this.marker = new google.maps.Marker({
-        position: this.latLng
-      });
+      position: this.latLng
+    });
   }
 
-  ionViewDidLoad(){
+  ionViewDidLoad() {
     this.initMap();
-
-    //aca pon algo para que no se ejecute si hubo parametros
-    this.uploadCycle();
+    if (this.follow) this.uploadCycle(); 
   }
 
   ionViewWillUnload(){
@@ -39,29 +51,32 @@ export class MapaPage {
 
     var myStyles = [
       {
-          featureType: "poi",
-          elementType: "labels",
-          stylers: [
-                { visibility: "off" }
-          ]
+        featureType: "poi",
+        elementType: "labels",
+        stylers: [
+              { visibility: "off" }
+        ]
       }
     ];
 
-
     let mapOptions = {
       center: this.latLng,
-      zoom: 2,
+      zoom: 10,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       styles: myStyles,
       disableDefaultUI: true
     };
 
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+
+    if (typeof(this.zone) !== 'undefined') {
+      this.previewZone(this.zone.subZones);
+    }
   }
 
   uploadCycle(){
-      this.getGeo().then(() => {this.marker.setMap(this.map);}).then(() => {this.setPlace(this.latLng);this.map.setZoom(17);})
-      this.intervalId = setInterval(this.intervalFunc.bind(this), 2000);
+    this.getGeo().then(() => {this.marker.setMap(this.map);}).then(() => {this.setPlace(this.latLng);this.map.setZoom(17);})
+    this.intervalId = setInterval(this.intervalFunc.bind(this), 2000);
   }
 
   setPlace(position: any){
@@ -69,22 +84,51 @@ export class MapaPage {
   }
 
   setMarker(position: any){
-     this.marker.setPosition( position );
+    this.marker.setPosition( position );
   }
 
   intervalFunc(){
     this.getGeo().then(() => {this.setPlace(this.latLng);this.setMarker(this.latLng);})
   }
 
-  getGeo(){
-     return Geolocation.getCurrentPosition().then((position) => {
+  getGeo() {
+    return Geolocation.getCurrentPosition().then((position) => {
       console.log("Posicion actualizada");
       this.latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
-    }, (err) => {
-      console.log(err);
+      }, (err) => {
+        console.log(err);
     });
   }
 
+  previewZone(sub) {
+
+    for (let z of sub) {
+
+      let zonePolygon = new google.maps.Polygon({
+        paths: z.bounds,
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 3,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35
+      });
+      console.log(this.map)
+      zonePolygon.setMap(this.map);
+
+      for (let p of z.points) {
+        new google.maps.Marker({
+          animation: google.maps.Animation.DROP,
+          position: p,
+          clickable: true,
+          map: this.map,
+          title: 'Nombre de la parada' 
+          /* Aqui deberia haber un nombre de la parada */
+        });
+      }
+
+    }
+
+  }
 
 }
