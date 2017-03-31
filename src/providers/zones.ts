@@ -32,10 +32,10 @@ export class Zones {
     const len = sub.length;
 
     for(let zone of sub) {
-      let size = zone.length;
+      let size = zone.bounds.length;
       if (size != 0) {
-        coord.lat += zone.reduce((acc, val) => acc + val.lat, 0) / size;
-        coord.lng += zone.reduce((acc, val) => acc + val.lng, 0) / size;
+        coord.lat += zone.bounds.reduce((acc, val) => acc + val.lat, 0) / size;
+        coord.lng += zone.bounds.reduce((acc, val) => acc + val.lng, 0) / size;
       }
     }
 

@@ -101,18 +101,34 @@ export class MapaPage {
     });
   }
 
-  previewZone(paths) {
+  previewZone(sub) {
 
-    let zonePolygon = new google.maps.Polygon({
-      paths: paths,
-      strokeColor: '#FF0000',
-      strokeOpacity: 0.8,
-      strokeWeight: 3,
-      fillColor: '#FF0000',
-      fillOpacity: 0.35
-    });
-    console.log(this.map)
-    zonePolygon.setMap(this.map);
+    for (let z of sub) {
+
+      let zonePolygon = new google.maps.Polygon({
+        paths: z.bounds,
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 3,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35
+      });
+      console.log(this.map)
+      zonePolygon.setMap(this.map);
+
+      for (let p of z.points) {
+        new google.maps.Marker({
+          animation: google.maps.Animation.DROP,
+          position: p,
+          clickable: true,
+          map: this.map,
+          title: 'Nombre de la parada' 
+          /* Aqui deberia haber un nombre de la parada */
+        });
+      }
+
+    }
+
   }
 
 }
