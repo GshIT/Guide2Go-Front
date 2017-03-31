@@ -9,6 +9,7 @@ import { ZonesPage } from '../pages/zones/zones';
 import { MainPage } from '../pages/main/main';
 import { RecommendPage } from '../pages/recommend/recommend';
 import { UserZonesPage } from '../pages/user-zones/user-zones';
+import { MapaPage } from '../pages/mapa/mapa';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { UserZonesPage } from '../pages/user-zones/user-zones';
     ZonesPage,
     MainPage,
     RecommendPage,
-    UserZonesPage
+    UserZonesPage,
+    MapaPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -31,7 +33,8 @@ import { UserZonesPage } from '../pages/user-zones/user-zones';
     ZonesPage,
     MainPage,
     RecommendPage,
-    UserZonesPage
+    UserZonesPage,
+    MapaPage
   ],
   providers: [{
     provide: ErrorHandler,

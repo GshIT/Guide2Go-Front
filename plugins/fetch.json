@@ -59,6 +59,12 @@
         "source": {
             "type": "registry",
             "id": "cordova-plugin-inappbrowser@1.7.0"
+        }
+    },
+    "cordova-plugin-geolocation": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-geolocation"
         },
         "is_top_level": true,
         "variables": {}

@@ -27,28 +27,14 @@
 <ion-content padding>
 
 	<ion-list>
-		<ion-item>
-			<ion-thumbnail item-left>
-				<ion-icon class="thumb-img" name="ios-image-outline"></ion-icon>
-			</ion-thumbnail>
-			<h1>Cuzco</h1>
-			<p>80 puntos</p>
-		</ion-item>
 
-		<ion-item>
+		<ion-item *ngFor="let zone of zones">
 			<ion-thumbnail item-left>
 				<ion-icon class="thumb-img" name="ios-image-outline"></ion-icon>
 			</ion-thumbnail>
-			<h1>MaccuPicco</h1>
-			<p>80 puntos</p>
-		</ion-item>
-
-		<ion-item>
-			<ion-thumbnail item-left>
-				<ion-icon class="thumb-img" name="ios-image-outline"></ion-icon>
-			</ion-thumbnail>
-			<h1>Lima</h1>
-			<p>Gratis</p>
+			<h1>{{ zone.name }}</h1>
+			<p>{{ zone.points }} puntos</p>
+			<button [navPush]="mapPage" [navParams]="setZone(zone)" ion-button clear item-right>Mostrar</button>
 		</ion-item>
 
 	</ion-list>
