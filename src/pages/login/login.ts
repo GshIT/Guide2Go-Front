@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MenuController,NavController } from 'ionic-angular';
-import { ReferedPage} from '../refered/refered';
+import { ReferedPage } from '../refered/refered';
+import { GuideLoginPage } from '../guide-login/guide-login';
 
 @Component({
   selector: 'page-login',
@@ -16,5 +17,9 @@ export class Login {
 
   refered() {
   	this.navCtrl.push(ReferedPage);
+  }
+
+  guideLogin() {
+    this.navCtrl.push(GuideLoginPage);
   }
 }
