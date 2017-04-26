@@ -14,7 +14,7 @@ import { Zones } from '../../providers/zones';
 @Component({
   selector: 'page-zones',
   templateUrl: 'zones.html',
-  providers: [Zones]
+  providers: [Zones] /* Add ngInit Hook */
 })
 export class ZonesPage {
 
