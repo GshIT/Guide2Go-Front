@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { UserProvider } from '../../providers/user-provider'
 
 /*
   Generated class for the Register page.
@@ -9,14 +10,27 @@ import { NavController, NavParams } from 'ionic-angular';
 */
 @Component({
   selector: 'page-register',
-  templateUrl: 'register.html'
+  templateUrl: 'register.html',
+  providers: [UserProvider]
 })
 export class RegisterPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+	user: {};
+	errorMsg: string;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterPage');
-  }
+	constructor(public navCtrl: NavController, public navParams: NavParams, public UserProvider: UserProvider){
+		this.user = {};
+	}
+
+	ionViewDidLoad() {
+	  console.log('ionViewDidLoad RegisterPage');
+	}
+
+	createUser(){
+		this.UserProvider.createUser(this.user).subscribe(
+				bn => console.log('todobn'),
+				error =>  this.errorMsg = <any>error);
+	} 
 
 }
+//jenny
