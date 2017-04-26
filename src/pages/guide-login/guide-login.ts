@@ -46,7 +46,15 @@ export class GuideLoginPage {
 		// Redireccionar si es valido
 		// 	- Guardar token
 		//
-		// Mostrar error si es incorrecto	
+		// Mostrar error si es incorrecto
+		// 	- (Agregar funcion fashion para esto)
+	}
+	
+	// Quiza deberia ir en un proveedor
+	private handleToken(token: {}) {
+
+		
+
 	}
 
 }

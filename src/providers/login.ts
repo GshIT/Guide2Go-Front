@@ -18,14 +18,14 @@ export class Login {
 
 	constructor(public http: Http) {
 		console.log('Hello Login Provider');
-		this.loginUrl = 'http://localhost:8000/api/login';
+		this.loginUrl = 'http://127.0.0.1:8000/api/login';
 	}
 
 	/* Deberia hacer dos argumentos? */
 	authenticate(args: {}): Observable<{}> {
 		let headers = new Headers({ 
 			'Content-Type': 'application/json',
-			'Access-Control-Allow-Origin': '*'
+			'Access-Control-Allow-Origin': '*' // CORS
 		});
 		let options = new RequestOptions({ headers: headers });
 
@@ -49,6 +49,7 @@ export class Login {
 		if (error instanceof Response) { // ?
 			const body = error.json() || '';
 			const err = body.error || JSON.stringify(body);
+			console.log(body);
 			errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
 		} else {
 			errMsg = error.message ? error.message : error.toString();
@@ -70,6 +71,6 @@ export class Login {
 						.catch(this.handleError);
 
 	}
-		
+	
 
 }

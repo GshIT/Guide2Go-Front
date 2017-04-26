@@ -12,6 +12,8 @@ import { UserZonesPage } from '../pages/user-zones/user-zones';
 import { MapaPage } from '../pages/mapa/mapa';
 //import { GuideLoginPage } from '../pages/guide-login/guide-login';
 
+import { IonicStorageModule } from '@ionic/storage';
+
 @Component({
 	templateUrl: 'app.html'
 })
