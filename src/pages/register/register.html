@@ -15,4 +15,31 @@
 
 <ion-content padding>
 
+	<form (ngSubmit)="createUser()">
+		
+		<ion-item class="full-input">
+			<ion-label floating>Correo</ion-label>
+			<ion-input type="text" [(ngModel)]="this.user.email" name="email"></ion-input>
+		</ion-item>
+
+		<ion-item class="full-input">
+			<ion-label floating>Contraseña</ion-label>
+			<ion-input type="password" [(ngModel)]="this.user.password" name="password"></ion-input>
+		</ion-item>
+
+		<ion-item class="full-input">
+			<ion-label floating>Nombre</ion-label>
+			<ion-input [(ngModel)]="this.user.nombre" name="nombre"></ion-input>
+		</ion-item>
+		
+		<ion-item class="full-input">
+			<ion-label floating>Codigo de referencia (opcional)</ion-label>
+			<ion-input [(ngModel)]="this.user.referer" name="referer"></ion-input>
+		</ion-item>
+
+		<!-- Deberia ser ion-row ? -->
+		<button ion-button full type="submit">crear</button>
+
+	</form>
+
 </ion-content>

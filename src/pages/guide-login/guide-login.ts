@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
+import { RegisterPage } from '../register/register';
 import { Login as LoginService } from '../../providers/login'
+
 
 /*
 	Generated class for the GuideLogin page.
@@ -47,6 +48,10 @@ export class GuideLoginPage {
 		// 	- Guardar token
 		//
 		// Mostrar error si es incorrecto	
+	}
+
+	register(){
+		this.navCtrl.push(RegisterPage);
 	}
 
 }

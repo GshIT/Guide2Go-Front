@@ -11,6 +11,7 @@ import { RecommendPage } from '../pages/recommend/recommend';
 import { UserZonesPage } from '../pages/user-zones/user-zones';
 import { MapaPage } from '../pages/mapa/mapa';
 import { GuideLoginPage } from '../pages/guide-login/guide-login';
+import { RegisterPage } from '../pages/register/register';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { GuideLoginPage } from '../pages/guide-login/guide-login';
     RecommendPage,
     UserZonesPage,
     MapaPage,
-    GuideLoginPage
+    GuideLoginPage,
+    RegisterPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -37,7 +39,8 @@ import { GuideLoginPage } from '../pages/guide-login/guide-login';
     RecommendPage,
     UserZonesPage,
     MapaPage,
-    GuideLoginPage
+    GuideLoginPage,
+    RegisterPage
   ],
   providers: [{
     provide: ErrorHandler,
