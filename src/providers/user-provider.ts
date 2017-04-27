@@ -11,7 +11,7 @@ export class UserProvider {
 	userUrl: string;
 
  	constructor(public http: Http) {
-    	this.userUrl = 'http://localhost:8000/api/user';
+    	this.userUrl = 'http://digitalcook.info:8000/api/user';
   	}
 
 	createUser(args: {}): Observable<{}>{

@@ -15,11 +15,13 @@
 
 <ion-content padding>
 
+	<h1 id="errorMsg">{{this.errorMsg}}</h1>
+
 	<form (ngSubmit)="createUser()">
 		
 		<ion-item class="full-input">
 			<ion-label floating>Correo</ion-label>
-			<ion-input type="text" [(ngModel)]="this.user.email" name="email"></ion-input>
+			<ion-input type="email" [(ngModel)]="this.user.email" name="email"></ion-input>
 		</ion-item>
 
 		<ion-item class="full-input">
@@ -29,7 +31,7 @@
 
 		<ion-item class="full-input">
 			<ion-label floating>Nombre</ion-label>
-			<ion-input [(ngModel)]="this.user.nombre" name="nombre"></ion-input>
+			<ion-input [(ngModel)]="this.user.name" name="nombre"></ion-input>
 		</ion-item>
 		
 		<ion-item class="full-input">
