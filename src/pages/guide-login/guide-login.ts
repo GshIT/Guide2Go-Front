@@ -43,7 +43,7 @@ export class GuideLoginPage {
 
 		this.loginService.authenticate(this.login)
 			.subscribe(
-				token => this.token = token,
+				this.handleToken,
 				this.handleError);
 
 		// Redireccionar si es valido
@@ -60,6 +60,8 @@ export class GuideLoginPage {
 		//
 		// Actualiza la vista
 		// (Se mueve a otra pagina)
+		
+		this.token = token; // ?
 		this.navCtrl.push(MainPage);
 	}
 

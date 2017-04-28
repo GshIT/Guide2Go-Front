@@ -1,9 +1,9 @@
 import { NgModule, ErrorHandler } from '@angular/core';
-import { IonicStorageModule } from '@ionic/storage';
-// import { Http } from '@angular/http';
+import { IonicStorageModule, Storage } from '@ionic/storage';
+import { Http } from '@angular/http';
 
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-// import { AuthHttp, AuthConfig } from 'angular2-jwt';
+import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
 import { MyApp } from './app.component';
 
@@ -17,53 +17,57 @@ import { MapaPage } from '../pages/mapa/mapa';
 import { GuideLoginPage } from '../pages/guide-login/guide-login';
 import { RegisterPage } from '../pages/register/register';
 
-// Esto esta muy loco
-// let storage = new Storage();
-// 
-// export function getAuthHttp(http) {
-// 
-// 	return new AuthHttp(new AuthConfig({
-// 		headerPrefix: '...',
-// 		noJwtError: true,
-// 		globalHeader: [{'Accept': 'applcation/json'}],
-// 		tokenGetter: (() => storage.get('token')),
-// 	}), http);
-// 
-// }
+// Eto ta mu loco
+const storage = new Storage();
+
+export function getAuthHttp(http) {
+	let config = new AuthConfig({
+		headerPrefix: 'JWT', // ?
+		noJwtError: true,
+		globalHeaders: [{'Accept': 'applcation/json'}],
+		tokenGetter: (() => storage.get('token')),
+	}); 
+	return new AuthHttp(config, http);
+}
 
 @NgModule({
-  declarations: [
-    MyApp,
-    Login,
-    ReferedPage,
-    ZonesPage,
-    MainPage,
-    RecommendPage,
-    UserZonesPage,
-    MapaPage,
-    GuideLoginPage,
-    RegisterPage
-  ],
-  imports: [
-    IonicModule.forRoot(MyApp),
+	declarations: [
+		MyApp,
+		Login,
+		ReferedPage,
+		ZonesPage,
+		MainPage,
+		RecommendPage,
+		UserZonesPage,
+		MapaPage,
+		GuideLoginPage,
+		RegisterPage
+	],
+	imports: [
+		IonicModule.forRoot(MyApp),
 		IonicStorageModule.forRoot()
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    Login,
-    ReferedPage,
-    ZonesPage,
-    MainPage,
-    RecommendPage,
-    UserZonesPage,
-    MapaPage,
-    GuideLoginPage,
-    RegisterPage
-  ],
-  providers: [{
-    provide: ErrorHandler,
-    useClass: IonicErrorHandler
-  }]
+	],
+	bootstrap: [IonicApp],
+	entryComponents: [
+		MyApp,
+		Login,
+		ReferedPage,
+		ZonesPage,
+		MainPage,
+		RecommendPage,
+		UserZonesPage,
+		MapaPage,
+		GuideLoginPage,
+		RegisterPage
+	],
+	providers: [
+		{
+			provide: AuthHttp,
+			useFactory: getAuthHttp,
+			deps: [Http]
+		}, {
+			provide: ErrorHandler,
+			useClass: IonicErrorHandler
+		}]
 })
 export class AppModule {}

@@ -21,9 +21,11 @@ export class Login {
 		public storage: Storage,
 		public http: Http) {
 		console.log('Hello Login Provider');
-
-		// this.loginUrl = 'http://127.0.0.1:8000/api/login';
-		this.loginUrl = 'http://digitalcook.info:8000/api/login';
+		
+		console.log(this.storage);
+		this.storage = storage;
+		this.loginUrl = 'http://127.0.0.1:8000/api/login';
+		// this.loginUrl = 'http://digitalcook.info:8000/api/login';
 	}
 
 	/* Deberia hacer dos argumentos? */
@@ -43,10 +45,11 @@ export class Login {
 	//
 	private getToken(resp: Response) {
 		let body = resp.json();
-		
+
 		// Verificar si ya existe un token
 		// Si ya esta expirado
 		// ...
+		console.log(this.storage);
 		this.storage.ready().then(() => {
 			// {} or String ?
 			this.storage.set('token', body.token);
@@ -83,8 +86,8 @@ export class Login {
 		// Verifica que ya existe el usuario
 		//
 		return this.http.post(this.loginUrl, args, options)
-		.map(this.getToken)
-		.catch(this.handleError);
+										.map(this.getToken)
+										.catch(this.handleError);
 
 	}
 
