@@ -1,5 +1,9 @@
 import { NgModule, ErrorHandler } from '@angular/core';
+import { IonicStorageModule } from '@ionic/storage';
+// import { Http } from '@angular/http';
+
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+// import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
 import { MyApp } from './app.component';
 
@@ -12,6 +16,20 @@ import { UserZonesPage } from '../pages/user-zones/user-zones';
 import { MapaPage } from '../pages/mapa/mapa';
 import { GuideLoginPage } from '../pages/guide-login/guide-login';
 import { RegisterPage } from '../pages/register/register';
+
+// Esto esta muy loco
+// let storage = new Storage();
+// 
+// export function getAuthHttp(http) {
+// 
+// 	return new AuthHttp(new AuthConfig({
+// 		headerPrefix: '...',
+// 		noJwtError: true,
+// 		globalHeader: [{'Accept': 'applcation/json'}],
+// 		tokenGetter: (() => storage.get('token')),
+// 	}), http);
+// 
+// }
 
 @NgModule({
   declarations: [
@@ -27,7 +45,8 @@ import { RegisterPage } from '../pages/register/register';
     RegisterPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+		IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

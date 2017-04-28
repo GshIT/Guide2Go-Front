@@ -17,6 +17,11 @@ export class UserZonesPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserZonesPage');
+		// Revisa el token en localStorage 
+		// 	Realiza un request para obtener las zonas
+		// 	O retorna al login
+		
+
   }
 
 }

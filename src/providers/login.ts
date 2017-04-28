@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Headers, RequestOptions } from '@angular/http';
+import { Storage } from '@ionic/storage';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -16,7 +17,9 @@ export class Login {
 
 	loginUrl: string;
 
-	constructor(public http: Http) {
+	constructor(
+		public storage: Storage,
+		public http: Http) {
 		console.log('Hello Login Provider');
 		this.loginUrl = 'http://127.0.0.1:8000/api/login';
 	}
@@ -30,16 +33,27 @@ export class Login {
 		let options = new RequestOptions({ headers: headers });
 
 		return this.http.post(this.loginUrl, args, options)
-						.map(this.getToken)
-						.catch(this.handleError);
+										.map(this.getToken)
+										.catch(this.handleError);
 	}
 
+	// Guarda el token en local storage
+	//
 	private getToken(resp: Response) {
 		let body = resp.json();
-		console.log(body); // Probar como viene el response
-		return body.token || {};
+		
+		// Verificar si ya existe un token
+		// Si ya esta expirado
+		// ...
+		this.storage.ready().then(() => {
+			// {} or String ?
+			this.storage.set('token', body.token);
+		});
+
+		console.log(body); // { token: '...' } 
+		return body.token || {}; // Que deberia retornar?
 	}
-	
+
 	// Si ya existe el usuario...
 	// O otra clase de error
 	//
@@ -62,15 +76,15 @@ export class Login {
 
 		let headers = new Headers({ 'Content-Type': 'application/json' });
 		let options = new RequestOptions({ headers: headers });
-		
+
 		// Obten el token al crear la cuenta
 		// Verifica que ya existe el usuario
 		//
 		return this.http.post(this.loginUrl, args, options)
-						.map(this.getToken)
-						.catch(this.handleError);
+		.map(this.getToken)
+		.catch(this.handleError);
 
 	}
-	
+
 
 }

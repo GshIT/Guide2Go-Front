@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { RegisterPage } from '../register/register';
+import { MainPage } from '../main/main';
+
 import { Login as LoginService } from '../../providers/login'
 
 
@@ -42,7 +44,7 @@ export class GuideLoginPage {
 		this.loginService.authenticate(this.login)
 			.subscribe(
 				token => this.token = token,
-				error =>  this.errorMsg = <any>error);
+				this.handleError);
 
 		// Redireccionar si es valido
 		// 	- Guardar token
@@ -50,12 +52,23 @@ export class GuideLoginPage {
 		// Mostrar error si es incorrecto
 		// 	- (Agregar funcion fashion para esto)
 	}
-	
+
 	// Quiza deberia ir en un proveedor
 	private handleToken(token: {}) {
 
-		
+		// Hay que ver como mostrar el cargador...
+		//
+		// Actualiza la vista
+		// (Se mueve a otra pagina)
+		this.navCtrl.push(MainPage);
+	}
 
+	private handleError(error: any) {
+		// Modificar la vista para que haga
+		// algo mas bonito aqui
+		console.log('Ups, hubo un error intenta de nuevo');
+		console.log(error);
+		this.errorMsg = error;
 	}
 
 	register(){

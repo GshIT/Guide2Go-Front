@@ -10,24 +10,27 @@ export class UserProvider {
 
 	userUrl: string;
 
- 	constructor(public http: Http) {
-    	this.userUrl = 'http://localhost:8000/api/user';
-  	}
+	constructor(public http: Http) {
+		this.userUrl = 'http://127.0.0.1:8000/api/user';
+	}
 
 	createUser(args: {}): Observable<{}>{
 		let bodyString = JSON.stringify(args);
-        let headers      = new Headers({ 'Content-Type': 'application/json','Access-Control-Allow-Origin': '*' });
-        let options       = new RequestOptions({ headers: headers });
+		let headers = new Headers({ 
+			'Content-Type': 'application/json',
+			'Access-Control-Allow-Origin': '*' 
+		});
+		let options = new RequestOptions({ headers: headers });
 
 		return this.http.post(this.userUrl, bodyString, options)
-                         .map(this.printInside)
-                         .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+			.map(this.printInside)
+			.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
 
 	}
 
 	private printInside(res: Response) {
 		let body = res.json();
-		
+
 		return body;
 	}
 
