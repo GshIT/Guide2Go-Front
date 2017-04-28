@@ -17,6 +17,7 @@ import { MapaPage } from '../pages/mapa/mapa';
 import { GuideLoginPage } from '../pages/guide-login/guide-login';
 import { RegisterPage } from '../pages/register/register';
 
+
 // Eto ta mu loco
 const storage = new Storage();
 

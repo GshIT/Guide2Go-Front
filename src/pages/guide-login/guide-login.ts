@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { RegisterPage } from '../register/register';
 import { MainPage } from '../main/main';
+import { Storage } from '@ionic/storage';
 
 import { Login as LoginService } from '../../providers/login'
 
@@ -24,6 +25,7 @@ export class GuideLoginPage {
 	errorMsg: string
 
 	constructor(
+		public storage: Storage,
 		private loginService: LoginService,
 		public navCtrl: NavController, 
 		public navParams: NavParams) {
@@ -43,7 +45,7 @@ export class GuideLoginPage {
 
 		this.loginService.authenticate(this.login)
 			.subscribe(
-				this.handleToken,
+				this.handleToken.bind(this),
 				this.handleError);
 
 		// Redireccionar si es valido
@@ -55,14 +57,15 @@ export class GuideLoginPage {
 
 	// Quiza deberia ir en un proveedor
 	private handleToken(token: {}) {
-
-		// Hay que ver como mostrar el cargador...
-		//
-		// Actualiza la vista
-		// (Se mueve a otra pagina)
-		
-		this.token = token; // ?
+		this.token = token;
+		this.saveToken(); 
 		this.navCtrl.push(MainPage);
+	}
+
+	private saveToken(){
+		this.storage.ready().then(() => {
+			this.storage.set('token', this.token);
+	    });
 	}
 
 	private handleError(error: any) {

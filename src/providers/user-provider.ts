@@ -31,7 +31,7 @@ export class UserProvider {
 
 	private printInside(res: Response) {
 		let body = res.json();
-
+		console.log(body);
 		return body;
 	}
 
