@@ -11,7 +11,8 @@ export class UserProvider {
 	userUrl: string;
 
 	constructor(public http: Http) {
-		this.userUrl = 'http://127.0.0.1:8000/api/user';
+		// this.userUrl = 'http://127.0.0.1:8000/api/user';
+		this.userUrl = 'http://digitalcook.info:8000/api/user';
 	}
 
 	createUser(args: {}): Observable<{}>{
@@ -23,8 +24,8 @@ export class UserProvider {
 		let options = new RequestOptions({ headers: headers });
 
 		return this.http.post(this.userUrl, bodyString, options)
-			.map(this.printInside)
-			.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+		.map(this.printInside)
+		.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
 
 	}
 

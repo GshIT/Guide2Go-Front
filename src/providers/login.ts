@@ -21,7 +21,9 @@ export class Login {
 		public storage: Storage,
 		public http: Http) {
 		console.log('Hello Login Provider');
-		this.loginUrl = 'http://127.0.0.1:8000/api/login';
+
+		// this.loginUrl = 'http://127.0.0.1:8000/api/login';
+		this.loginUrl = 'http://digitalcook.info:8000/api/login';
 	}
 
 	/* Deberia hacer dos argumentos? */

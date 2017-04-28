@@ -20,6 +20,7 @@ export class RegisterPage {
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, public UserProvider: UserProvider){
 		this.user = {};
+		this.errorMsg = "";
 	}
 
 	ionViewDidLoad() {
@@ -28,9 +29,14 @@ export class RegisterPage {
 
 	createUser(){
 		this.UserProvider.createUser(this.user).subscribe(
-				bn => console.log('todobn'),
+				respuesta => this.correcto(respuesta),
 				error =>  this.errorMsg = <any>error);
 	} 
+
+	correcto(respuesta){
+		console.log(respuesta);
+		this.navCtrl.pop();
+	}
 
 }
 //jenny
