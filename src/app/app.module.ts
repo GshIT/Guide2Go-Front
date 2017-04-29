@@ -5,6 +5,8 @@ import { Http } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
+import { GooglePlus } from '@ionic-native/google-plus';
+
 import { MyApp } from './app.component';
 
 import { Login } from '../pages/login/login';
@@ -62,6 +64,7 @@ export function getAuthHttp(http) {
 		RegisterPage
 	],
 	providers: [
+		GooglePlus,
 		{
 			provide: AuthHttp,
 			useFactory: getAuthHttp,
