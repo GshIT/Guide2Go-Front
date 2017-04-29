@@ -4,6 +4,9 @@ import { NavController, NavParams } from 'ionic-angular';
 import { MapaPage } from '../mapa/mapa';
 
 import { Zones } from '../../providers/zones';
+import { JwtHelper} from 'angular2-jwt';
+import { Storage } from '@ionic/storage';
+
 
 /*
   Generated class for the Zones page.
@@ -21,8 +24,11 @@ export class ZonesPage {
 	/* Should not be any */
 	mapPage: any;
 	zones: any[];
+  token: string;
 
   constructor(
+    public storage: Storage,
+    public jwtHelper: JwtHelper,
   	public zonesProvider: Zones,
   	public navCtrl: NavController, 
   	public navParams: NavParams) {
@@ -30,6 +36,9 @@ export class ZonesPage {
   	this.zones = zonesProvider.getZones();
   	this.mapPage = MapaPage;
 
+    this.storage.ready().then(() => {
+      this.storage.get('token').then((val) => {this.token = val;})
+     });
   }
 
   ionViewDidLoad() {
@@ -38,6 +47,14 @@ export class ZonesPage {
 
   setZone(zone) {
   	return { zone: zone };
+  }
+
+  probar(){ 
+    console.log(
+    this.jwtHelper.decodeToken(this.token),
+    this.jwtHelper.getTokenExpirationDate(this.token),
+    this.jwtHelper.isTokenExpired(this.token)
+    );
   }
 
 }
