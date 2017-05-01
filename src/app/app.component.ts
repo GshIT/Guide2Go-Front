@@ -10,6 +10,7 @@ import { MainPage } from '../pages/main/main';
 import { RecommendPage } from '../pages/recommend/recommend';
 import { UserZonesPage } from '../pages/user-zones/user-zones';
 import { MapaPage } from '../pages/mapa/mapa';
+import { PerfilPage } from '../pages/perfil/perfil';
 //import { GuideLoginPage } from '../pages/guide-login/guide-login';
 
 @Component({
@@ -30,7 +31,7 @@ export class MyApp {
 
 		// set our app's pages
 		this.pages = [
-			{ title: 'Mi Perfil', component: null },
+			{ title: 'Mi Perfil', component: PerfilPage },
 			{ title: 'Mis Zonas', component: UserZonesPage },
 			{ title: 'Recomendar', component: RecommendPage },
 			{ title: 'Todas las Zonas', component: ZonesPage },
