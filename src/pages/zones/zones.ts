@@ -49,12 +49,4 @@ export class ZonesPage {
   	return { zone: zone };
   }
 
-  probar(){ 
-    console.log(
-    this.jwtHelper.decodeToken(this.token),
-    this.jwtHelper.getTokenExpirationDate(this.token),
-    this.jwtHelper.isTokenExpired(this.token)
-    );
-  }
-
 }
