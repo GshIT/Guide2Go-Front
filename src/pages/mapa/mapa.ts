@@ -5,11 +5,12 @@ import { Geolocation } from 'ionic-native';
 
 import { Zones } from '../../providers/zones';
 import { SubzoneProvider } from '../../providers/subzone-provider';
+import { ParadaProvider } from '../../providers/parada-provider';
 
 @Component({
   selector: 'page-mapa',
   templateUrl: 'mapa.html',
-  providers: [Zones,SubzoneProvider]
+  providers: [Zones,SubzoneProvider,ParadaProvider]
 })
 export class MapaPage {
 
@@ -21,12 +22,14 @@ export class MapaPage {
   follow: boolean;
   zone: any;
   subzones: any;
+  paradas: any;
 
   constructor(
     public zonesProvider: Zones,
     public params: NavParams,
     public navCtrl: NavController,
-    public subzoneProb: SubzoneProvider) {
+    public subzoneProb: SubzoneProvider,
+    public paradaProb: ParadaProvider) {
 
     this.zone = params.get('zone');
     this.follow = (typeof(this.zone) !== 'undefined') ? false : true;
@@ -76,6 +79,7 @@ export class MapaPage {
       let polygon = this.getPolygon(this.zone);
       this.previewZone(polygon,'#FF0000');
       this.centerPolygon(polygon);
+
       this.subzoneProb.getZone(this.zone.id)
       .subscribe(this.previewSubZone.bind(this), (err)=>{console.log(err);});
     }
@@ -83,12 +87,53 @@ export class MapaPage {
 
   previewSubZone(res){
     this.subzones = res;
-    console.log(this.subzones);
 
     for(let subzone in this.subzones){
-      let polygon = this.getPolygon(this.subzones[subzone]);
+      let subZ = this.subzones[subzone]
+      let polygon = this.getPolygon(subZ);
       this.previewZone(polygon,'#4286f4');
+
+      this.bindParadas(subZ.id);
     }
+  }
+
+  bindParadas(id){
+    this.paradaProb.getParadas(id)
+    .subscribe(this.previewParadas.bind(this), (err)=>{console.log(err);});
+  }
+
+  previewParadas(res){
+    this.paradas = res;
+
+    for(let parada in this.paradas){
+      let par = this.paradas[parada]
+      let point = this.getPoint(par);
+      this.createMarker(point,par.nombre,par.descripcion);
+    }
+  }
+
+  createMarker(point,name,description){
+
+    var contentString = '<h2>'+name+'</h2>'+'<p>'+description+'</p>';
+    var infowindow = new google.maps.InfoWindow({
+          content: contentString
+    });
+
+    var marker = new google.maps.Marker({
+      position: point,
+      map: this.map,
+      title: name,
+      animation: google.maps.Animation.DROP,
+    });
+
+    marker.addListener('click', function() {
+      infowindow.open(this.map, marker);
+    });
+
+  }
+
+  getPoint(sub){
+    return {lat: sub.punto.lat, lng: sub.punto.lon};
   }
 
   uploadCycle(){
