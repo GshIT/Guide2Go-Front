@@ -14,8 +14,8 @@ export class UserProvider {
 	userUrl: string;
 
 	constructor(public http: Http, public authHttp: AuthHttp, public JwtHelper: JwtHelper) {
-		this.userUrl = 'http://127.0.0.1:8000/api/user';
-		//this.userUrl = 'http://digitalcook.info:8000/api/user';
+		//this.userUrl = 'http://127.0.0.1:8000/api/user';
+		this.userUrl = 'http://digitalcook.info:8000/api/user';
 	}
 
 	createUser(args: {}): Observable<{}>{

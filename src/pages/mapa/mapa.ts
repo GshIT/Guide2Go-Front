@@ -28,8 +28,8 @@ export class MapaPage {
     this.zone = params.get('zone');
     this.follow = (typeof(this.zone) !== 'undefined') ? false : true;
     
-    const coords = zonesProvider.getZoneLatLng(this.zone);
-
+    //const coords = zonesProvider.getZoneLatLng(this.zone);
+    const coords = { lat: 0, lng: 0 };
     /* -13.163109, -72.544961 */
     this.latLng = new google.maps.LatLng(coords.lat, coords.lng);
     this.marker = new google.maps.Marker({
@@ -70,7 +70,7 @@ export class MapaPage {
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
     if (typeof(this.zone) !== 'undefined') {
-      this.previewZone(this.zone.subZones);
+      this.previewZone(this.zone);
     }
   }
 
@@ -103,31 +103,36 @@ export class MapaPage {
 
   previewZone(sub) {
 
-    for (let z of sub) {
-
+    let polygon = [{}];
+    console.log(polygon);
+    for (let z of sub.poligono.linestrings.pop().points) {
+      polygon.push({lat: z.lat, lng: z.lon});
+    }
+    polygon.shift();
       let zonePolygon = new google.maps.Polygon({
-        paths: z.bounds,
+        paths: polygon,
         strokeColor: '#FF0000',
         strokeOpacity: 0.8,
         strokeWeight: 3,
         fillColor: '#FF0000',
         fillOpacity: 0.35
       });
+      //console.log(this.zone.poligono.linestrings.pop().points);
       console.log(this.map)
       zonePolygon.setMap(this.map);
 
-      for (let p of z.points) {
+      /*for (let p of z.points) {
         new google.maps.Marker({
           animation: google.maps.Animation.DROP,
           position: p,
           clickable: true,
           map: this.map,
           title: 'Nombre de la parada' 
-          /* Aqui deberia haber un nombre de la parada */
+          Aqui deberia haber un nombre de la parada 
         });
-      }
+      }*/
 
-    }
+    //}
 
   }
 

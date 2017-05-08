@@ -20,18 +20,19 @@ export class ZoneProvider {
 
   	constructor(public http: Http, public authHttp: AuthHttp, public JwtHelper: JwtHelper) {
     	console.log('Hello ZoneProvider Provider');
-    	this.zoneUrl = 'http://localhost:8000/api/zona';
-		//this.zoneUrl = 'http://digitalcook.info:8000/api/login';
+    	//this.zoneUrl = 'http://localhost:8000/api/zona';
+		this.zoneUrl = 'http://digitalcook.info:8000/api/zona';
   	}
 
   	get(token): Observable<{}>{
+  		console.log(token);
 		let headers = new Headers({ 
 			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': '*' 
 		});
 		let options = new RequestOptions({ headers: headers });
 
-		return this.http.get(this.zoneUrl+'?'+token, options)
+		return this.http.get(this.zoneUrl+'?token='+token, options)
 		.map(this.printInside)
 		.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
 	}
