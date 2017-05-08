@@ -27,20 +27,17 @@
 <ion-content padding>
 
 	<ion-list>
-		<ion-item>
+		
+		<ion-item *ngFor="let zone of userZones">
+			
+			<!-- Todavia no hay fotos :( -->
 			<ion-thumbnail item-left>
 				<ion-icon class="thumb-img" name="ios-image-outline"></ion-icon>
 			</ion-thumbnail>
-			<h1>Cuzco</h1>
-			<p>80 puntos</p>
-		</ion-item>
+			<h1>{{ zone.name }}</h1>
+			<p>{{ zone.cost }} puntos</p>
+			<button (click)="download(zone)" ion-button clear item-right>Descargar</button>
 
-		<ion-item>
-			<ion-thumbnail item-left>
-				<ion-icon class="thumb-img" name="ios-image-outline"></ion-icon>
-			</ion-thumbnail>
-			<h1>Cuzco</h1>
-			<p>80 puntos</p>
 		</ion-item>
 
 	</ion-list>
