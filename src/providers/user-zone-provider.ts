@@ -48,7 +48,10 @@ export class UserZoneProvider {
 		// whateva
 		return this.storage.get('token')
 			.then( token => {
-				const params = `?token=${token}`;
+				
+				console.log(this.jwt.decodeToken(token));
+			
+				const params = `?token=${token}&user=${1}`;
 				const url = this.apiGuideUrl + params;
 
 				return this.http.get(url, { headers: headers })

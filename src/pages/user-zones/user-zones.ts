@@ -16,7 +16,7 @@ import { UserZoneProvider } from '../../providers/user-zone-provider';
 })
 export class UserZonesPage {
 	
-	userZones: any;
+	userGuides: any;
 
   constructor(
 		public zonesProvider: UserZoneProvider,
@@ -31,7 +31,7 @@ export class UserZonesPage {
 		
 		// Obtiene las zonas (guias) del usuario
 		this.zonesProvider.fetchZones() // Provider;
-			.then( (zones) => this.userZones = zones )
+			.then( (zones) => this.userGuides = zones )
 			.catch( () => 'Token no encontrado');
   }
 

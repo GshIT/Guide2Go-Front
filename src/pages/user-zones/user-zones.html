@@ -28,15 +28,15 @@
 
 	<ion-list>
 		
-		<ion-item *ngFor="let zone of userZones">
+		<ion-item *ngFor="let guide of userGuides">
 			
 			<!-- Todavia no hay fotos :( -->
 			<ion-thumbnail item-left>
 				<ion-icon class="thumb-img" name="ios-image-outline"></ion-icon>
 			</ion-thumbnail>
-			<h1>{{ zone.name }}</h1>
-			<p>{{ zone.cost }} puntos</p>
-			<button (click)="download(zone)" ion-button clear item-right>Descargar</button>
+			<h1>{{ guide.zona.name }}</h1>
+			<p>{{ guide.costo }} puntos</p>
+			<button (click)="download(guide)" ion-button clear item-right>Descargar</button>
 
 		</ion-item>
 
