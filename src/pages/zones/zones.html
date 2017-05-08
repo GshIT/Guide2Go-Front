@@ -33,7 +33,7 @@
 				<ion-icon class="thumb-img" name="ios-image-outline"></ion-icon>
 			</ion-thumbnail>
 			<h1>{{ zone.name }}</h1>
-			<button [navPush]="mapPage" [navParams]="setZone(zone)" ion-button clear item-right>Mostrar</button>
+			<button (click)="setZone(zone)" ion-button clear item-right>Mostrar</button>
 		</ion-item>
 
 	</ion-list>

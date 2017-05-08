@@ -104,7 +104,7 @@ export class MapaPage {
   previewZone(sub) {
     let polygon = [{}];
     console.log(polygon);
-    for (let z of sub.poligono.linestrings.pop().points) {
+    for (let z of sub.poligono.linestrings[0].points) {
       polygon.push({lat: z.lat, lng: z.lon});
     }
     polygon.shift();
