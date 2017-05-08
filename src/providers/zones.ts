@@ -28,16 +28,15 @@ export class Zones {
     let coord = { lat: 0, lng: 0 };
     if (!resp) return coord;
 
-    const sub = resp.subZones;
+    const sub = resp;
     const len = sub.length;
 
-    for(let zone of sub) {
-      let size = zone.bounds.length;
-      if (size != 0) {
-        coord.lat += zone.bounds.reduce((acc, val) => acc + val.lat, 0) / size;
-        coord.lng += zone.bounds.reduce((acc, val) => acc + val.lng, 0) / size;
-      }
+    let size = sub.length;
+    if (size != 0) {
+      coord.lat += sub.reduce((acc, val) => acc + val.lat, 0) / size;
+      coord.lng += sub.reduce((acc, val) => acc + val.lng, 0) / size;
     }
+    
 
     /* Codigo feo */
     if (len != 0) {

@@ -102,13 +102,17 @@ export class MapaPage {
   }
 
   previewZone(sub) {
-
     let polygon = [{}];
     console.log(polygon);
     for (let z of sub.poligono.linestrings.pop().points) {
       polygon.push({lat: z.lat, lng: z.lon});
     }
     polygon.shift();
+
+    let hola = this.zonesProvider.getZoneLatLng(polygon);
+    this.latLng = new google.maps.LatLng(hola.lat, hola.lng);
+    console.log(hola);
+
       let zonePolygon = new google.maps.Polygon({
         paths: polygon,
         strokeColor: '#FF0000',
@@ -118,7 +122,7 @@ export class MapaPage {
         fillOpacity: 0.35
       });
       //console.log(this.zone.poligono.linestrings.pop().points);
-      console.log(this.map)
+      this.map.setCenter(this.latLng);
       zonePolygon.setMap(this.map);
 
       /*for (let p of z.points) {
