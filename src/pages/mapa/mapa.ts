@@ -39,7 +39,7 @@ export class MapaPage {
 
   ionViewDidLoad() {
     this.initMap();
-    if (this.follow) this.uploadCycle(); 
+    this.uploadCycle(); 
   }
 
   ionViewWillUnload(){
@@ -75,7 +75,7 @@ export class MapaPage {
   }
 
   uploadCycle(){
-    this.getGeo().then(() => {this.marker.setMap(this.map);}).then(() => {this.setPlace(this.latLng);this.map.setZoom(17);})
+    this.getGeo().then(() => {this.marker.setMap(this.map);})
     this.intervalId = setInterval(this.intervalFunc.bind(this), 2000);
   }
 
@@ -88,7 +88,7 @@ export class MapaPage {
   }
 
   intervalFunc(){
-    this.getGeo().then(() => {this.setPlace(this.latLng);this.setMarker(this.latLng);})
+    this.getGeo().then(() => {this.setMarker(this.latLng);})
   }
 
   getGeo() {
@@ -103,7 +103,6 @@ export class MapaPage {
 
   previewZone(sub) {
     let polygon = [{}];
-    console.log(polygon);
     for (let z of sub.poligono.linestrings[0].points) {
       polygon.push({lat: z.lat, lng: z.lon});
     }
@@ -111,7 +110,6 @@ export class MapaPage {
 
     let hola = this.zonesProvider.getZoneLatLng(polygon);
     this.latLng = new google.maps.LatLng(hola.lat, hola.lng);
-    console.log(hola);
 
       let zonePolygon = new google.maps.Polygon({
         paths: polygon,

@@ -57,7 +57,6 @@ export class ZonesPage {
   }
 
   setZone(zone) {
-    console.log(zone);
   	this.navCtrl.push(MapaPage, {zone: zone});
   }
 

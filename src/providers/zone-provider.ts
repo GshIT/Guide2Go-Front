@@ -25,7 +25,6 @@ export class ZoneProvider {
   	}
 
   	get(token): Observable<{}>{
-  		console.log(token);
 		let headers = new Headers({ 
 			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': '*' 
@@ -39,7 +38,6 @@ export class ZoneProvider {
 
 	private printInside(res: Response) {
 		let body = res.json();
-		console.log(body);
 		return body;
 	}
 

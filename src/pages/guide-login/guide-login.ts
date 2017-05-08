@@ -20,16 +20,16 @@ import { Login as LoginService } from '../../providers/login'
 })
 export class GuideLoginPage {
 
-	login: {}
-	token: {}
-	errorMsg: string
+	login: {};
+	token: {};
+	errorMsg: string;
 
 	constructor(
 		public storage: Storage,
 		private loginService: LoginService,
 		public navCtrl: NavController, 
 		public navParams: NavParams) {
-
+		this.errorMsg = "";
 		this.login = {};
 	}
 
@@ -46,7 +46,7 @@ export class GuideLoginPage {
 		this.loginService.authenticate(this.login)
 			.subscribe(
 				this.handleToken.bind(this),
-				this.handleError);
+				this.handleError.bind(this));
 
 		// Redireccionar si es valido
 		// 	- Guardar token
@@ -71,9 +71,9 @@ export class GuideLoginPage {
 	private handleError(error: any) {
 		// Modificar la vista para que haga
 		// algo mas bonito aqui
+		this.errorMsg = "Ups, hubo un error intenta de nuevo";
 		console.log('Ups, hubo un error intenta de nuevo');
 		console.log(error);
-		this.errorMsg = error;
 	}
 
 	register(){
