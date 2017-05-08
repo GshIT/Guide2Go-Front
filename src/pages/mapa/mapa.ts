@@ -61,7 +61,7 @@ export class MapaPage {
 
     let mapOptions = {
       center: this.latLng,
-      zoom: 10,
+      zoom: 3,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       styles: myStyles,
       disableDefaultUI: true

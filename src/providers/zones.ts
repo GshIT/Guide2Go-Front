@@ -31,13 +31,10 @@ export class Zones {
     const sub = resp;
     const len = sub.length;
 
-    let size = sub.length;
-    if (size != 0) {
-      coord.lat += sub.reduce((acc, val) => acc + val.lat, 0) / size;
-      coord.lng += sub.reduce((acc, val) => acc + val.lng, 0) / size;
+    for(let zone of sub) {
+      coord.lat += zone.lat;
+      coord.lng += zone.lng;
     }
-    
-
     /* Codigo feo */
     if (len != 0) {
       coord.lat /= len;
