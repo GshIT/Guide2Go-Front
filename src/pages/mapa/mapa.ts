@@ -4,11 +4,12 @@ import { NavParams, NavController } from 'ionic-angular';
 import { Geolocation } from 'ionic-native';
 
 import { Zones } from '../../providers/zones';
+import { SubzoneProvider } from '../../providers/subzone-provider';
 
 @Component({
   selector: 'page-mapa',
   templateUrl: 'mapa.html',
-  providers: [Zones]
+  providers: [Zones,SubzoneProvider]
 })
 export class MapaPage {
 
@@ -19,11 +20,13 @@ export class MapaPage {
   marker: any;
   follow: boolean;
   zone: any;
+  subzones: any;
 
   constructor(
     public zonesProvider: Zones,
     public params: NavParams,
-    public navCtrl: NavController) {
+    public navCtrl: NavController,
+    public subzoneProb: SubzoneProvider) {
 
     this.zone = params.get('zone');
     this.follow = (typeof(this.zone) !== 'undefined') ? false : true;
@@ -70,7 +73,21 @@ export class MapaPage {
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
     if (typeof(this.zone) !== 'undefined') {
-      this.previewZone(this.zone);
+      let polygon = this.getPolygon(this.zone);
+      this.previewZone(polygon,'#FF0000');
+      this.centerPolygon(polygon);
+      this.subzoneProb.getZone(this.zone.id)
+      .subscribe(this.previewSubZone.bind(this), (err)=>{console.log(err);});
+    }
+  }
+
+  previewSubZone(res){
+    this.subzones = res;
+    console.log(this.subzones);
+
+    for(let subzone in this.subzones){
+      let polygon = this.getPolygon(this.subzones[subzone]);
+      this.previewZone(polygon,'#4286f4');
     }
   }
 
@@ -101,26 +118,37 @@ export class MapaPage {
     });
   }
 
-  previewZone(sub) {
+  centerPolygon(polygon){
+    let hola = this.zonesProvider.getZoneLatLng(polygon);
+    this.latLng = new google.maps.LatLng(hola.lat, hola.lng);
+    this.map.setCenter(this.latLng);
+  }
+
+  getPolygon(sub){
     let polygon = [{}];
     for (let z of sub.poligono.linestrings[0].points) {
       polygon.push({lat: z.lat, lng: z.lon});
     }
     polygon.shift();
+    return polygon
+  }
 
-    let hola = this.zonesProvider.getZoneLatLng(polygon);
-    this.latLng = new google.maps.LatLng(hola.lat, hola.lng);
+  previewZone(polygon, color) {
+    
+
+    //let hola = this.zonesProvider.getZoneLatLng(polygon);
+    //this.latLng = new google.maps.LatLng(hola.lat, hola.lng);
 
       let zonePolygon = new google.maps.Polygon({
         paths: polygon,
-        strokeColor: '#FF0000',
+        strokeColor: color,
         strokeOpacity: 0.8,
         strokeWeight: 3,
-        fillColor: '#FF0000',
+        fillColor: color,
         fillOpacity: 0.35
       });
       //console.log(this.zone.poligono.linestrings.pop().points);
-      this.map.setCenter(this.latLng);
+      //this.map.setCenter(this.latLng);
       zonePolygon.setMap(this.map);
 
       /*for (let p of z.points) {
