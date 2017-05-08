@@ -3,10 +3,10 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { MapaPage } from '../mapa/mapa';
 
-import { Zones } from '../../providers/zones';
 import { JwtHelper} from 'angular2-jwt';
 import { Storage } from '@ionic/storage';
 
+import { Zones } from '../../providers/zones';
 import { ZoneProvider as ZoneProvider } from '../../providers/zone-provider';
 
 

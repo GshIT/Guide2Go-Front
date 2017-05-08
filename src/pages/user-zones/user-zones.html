@@ -27,20 +27,17 @@
 <ion-content padding>
 
 	<ion-list>
-		<ion-item>
+		
+		<ion-item *ngFor="let guide of userGuides">
+			
+			<!-- Todavia no hay fotos :( -->
 			<ion-thumbnail item-left>
 				<ion-icon class="thumb-img" name="ios-image-outline"></ion-icon>
 			</ion-thumbnail>
-			<h1>Cuzco</h1>
-			<p>80 puntos</p>
-		</ion-item>
+			<h1>{{ guide.zona.name }}</h1>
+			<p>{{ guide.costo }} puntos</p>
+			<button (click)="download(guide)" ion-button clear item-right>Descargar</button>
 
-		<ion-item>
-			<ion-thumbnail item-left>
-				<ion-icon class="thumb-img" name="ios-image-outline"></ion-icon>
-			</ion-thumbnail>
-			<h1>Cuzco</h1>
-			<p>80 puntos</p>
 		</ion-item>
 
 	</ion-list>

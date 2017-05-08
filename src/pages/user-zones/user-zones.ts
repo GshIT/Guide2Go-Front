@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+import { UserZoneProvider } from '../../providers/user-zone-provider';
+
 /*
   Generated class for the UserZones page.
 
@@ -9,19 +11,32 @@ import { NavController, NavParams } from 'ionic-angular';
 */
 @Component({
   selector: 'page-user-zones',
-  templateUrl: 'user-zones.html'
+  templateUrl: 'user-zones.html',
+	providers: [ UserZoneProvider ]
 })
 export class UserZonesPage {
+	
+	userGuides: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(
+		public zonesProvider: UserZoneProvider,
+		public navCtrl: NavController, 
+		public navParams: NavParams) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserZonesPage');
 		// Revisa el token en localStorage 
-		// 	Realiza un request para obtener las zonas
-		// 	O retorna al login
+		// Realiza un request para obtener las zonas
+		// O retorna al login
 		
-
+		// Obtiene las zonas (guias) del usuario
+		this.zonesProvider.fetchZones() // Provider;
+			.then( (zones) => this.userGuides = zones )
+			.catch( () => 'Token no encontrado');
   }
 
+	download() {
+		// Poner condigo aqui
+		console.log('Descargada zona con exito');
+	}
 }
