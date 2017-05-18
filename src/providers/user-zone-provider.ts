@@ -31,7 +31,10 @@ export class UserZoneProvider {
 		console.log('Hello UserZoneProvider Provider');
 
 		// Esto podria ir en otro lugar..
-		const apiUrl = "http://localhost:8000/api/";
+    // const apiUrl = "http://localhost:8000/api/";
+    
+    const apiUrl = "http://digitalcook.info:8000/api/";
+ 
 		this.apiGuideUrl = apiUrl + "guia";
 		this.apiZoneUrl  = apiUrl + "zona";
 	}
@@ -51,7 +54,7 @@ export class UserZoneProvider {
 				
 				console.log(this.jwt.decodeToken(token));
 			
-				const params = `?token=${token}&user=${1}`;
+				const params = `?token=${token}&self=true`;
 				const url = this.apiGuideUrl + params;
 
 				return this.http.get(url, { headers: headers })

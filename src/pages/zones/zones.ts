@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { MapaPage } from '../mapa/mapa';
+import { PerfilPage } from '../perfil/perfil';
 
 import { JwtHelper} from 'angular2-jwt';
 import { Storage } from '@ionic/storage';
 
 import { Zones } from '../../providers/zones';
 import { ZoneProvider as ZoneProvider } from '../../providers/zone-provider';
-
 
 /*
   Generated class for the Zones page.
@@ -27,7 +27,7 @@ export class ZonesPage {
 	mapPage: any;
 	zones: any[];
   token: string;
-  zonini: {};
+  fetchedZones: {};
 
   constructor(
     public storage: Storage,
@@ -40,14 +40,18 @@ export class ZonesPage {
   	this.zones = zonesProvider.getZones();
   	this.mapPage = MapaPage;
 
-    //hay q borrar el estatico y resplazarlo por este zonini
-
+    // Hay q borrar el estatico y resplazarlo por este fetchedZones
 
     this.storage.ready().then(() => {
       this.storage.get('token').then((val) => {
         this.token = val;
-        //deberia traer las zonas
-        this.zoneProvider.get(this.token).subscribe( (res)=>{this.zonini = res;}, (err)=>{console.log(err);});
+        
+        // Deberia traer las zonas
+        this.zoneProvider.get(this.token)
+          .subscribe( 
+            (res) => this.fetchedZones = res, 
+            (err) => console.log(err)
+          );
       })
     });
   }
@@ -59,5 +63,9 @@ export class ZonesPage {
   setZone(zone) {
   	this.navCtrl.push(MapaPage, {zone: zone});
   }
-
+  
+  // Hay que ver como reusamos esto 
+  goToProfile() {
+    this.navCtrl.push(PerfilPage);
+  }
 }

@@ -4,38 +4,45 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+
+<!-- 
+  Posiblemente este header 
+  pueda ser reutilizado 
+-->
 <ion-header>
 
   <ion-navbar>
-		<button ion-button menuToggle>
-			<ion-icon name="menu"></ion-icon>
-		</button>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Guide2Go</ion-title>
 
     <!-- Right Side -->
     <ion-buttons end>
-    	<button ion-button>
-				<ion-icon class="profile-img" name="contact"></ion-icon>
-			</button>
+      <button (click)="goToProfile()" ion-button>
+        <ion-icon class="profile-img" name="contact"></ion-icon>
+      </button>
     </ion-buttons>
 
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
 
-	<ion-list>
+  <ion-list>
 
-		<ion-item *ngFor="let zone of zonini">
-			<ion-thumbnail item-left>
-				<ion-icon class="thumb-img" name="ios-image-outline"></ion-icon>
-			</ion-thumbnail>
-			<h1>{{ zone.name }}</h1>
-			<button (click)="setZone(zone)" ion-button clear item-right>Mostrar</button>
-		</ion-item>
+    <ion-item *ngFor="let zone of fetchedZones">
+      <ion-thumbnail item-left>
+        <ion-icon class="thumb-img" name="ios-image-outline"></ion-icon>
+      </ion-thumbnail>
+      <h1>{{ zone.name }}</h1>
 
-	</ion-list>
+      <!-- Cambiar este boton de mostrar de uno para comprar -->
+      <!-- Mover este boton a "Mis Zonas" -->
+      <button (click)="setZone(zone)" ion-button clear item-right>Mostrar</button>
+    </ion-item>
+
+  </ion-list>
 
 </ion-content>
