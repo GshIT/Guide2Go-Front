@@ -1,5 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicStorageModule, Storage } from '@ionic/storage';
+import { SQLite } from '@ionic-native/sqlite';
 import { Http } from '@angular/http';
 import { AuthHttp, AuthConfig, JwtHelper } from 'angular2-jwt';
 
@@ -75,6 +76,9 @@ export function getAuthHttp(http) {
 		}, {
 			provide: ErrorHandler,
 			useClass: IonicErrorHandler
-		},JwtHelper]
+		},
+		SQLite,
+		JwtHelper
+	]
 })
 export class AppModule {}
