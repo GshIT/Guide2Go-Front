@@ -5,10 +5,13 @@ import 'rxjs/add/operator/map';
 
 // import { Observable } from 'rxjs/Observable';
 import { Storage } from '@ionic/storage';
+import { 
+  Transfer,
+  TransferObject
+} from '@ionic-native/transfer';
 
 import { AuthHttp } from 'angular2-jwt';
 import { JwtHelper } from 'angular2-jwt';
-
 
 /*
 	Generated class for the UserZoneProvider provider.
@@ -23,6 +26,7 @@ export class UserZoneProvider {
 	apiZoneUrl  : string;
 
 	constructor(
+    public transfer: Transfer,
 		public storage: Storage,
 		public jwt: JwtHelper,
 		public auth: AuthHttp,
@@ -73,4 +77,6 @@ export class UserZoneProvider {
 		let err = error.json().error || 'Server error';
 		return Promise.reject(err);
 	}
+
+
 }

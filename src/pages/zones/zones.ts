@@ -23,29 +23,29 @@ import { ZoneProvider as ZoneProvider } from '../../providers/zone-provider';
 })
 export class ZonesPage {
 
-	/* Should not be any */
-	mapPage: any;
-	zones: any[];
+  /* Should not be any */
+  mapPage: any;
+  zones: any[];
   token: string;
   fetchedZones: {};
 
   constructor(
     public storage: Storage,
     public jwtHelper: JwtHelper,
-  	public zonesProvider: Zones,
-  	public navCtrl: NavController, 
-  	public navParams: NavParams,
+    public zonesProvider: Zones,
+    public navCtrl: NavController, 
+    public navParams: NavParams,
     private zoneProvider: ZoneProvider) {
 
-  	this.zones = zonesProvider.getZones();
-  	this.mapPage = MapaPage;
+    this.zones = zonesProvider.getZones();
+    this.mapPage = MapaPage;
 
     // Hay q borrar el estatico y resplazarlo por este fetchedZones
 
     this.storage.ready().then(() => {
       this.storage.get('token').then((val) => {
         this.token = val;
-        
+
         // Deberia traer las zonas
         this.zoneProvider.get(this.token)
           .subscribe( 
@@ -61,11 +61,12 @@ export class ZonesPage {
   }
 
   setZone(zone) {
-  	this.navCtrl.push(MapaPage, {zone: zone});
+    this.navCtrl.push(MapaPage, {zone: zone});
   }
-  
+
   // Hay que ver como reusamos esto 
   goToProfile() {
     this.navCtrl.push(PerfilPage);
   }
 }
+

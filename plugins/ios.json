@@ -37,6 +37,9 @@
         },
         "cordova-plugin-file-transfer": {
             "PACKAGE_NAME": "com.ionicframework.guide2go674784"
+        },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
         }
     },
     "dependent_plugins": {
