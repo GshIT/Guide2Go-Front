@@ -29,8 +29,11 @@ export function getAuthHttp(http) {
 	let config = new AuthConfig({
 		headerPrefix: 'token', // ?
 		noJwtError: true,
-		globalHeaders: [{'Accept': 'applcation/json','Content-Type': 'application/json',
-			'Access-Control-Allow-Origin': '*' }],
+		globalHeaders: [{
+			'Accept': 'applcation/json',
+			'Content-Type': 'application/json',
+			'Access-Control-Allow-Origin': '*' 
+		}],
 		tokenGetter: (() => storage.get('token')),
 	}); 
 	return new AuthHttp(config, http);

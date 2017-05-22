@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
-
 /*
   Generated class for the AudioProvider provider.
 
