@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
@@ -13,17 +12,36 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 @Injectable()
 export class OfflineProvider {
 
+	dbConnection: Promise<SQLiteObject>;
+
 	constructor(private sqlite: SQLite) {
+
 		console.log('Sqlite Offline Provider');
+
 		this.sqlite.echoTest()
 			.then(() => console.log('Test finished!'))
 			.catch(() => console.log('Test error!'));
 	}
 
-	storeUserInfo() {
-		this.sqlite.create({
+	public initDatabase() {
+
+		this.dbConnection = this.sqlite.create({
 			name: 'data.db',
 			location: 'default'
-		});
+		})
+			.then((db: SQLiteObject) => db)
+			.catch((e) => console.log(e));
+
+	}
+
+	storeUserInfo() {
+
+		this.dbConnection
+			.then((db: SQLiteObject) => {
+				// db.executeSql('');
+				console.log("Ejecutado el sql!");
+			})
+			.catch((e) => console.log(e));
+
 	}
 }

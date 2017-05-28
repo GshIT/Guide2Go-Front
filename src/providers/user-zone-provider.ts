@@ -6,8 +6,7 @@ import 'rxjs/add/operator/map';
 // import { Observable } from 'rxjs/Observable';
 import { Storage } from '@ionic/storage';
 import { 
-  Transfer,
-  TransferObject
+  Transfer
 } from '@ionic-native/transfer';
 
 import { AuthHttp } from 'angular2-jwt';

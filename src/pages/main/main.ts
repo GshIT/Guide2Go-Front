@@ -7,11 +7,16 @@ import {
 	NavParams 
 } from 'ionic-angular';
 
+import { 
+	OfflineProvider 
+} from '../../providers/offline-provider';
+
 import { ZonesPage } from '../zones/zones';
 
 @Component({
 	selector: 'page-main',
-	templateUrl: 'main.html'
+	templateUrl: 'main.html',
+	providers: [ OfflineProvider ]
 })
 export class MainPage {
 
@@ -22,6 +27,7 @@ export class MainPage {
 	codigo */
 
 	constructor(
+		public offln: OfflineProvider,
 		public loadCtrl: LoadingController,
 		public menuCtrl: MenuController,
 		public navCtrl: NavController, 
@@ -46,6 +52,7 @@ export class MainPage {
 			content: 'Cargando...'
 		});
 		this.loader.present();
+		this.offln.initDatabase();
 	}
-
+	
 }
