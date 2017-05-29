@@ -123,7 +123,7 @@ export class MapaPage {
       position: point,
       map: this.map,
       title: name,
-      animation: google.maps.Animation.DROP,
+      animation: google.maps.Animation.DROP
     });
 
     marker.addListener('click', function() {
