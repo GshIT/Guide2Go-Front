@@ -13,7 +13,7 @@ import 'rxjs/add/operator/map';
 export class Zones {
 
   constructor(public http: Http) {
-    console.log('Hello Zones Provider');
+    console.log('Old zones provider (Delete this)');
   }
 
   /* Debe hacerse con promesas.... */

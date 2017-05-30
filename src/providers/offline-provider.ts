@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { Storage } from '@ionic/storage';
+import { Http } from '@angular/http';
 
 /*
 	Generated class for the OfflineProvider provider.
@@ -14,7 +16,10 @@ export class OfflineProvider {
 
 	dbConnect: Promise<SQLiteObject>;
 
-	constructor(private sqlite: SQLite) {
+	constructor(
+		private http: Http,
+		private storage: Storage,
+		private sqlite: SQLite) {
 
 		console.log('Sqlite Offline Provider');
 
@@ -134,5 +139,18 @@ export class OfflineProvider {
 		console.log("Created User relationship with Guide");
 
 		return db;
+	}
+
+	storeUserInfo() {
+		
+		// Hacer request para traer la info
+		// del usuario
+	//	this.http.get();
+		
+		const st = this.storage.ready();
+		st.then(() => {
+			this.storage.set('user', {});
+		});
+
 	}
 }

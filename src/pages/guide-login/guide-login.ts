@@ -65,7 +65,7 @@ export class GuideLoginPage {
 	private saveToken(){
 		this.storage.ready().then(() => {
 			this.storage.set('token', this.token);
-	    });
+		});
 	}
 
 	private handleError(error: any) {

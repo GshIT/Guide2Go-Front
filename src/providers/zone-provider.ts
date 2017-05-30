@@ -8,32 +8,42 @@ import { AuthHttp } from 'angular2-jwt';
 import { JwtHelper } from 'angular2-jwt';
 
 /*
-  Generated class for the ZoneProvider provider.
+	Generated class for the ZoneProvider provider.
 
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
+	See https://angular.io/docs/ts/latest/guide/dependency-injection.html
+	for more info on providers and Angular 2 DI.
+ */
 @Injectable()
 export class ZoneProvider {
 
 	zoneUrl: string;
 
-  	constructor(public http: Http, public authHttp: AuthHttp, public JwtHelper: JwtHelper) {
-    	console.log('Hello ZoneProvider Provider');
-    	//this.zoneUrl = 'http://localhost:8000/api/zona';
-		this.zoneUrl = 'http://digitalcook.info:8000/api/zona';
-  	}
+	constructor(
+		public http: Http, 
+		public authHttp: AuthHttp, 
+		public JwtHelper: JwtHelper) {
 
-  	get(token): Observable<{}>{
+		console.log('Started zones provider');
+
+		// this.zoneUrl = 'http://localhost:8000/api/zona';
+		this.zoneUrl = 'http://digitalcook.info:8000/api/zona';
+	}
+
+	get(token): Observable<{}> {
+
+		// Obten el token de localStorage aqui
+		// y no desde afuera
+
 		let headers = new Headers({ 
 			'Content-Type': 'application/json',
-			'Access-Control-Allow-Origin': '*' 
+			'Access-Control-Allow-Origin': '*',
+			'Authorization': `Bearer <${token}>`
 		});
 		let options = new RequestOptions({ headers: headers });
 
-		return this.http.get(this.zoneUrl+'?token='+token, options)
+		return this.http.get(this.zoneUrl, options)
 		.map(this.printInside)
-		.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+		.catch((error:any) => Observable.throw('Server error'));
 	}
 
 	private printInside(res: Response) {

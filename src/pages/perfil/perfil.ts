@@ -24,9 +24,17 @@ export class PerfilPage {
     public storage: Storage,
   	public navCtrl: NavController, 
   	public navParams: NavParams) {
-  	this.user = {nombre: 'wait', email: 'wait', dolares: 'wait'};
+
+  	this.user = {
+			nombre: 'Wait', 
+			email: 'Wait', 
+			dolares: 'Wait'
+		};
+
     this.storage.ready().then(() => {
-    	this.storage.get('token').then((val) => {this.UserProvider.show(val,this.user);})
+    	this.storage.get('token').then((val) => {
+				this.UserProvider.show(val, this.user);
+			})
     });
   }
 

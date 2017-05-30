@@ -6,7 +6,6 @@ import { AuthHttp, AuthConfig, JwtHelper } from 'angular2-jwt';
 
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
-
 import { MyApp } from './app.component';
 
 import { Login } from '../pages/login/login';
@@ -20,14 +19,11 @@ import { GuideLoginPage } from '../pages/guide-login/guide-login';
 import { RegisterPage } from '../pages/register/register';
 import { PerfilPage } from '../pages/perfil/perfil';
 
-
-
 // Eto ta mu loco
 const storage = new Storage();
 
 export function getAuthHttp(http) {
 	let config = new AuthConfig({
-		headerPrefix: 'token', // ?
 		noJwtError: true,
 		globalHeaders: [{
 			'Accept': 'applcation/json',

@@ -8,7 +8,9 @@ import { GuideLoginPage } from '../guide-login/guide-login';
   templateUrl: 'login.html'
 })
 export class Login {
-  constructor(private menu: MenuController, private navCtrl : NavController) {}
+  constructor(
+	  private menu: MenuController, 
+	  private navCtrl : NavController) {}
 
   ionViewDidEnter() {
   	// Cerrar sesion cuando entra para estar seguros.

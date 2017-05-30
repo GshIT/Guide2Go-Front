@@ -10,18 +10,10 @@
         "cordova-plugin-console": {
             "PACKAGE_NAME": "com.ionicframework.guide2go674784"
         },
-        "cordova-plugin-crosswalk-webview": {
-            "XWALK_VERSION": "23+",
-            "XWALK_LITEVERSION": "xwalk_core_library_canary:17+",
-            "XWALK_COMMANDLINE": "--disable-pull-to-refresh-effect",
-            "XWALK_MODE": "embedded",
-            "XWALK_MULTIPLEAPK": "true",
-            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
-        },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "com.ionicframework.guide2go674784"
         },
-        "cordova-plugin-inappbrowser": {
+        "cordova-plugin-googleplus": {
             "PACKAGE_NAME": "com.ionicframework.guide2go674784"
         },
         "cordova-plugin-splashscreen": {
@@ -36,22 +28,9 @@
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.ionicframework.guide2go674784"
         },
-        "cordova-plugin-googleplus": {
-            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
-        },
-        "cordova-plugin-file-transfer": {
-            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
-        },
         "cordova-sqlite-storage": {
             "PACKAGE_NAME": "com.ionicframework.guide2go674784"
         }
     },
-    "dependent_plugins": {
-        "cordova-plugin-compat": {
-            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
-        },
-        "cordova-plugin-file": {
-            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
-        }
-    }
+    "dependent_plugins": {}
 }

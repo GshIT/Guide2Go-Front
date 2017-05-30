@@ -40,7 +40,9 @@
     "cordova-plugin-statusbar",
     "cordova-plugin-console",
     "cordova-plugin-splashscreen",
-    "ionic-plugin-keyboard"
+    "ionic-plugin-keyboard",
+    "cordova-plugin-googleplus",
+    "cordova-sqlite-storage"
   ],
   "cordovaPlatforms": [
     "ios",
@@ -48,6 +50,11 @@
       "platform": "ios",
       "version": "",
       "locator": "ios"
+    },
+    {
+      "platform": "android",
+      "version": "",
+      "locator": "android"
     }
   ],
   "description": "Guide2Go: An Ionic project"

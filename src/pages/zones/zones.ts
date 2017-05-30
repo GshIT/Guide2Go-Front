@@ -36,8 +36,10 @@ export class ZonesPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     private zoneProvider: ZoneProvider) {
-
-    this.zones = zonesProvider.getZones();
+		
+		// Ya hay que borrar este viejo provider
+    // this.zones = zonesProvider.getZones();
+		
     this.mapPage = MapaPage;
 
     // Hay q borrar el estatico y resplazarlo por este fetchedZones

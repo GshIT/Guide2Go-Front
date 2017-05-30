@@ -7,25 +7,19 @@
         "files": {}
     },
     "installed_plugins": {
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
+        },
         "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
-        },
-        "cordova-plugin-crosswalk-webview": {
-            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
-        },
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
-        },
-        "cordova-plugin-inappbrowser": {
-            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
-        },
-        "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.ionicframework.guide2go674784"
         },
         "cordova-plugin-statusbar": {
             "PACKAGE_NAME": "com.ionicframework.guide2go674784"
         },
-        "cordova-plugin-whitelist": {
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
+        },
+        "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.ionicframework.guide2go674784"
         },
         "ionic-plugin-keyboard": {
@@ -35,19 +29,9 @@
             "REVERSED_CLIENT_ID": "com.googleusercontent.apps.96779452065-aor0s70an43k2i901aa29j2abmtpcn5c",
             "PACKAGE_NAME": "com.ionicframework.guide2go674784"
         },
-        "cordova-plugin-file-transfer": {
-            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
-        },
         "cordova-sqlite-storage": {
             "PACKAGE_NAME": "com.ionicframework.guide2go674784"
         }
     },
-    "dependent_plugins": {
-        "cordova-plugin-compat": {
-            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
-        },
-        "cordova-plugin-file": {
-            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
-        }
-    }
+    "dependent_plugins": {}
 }

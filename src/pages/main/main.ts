@@ -52,7 +52,14 @@ export class MainPage {
 			content: 'Cargando...'
 		});
 		this.loader.present();
+
+		// Verificar si es la primera vez
+		// inicializar base de datos y 
+		// creacion de tablas
 		this.offln.initDatabase();
+
+		// Guarda informacion local del usuario 
+		// para estar disponible offline
 	}
 	
 }

@@ -13,7 +13,11 @@ export class UserProvider {
 
 	userUrl: string;
 
-	constructor(public http: Http, public authHttp: AuthHttp, public JwtHelper: JwtHelper) {
+	constructor(
+		public http: Http, 
+		public authHttp: AuthHttp, 
+		public JwtHelper: JwtHelper) {
+
 		//this.userUrl = 'http://127.0.0.1:8000/api/user';
 		this.userUrl = 'http://digitalcook.info:8000/api/user';
 	}
@@ -38,16 +42,25 @@ export class UserProvider {
 		return body;
 	}
 
-	show(token,user){
-     	//aca hay q ver como se manda el token solo
-	  	return this.authHttp.get(this.userUrl+'/'+this.JwtHelper.decodeToken(token).sub+'?token='+token)
-	    	.subscribe(
-	      	data => {user.nombre = data.json().users.pop().name; 
-	      			user.email = data.json().users.pop().email; 
-	      			user.dolares = data.json().users.pop().dolares},
-	      	err => console.log(err),
-	      	() => console.log('Request Complete')
-	    	);
+	show(token, user){
+		
+		// Aqui hay q ver como se manda el token solo
+		// this.userUrl + '/' + this.JwtHelper.decodeToken(token).sub+'?token=' + token
+		
+		// Ya deberia funcionar sin el token de parametro
+
+		let url = `${this.userUrl}/${this.JwtHelper.decodeToken(token).sub}?token=${token}`;
+
+		return this.authHttp.get(url)
+			.subscribe(
+				data => { 
+					user.nombre  = data.json().users.pop().name; 
+					user.email   = data.json().users.pop().email; 
+					user.dolares = data.json().users.pop().dolares
+				},
+				err => console.log(err),
+				() => console.log('Request Complete')
+			);
 	}
 
 }
