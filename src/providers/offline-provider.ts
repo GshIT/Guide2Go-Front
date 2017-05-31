@@ -5,6 +5,8 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { Storage } from '@ionic/storage';
 import { Http } from '@angular/http';
 
+import { HttpUtils } from '../providers/custom-http';
+
 /*
 	Generated class for the OfflineProvider provider.
 
@@ -18,6 +20,7 @@ export class OfflineProvider {
 
 	constructor(
 		private http: Http,
+		private httpUtil: HttpUtils,
 		private storage: Storage,
 		private sqlite: SQLite) {
 
@@ -59,6 +62,29 @@ export class OfflineProvider {
 		console.log("Created Users Table!");
 
 		return db;
+	}
+
+	storeUserInfo() {
+
+		// Hacer request para traer la info
+		// del usuario
+
+		let url = this.httpUtil.routes['user'];
+		let sub = "";
+
+		// Aqui ya se puede colocar el parametro
+		// self = True para la ruta 
+		this.storage.ready()
+			.then(() => this.storage.get('token'))
+			.then((token) => {
+				sub = this.httpUtil.tokenSub(token);
+				url = `${url}/${sub}`;
+				return this.httpUtil.authHeaders();
+			})
+			.then((opts) => this.http.get(url, opts).toPromise())
+			.then((resp) => resp.json() || {})
+			.then((user) => this.storage.set('user', user))
+			.catch((e) => console.log(e)); 
 	}
 
 	initGuideTable(db: SQLiteObject) {
@@ -141,16 +167,4 @@ export class OfflineProvider {
 		return db;
 	}
 
-	storeUserInfo() {
-		
-		// Hacer request para traer la info
-		// del usuario
-	//	this.http.get();
-		
-		const st = this.storage.ready();
-		st.then(() => {
-			this.storage.set('user', {});
-		});
-
-	}
 }

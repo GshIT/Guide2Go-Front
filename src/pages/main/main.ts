@@ -57,6 +57,7 @@ export class MainPage {
 		// inicializar base de datos y 
 		// creacion de tablas
 		this.offln.initDatabase();
+		this.offln.storeUserInfo();
 
 		// Guarda informacion local del usuario 
 		// para estar disponible offline

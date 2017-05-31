@@ -22,7 +22,8 @@ export class UserProvider {
 		this.userUrl = 'http://digitalcook.info:8000/api/user';
 	}
 
-	createUser(args: {}): Observable<{}>{
+	createUser(args: {}): Observable<{}> {
+
 		let bodyString = JSON.stringify(args);
 		let headers = new Headers({ 
 			'Content-Type': 'application/json',

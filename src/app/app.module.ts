@@ -3,6 +3,7 @@ import { IonicStorageModule, Storage } from '@ionic/storage';
 import { SQLite } from '@ionic-native/sqlite';
 import { Http } from '@angular/http';
 import { AuthHttp, AuthConfig, JwtHelper } from 'angular2-jwt';
+import { Transfer } from '@ionic-native/transfer';
 
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
@@ -19,10 +20,11 @@ import { GuideLoginPage } from '../pages/guide-login/guide-login';
 import { RegisterPage } from '../pages/register/register';
 import { PerfilPage } from '../pages/perfil/perfil';
 
-// Eto ta mu loco
-const storage = new Storage();
+import { HttpUtils } from '../providers/custom-http';
 
-export function getAuthHttp(http) {
+// Mover esto a un modulo o algo...
+//
+export function getAuthHttp(http, storage) {
 	let config = new AuthConfig({
 		noJwtError: true,
 		globalHeaders: [{
@@ -30,7 +32,7 @@ export function getAuthHttp(http) {
 			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': '*' 
 		}],
-		tokenGetter: (() => storage.get('token')),
+		tokenGetter: () => storage.get('token'),
 	}); 
 	return new AuthHttp(config, http);
 }
@@ -71,12 +73,14 @@ export function getAuthHttp(http) {
 		{
 			provide: AuthHttp,
 			useFactory: getAuthHttp,
-			deps: [Http]
+			deps: [Http, Storage]
 		}, {
 			provide: ErrorHandler,
 			useClass: IonicErrorHandler
 		},
+		Transfer,
 		SQLite,
+		HttpUtils,
 		JwtHelper
 	]
 })
