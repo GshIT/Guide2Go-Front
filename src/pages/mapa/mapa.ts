@@ -18,11 +18,15 @@ export class MapaPage {
   map: any;
   latLng: any;
   intervalId: any;
+  intervalStop: any;
+  intervalSubzone: any;
   marker: any;
   follow: boolean;
   zone: any;
   subzones: any;
   paradas: any;
+  subPolygon: any;
+  aktivParada: any;
 
   constructor(
     public zonesProvider: Zones,
@@ -31,6 +35,9 @@ export class MapaPage {
     public subzoneProb: SubzoneProvider,
     public paradaProb: ParadaProvider) {
 
+    this.paradas = [];
+    this.aktivParada = [];
+    this.subPolygon = [];
     this.zone = params.get('zone');
     this.follow = (typeof(this.zone) !== 'undefined') ? false : true;
     
@@ -45,12 +52,63 @@ export class MapaPage {
 
   ionViewDidLoad() {
     this.initMap();
-    this.uploadCycle(); 
+    this.uploadCycle();  
   }
 
   ionViewWillUnload(){
     console.log("saliendo")
     clearInterval(this.intervalId);
+    clearInterval(this.intervalStop);
+    clearInterval(this.intervalSubzone);
+  }
+
+  //revisa las subzonas y dice en cual estoy yo y filtra las paradas a solo en la subzona en la que estoy
+  uploadSubZone(){
+    this.intervalSubzone = setInterval(this.filterStops.bind(this), 5000);
+  }
+
+  filterStops(){
+    let i;
+    let inside = false;
+    for (i = 0; i < this.subPolygon.length && !inside; i++){
+      //console.log(this.subPolygon[i]);
+      if(google.maps.geometry.poly.containsLocation(this.latLng, this.subPolygon[i].polygon)){
+        console.log("dentro de " + this.subPolygon[i].id);
+        this.getAktiv(this.subPolygon[i].id);
+      }
+    }
+  }
+
+  getAktiv(id: any){
+    let i;
+    this.aktivParada = [];
+    for (i = 0; i < this.paradas.length; i++){
+      if(this.paradas[i].subzona == id){
+        this.aktivParada.push(this.paradas[i]);
+      }
+    }
+  }
+
+  uploadStop(){
+    this.intervalStop = setInterval(this.nearStop.bind(this), 5000);
+  }
+
+  nearStop(){
+    let i;
+    let distance;
+    for (i = 0; i < this.aktivParada.length; i++){
+      //console.log(this.aktivParada[i].point);
+      distance = this.calcDistance(i);
+      //console.log(distance);
+      if(distance <= 50){
+        console.log('beeep '+this.aktivParada[i].nombre);
+      }
+    }
+  }
+
+  calcDistance(i: any){
+    let p2 = new google.maps.LatLng(this.aktivParada[i].point.lat, this.aktivParada[i].point.lng);
+    return google.maps.geometry.spherical.computeDistanceBetween(this.latLng,p2);
   }
 
   initMap(){
@@ -91,10 +149,12 @@ export class MapaPage {
     for(let subzone in this.subzones){
       let subZ = this.subzones[subzone]
       let polygon = this.getPolygon(subZ);
-      this.previewZone(polygon,'#4286f4');
+      this.subPolygon.push({polygon:this.previewZone(polygon,'#4286f4'),id: subZ.id});
 
       this.bindParadas(subZ.id);
     }
+    this.uploadSubZone();
+    this.uploadStop();
   }
 
   bindParadas(id){
@@ -103,12 +163,14 @@ export class MapaPage {
   }
 
   previewParadas(res){
-    this.paradas = res;
 
-    for(let parada in this.paradas){
-      let par = this.paradas[parada]
+    for(let parada in res){
+      let par = res[parada];
       let point = this.getPoint(par);
+
       this.createMarker(point,par.nombre,par.descripcion);
+      this.paradas.push({point: point, id: par.id, subzona: par.sub_zonas_id, nombre: par.nombre});
+      //console.log(par);
     }
   }
 
@@ -195,7 +257,7 @@ export class MapaPage {
       //console.log(this.zone.poligono.linestrings.pop().points);
       //this.map.setCenter(this.latLng);
       zonePolygon.setMap(this.map);
-
+      return zonePolygon;
       /*for (let p of z.points) {
         new google.maps.Marker({
           animation: google.maps.Animation.DROP,

@@ -21,9 +21,6 @@
         "cordova-plugin-device": {
             "PACKAGE_NAME": "com.ionicframework.guide2go674784"
         },
-        "cordova-plugin-geolocation": {
-            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
-        },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.ionicframework.guide2go674784"
         },
@@ -40,9 +37,5 @@
             "PACKAGE_NAME": "com.ionicframework.guide2go674784"
         }
     },
-    "dependent_plugins": {
-        "cordova-plugin-compat": {
-            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
-        }
-    }
+    "dependent_plugins": {}
 }

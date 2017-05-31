@@ -1,7 +1,8 @@
 import { NgModule, ErrorHandler } from '@angular/core';
-import { IonicStorageModule, Storage } from '@ionic/storage';
+import { IonicStorageModule } from '@ionic/storage';
 import { Http } from '@angular/http';
 import { AuthHttp, AuthConfig, JwtHelper } from 'angular2-jwt';
+import { Storage } from '@ionic/storage';
 
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
@@ -22,7 +23,7 @@ import { PerfilPage } from '../pages/perfil/perfil';
 
 
 // Eto ta mu loco
-const storage = new Storage();
+let storage = new Storage(true);
 
 export function getAuthHttp(http) {
 	let config = new AuthConfig({

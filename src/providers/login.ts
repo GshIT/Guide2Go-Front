@@ -18,8 +18,8 @@ export class Login {
 
 	constructor(public http: Http) {
 		console.log('Hello Login Provider');
-		this.loginUrl = 'http://localhost:8000/api/login';
-		//this.loginUrl = 'http://digitalcook.info:8000/api/login';
+		//this.loginUrl = 'http://localhost:8000/api/login';
+		this.loginUrl = 'http://digitalcook.info:8000/api/login';
 	}
 
 	/* Deberia hacer dos argumentos? */
@@ -37,6 +37,7 @@ export class Login {
 
 	private getToken(resp: Response) {
 		let body = resp.json();
+		console.log(body);
 		return body.token;
 	}
 	

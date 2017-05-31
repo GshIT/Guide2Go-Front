@@ -71,7 +71,7 @@ export class GuideLoginPage {
 	private handleError(error: any) {
 		// Modificar la vista para que haga
 		// algo mas bonito aqui
-		this.errorMsg = "Ups, hubo un error intenta de nuevo";
+		this.errorMsg = error;
 		console.log('Ups, hubo un error intenta de nuevo');
 		console.log(error);
 	}
