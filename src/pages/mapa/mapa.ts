@@ -6,11 +6,12 @@ import { Geolocation } from 'ionic-native';
 import { Zones } from '../../providers/zones';
 import { SubzoneProvider } from '../../providers/subzone-provider';
 import { ParadaProvider } from '../../providers/parada-provider';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 @Component({
   selector: 'page-mapa',
   templateUrl: 'mapa.html',
-  providers: [Zones,SubzoneProvider,ParadaProvider]
+  providers: [Zones,SubzoneProvider,ParadaProvider,NativeAudio]
 })
 export class MapaPage {
 
@@ -33,7 +34,8 @@ export class MapaPage {
     public params: NavParams,
     public navCtrl: NavController,
     public subzoneProb: SubzoneProvider,
-    public paradaProb: ParadaProvider) {
+    public paradaProb: ParadaProvider,
+    private nativeAudio: NativeAudio) {
 
     this.paradas = [];
     this.aktivParada = [];
@@ -96,11 +98,20 @@ export class MapaPage {
   nearStop(){
     let i;
     let distance;
+    var audio;
     for (i = 0; i < this.aktivParada.length; i++){
       //console.log(this.aktivParada[i].point);
       distance = this.calcDistance(i);
       //console.log(distance);
       if(distance <= 50){
+        //esto funciona para navegador
+        audio = new Audio('http://soundbible.com/mp3/Censored_Beep-Mastercard-569981218.mp3');
+        audio.play();
+        //hasta aca
+        //audio nativo
+        //this.nativeAudio.preloadSimple(this.aktivParada[i].id, 'http://soundbible.com/mp3/Censored_Beep-Mastercard-569981218.mp3')
+        //.then(() => console.log(this.aktivParada[i].id), () => console.log("error"));
+        //hasta aca audio nativo
         console.log('beeep '+this.aktivParada[i].nombre);
       }
     }
