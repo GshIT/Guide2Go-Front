@@ -49,8 +49,7 @@ export class MainPage {
 	ionViewWillEnter() {
 		console.log('Entering to the main.');
 		this.loader = this.loadCtrl.create({
-			content: 'Cargando...',
-			duration: 3000
+			content: 'Cargando...'
 		});
 		this.loader.present();
 

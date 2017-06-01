@@ -2,7 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, MenuController, Nav } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { Storage } from '@ionic/storage';
+import { JwtHelper } from 'angular2-jwt';
 
+import { DefaultPage } from '../pages/default/default';
 import { Login } from '../pages/login/login';
 import { ZonesPage } from '../pages/zones/zones';
 import { MainPage } from '../pages/main/main';
@@ -16,20 +18,20 @@ import { PerfilPage } from '../pages/perfil/perfil';
 	templateUrl: 'app.html'
 })
 export class MyApp {
+
 	@ViewChild(Nav) nav: Nav;
 
 	// make Login the root (or first) page
-	rootPage: any = Login;
+	rootPage: any = DefaultPage;
 	pages: Array<{title: string, component: any}>;
 
 	constructor(
+		public jwt: JwtHelper,
 		public storage: Storage,
 		public platform: Platform,
-		public menu: MenuController
-	) {
-		this.initializeApp();
+		public menu: MenuController) {
 
-		// set our app's pages
+		this.initializeApp();
 		this.pages = [
 			{ title: 'Mi Perfil', component: PerfilPage },
 			{ title: 'Mis Zonas', component: UserZonesPage },
@@ -41,18 +43,43 @@ export class MyApp {
 	}
 
 	initializeApp() {
-		this.platform.ready().then(() => {
-			// Okay, so the platform is ready and our plugins are available.
-			// Here you can do any higher level native things you might need.
-			StatusBar.styleDefault();
-			Splashscreen.hide();
-		});
+		this.platform.ready()
+			.then(() => this.verifyToken())
+			.then(() => {
+				StatusBar.styleDefault();
+				Splashscreen.hide();
+			});
+	}
+
+	verifyToken() {
+
+		// Aqui vamos a verificar que hay 
+		// conexion a internet
+		// Y verificamos tambien que hay una sesion abierta
+
+		return this.storage.ready()
+			.then(() => this.storage.get('token'))
+			.then((token) => {
+				console.log(`Found token => ${token}`);
+
+				// Verifica si el token ya expiro
+				if (token && !this.jwt.isTokenExpired(token)) {
+					this.rootPage = MainPage;
+				}
+				else {
+					this.rootPage = Login;
+				}
+			})
+			.catch((e) => console.log(e));
+
 	}
 
 	openPage(page) {
-		// close the menu when clicking a link from the menu
+
+		// Cierra el menu cuando se 
+		// selecciona una pagina
 		this.menu.close();
-		// navigate to the new page if it is not the current page
+
 		this.nav.setRoot(page.component, {}, {
 			animate: true,
 			direction: 'back'
@@ -63,14 +90,21 @@ export class MyApp {
 	}
 
 	closeSession() {
+
+		// Hacemos el root page el Login
+		this.rootPage = Login;
+
+		// No hay problema con hacer esto
+		// asincrono?
 		this.storage.ready()
 			.then(() => this.storage.remove('token'))
 			.then(() => this.storage.remove('user'))
 			.catch((e) => console.log(e));
 
-		this.nav.setRoot(this.rootPage, {}, {
-			animate: true,
-			direction: 'back'
-		})
+		// Test
+		//	this.nav.setRoot(this.rootPage, {}, {
+		//		animate: true,
+		//		direction: 'back'
+		//	})
 	}
 }

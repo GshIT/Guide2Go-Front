@@ -9,6 +9,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 
+import { DefaultPage } from '../pages/default/default';
 import { Login } from '../pages/login/login';
 import { ReferedPage} from '../pages/refered/refered';
 import { ZonesPage } from '../pages/zones/zones';
@@ -40,6 +41,7 @@ export function getAuthHttp(http, storage) {
 @NgModule({
 	declarations: [
 		MyApp,
+		DefaultPage,
 		Login,
 		ReferedPage,
 		ZonesPage,
@@ -58,6 +60,7 @@ export function getAuthHttp(http, storage) {
 	bootstrap: [IonicApp],
 	entryComponents: [
 		MyApp,
+		DefaultPage,
 		Login,
 		ReferedPage,
 		ZonesPage,
