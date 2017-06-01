@@ -1,8 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-
 import { Platform, MenuController, Nav } from 'ionic-angular';
-
 import { StatusBar, Splashscreen } from 'ionic-native';
+import { Storage } from '@ionic/storage';
 
 import { Login } from '../pages/login/login';
 import { ZonesPage } from '../pages/zones/zones';
@@ -20,10 +19,11 @@ export class MyApp {
 	@ViewChild(Nav) nav: Nav;
 
 	// make Login the root (or first) page
-	rootPage: any = MainPage;
+	rootPage: any = Login;
 	pages: Array<{title: string, component: any}>;
 
 	constructor(
+		public storage: Storage,
 		public platform: Platform,
 		public menu: MenuController
 	) {
@@ -36,7 +36,7 @@ export class MyApp {
 			{ title: 'Recomendar', component: RecommendPage },
 			{ title: 'Todas las Zonas', component: ZonesPage },
 			{ title: 'Mapa', component: MapaPage },
-			{ title: 'Cerrar Sesion', component: Login }
+			// { title: 'Cerrar Sesion', component: Login }
 		];
 	}
 
@@ -60,5 +60,17 @@ export class MyApp {
 			.catch(() => {
 				console.log('Esa pagina no existe todavia...');
 			})
+	}
+
+	closeSession() {
+		this.storage.ready()
+			.then(() => this.storage.remove('token'))
+			.then(() => this.storage.remove('user'))
+			.catch((e) => console.log(e));
+
+		this.nav.setRoot(this.rootPage, {}, {
+			animate: true,
+			direction: 'back'
+		})
 	}
 }

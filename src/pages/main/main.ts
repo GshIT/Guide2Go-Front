@@ -49,7 +49,8 @@ export class MainPage {
 	ionViewWillEnter() {
 		console.log('Entering to the main.');
 		this.loader = this.loadCtrl.create({
-			content: 'Cargando...'
+			content: 'Cargando...',
+			duration: 3000
 		});
 		this.loader.present();
 
@@ -57,10 +58,13 @@ export class MainPage {
 		// inicializar base de datos y 
 		// creacion de tablas
 		this.offln.initDatabase();
-		this.offln.storeUserInfo();
-
+		
 		// Guarda informacion local del usuario 
 		// para estar disponible offline
+		this.offln.storeUserInfo();
+		
+		// Si no hay conexion a interne:
+		// entra en modo offline
 	}
-	
+
 }
