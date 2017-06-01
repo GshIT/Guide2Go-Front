@@ -91,8 +91,14 @@ export class MyApp {
 
 	closeSession() {
 
+		this.menu.close();
+		
 		// Hacemos el root page el Login
-		this.rootPage = Login;
+		this.nav.setRoot(Login, {}, {
+			animate: true,
+			direction: 'back'
+		})
+			.then(() => this.rootPage = Login);
 
 		// No hay problema con hacer esto
 		// asincrono?
@@ -101,10 +107,5 @@ export class MyApp {
 			.then(() => this.storage.remove('user'))
 			.catch((e) => console.log(e));
 
-		// Test
-		//	this.nav.setRoot(this.rootPage, {}, {
-		//		animate: true,
-		//		direction: 'back'
-		//	})
 	}
 }

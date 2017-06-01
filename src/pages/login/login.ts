@@ -7,7 +7,6 @@ import {
 
 import { GuideLoginPage } from '../guide-login/guide-login';
 import { ReferedPage } from '../refered/refered';
-import { MainPage } from '../main/main';
 
 @Component({
 	selector: 'page-login',
