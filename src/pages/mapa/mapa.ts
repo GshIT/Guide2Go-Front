@@ -1,7 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
-
-import { NavParams, NavController } from 'ionic-angular';
 import { Geolocation } from 'ionic-native';
+import { 
+  NavParams,
+  NavController,
+  Toast,
+  ToastController,
+} from 'ionic-angular';
 
 import { Zones } from '../../providers/zones';
 import { SubzoneProvider } from '../../providers/subzone-provider';
@@ -29,7 +33,16 @@ export class MapaPage {
   subPolygon: any;
   aktivParada: any;
 
+  // Toast
+  toast: Toast;
+  lastStop: Object;
+
+  /**
+   * Este componente lo que tiene
+   * e esteroides no jo
+   */
   constructor(
+    public toastCtrl: ToastController,
     public zonesProvider: Zones,
     public params: NavParams,
     public navCtrl: NavController,
@@ -37,12 +50,14 @@ export class MapaPage {
     public paradaProb: ParadaProvider,
     private nativeAudio: NativeAudio) {
 
+    this.lastStop = null;
+
     this.paradas = [];
     this.aktivParada = [];
     this.subPolygon = [];
     this.zone = params.get('zone');
     this.follow = (typeof(this.zone) !== 'undefined') ? false : true;
-    
+
     //const coords = zonesProvider.getZoneLatLng(this.zone);
     const coords = { lat: 0, lng: 0 };
     /* -13.163109, -72.544961 */
@@ -58,13 +73,14 @@ export class MapaPage {
   }
 
   ionViewWillUnload(){
-    console.log("saliendo")
+    console.log("Saliendo")
     clearInterval(this.intervalId);
     clearInterval(this.intervalStop);
     clearInterval(this.intervalSubzone);
   }
 
-  //revisa las subzonas y dice en cual estoy yo y filtra las paradas a solo en la subzona en la que estoy
+  // Revisa las subzonas y dice en cual estoy yo y 
+  // filtra las paradas a solo en la subzona en la que estoy
   uploadSubZone(){
     this.intervalSubzone = setInterval(this.filterStops.bind(this), 5000);
   }
@@ -75,7 +91,7 @@ export class MapaPage {
     for (i = 0; i < this.subPolygon.length && !inside; i++){
       //console.log(this.subPolygon[i]);
       if(google.maps.geometry.poly.containsLocation(this.latLng, this.subPolygon[i].polygon)){
-        console.log("dentro de " + this.subPolygon[i].id);
+        console.log("Dentro de " + this.subPolygon[i].id);
         this.getAktiv(this.subPolygon[i].id);
       }
     }
@@ -96,29 +112,82 @@ export class MapaPage {
   }
 
   nearStop(){
+
+    const url = 'http://soundbible.com/mp3/Censored_Beep-Mastercard-569981218.mp3';
+    let actStop;
     let i;
     let distance;
-    var audio;
-    for (i = 0; i < this.aktivParada.length; i++){
-      //console.log(this.aktivParada[i].point);
+    var audio; // var D:
+
+    /**
+     * Aqui cambie las paradas filtradas por todas
+     * para probar si suena
+     */
+    for (i = 0; i < this.paradas.length; i++){
+
+      actStop = this.paradas[i]; // for of?
       distance = this.calcDistance(i);
-      //console.log(distance);
+
+      console.log(actStop.point);
+      console.log(distance);
+
       if(distance <= 50){
-        //esto funciona para navegador
-        audio = new Audio('http://soundbible.com/mp3/Censored_Beep-Mastercard-569981218.mp3');
+
+        // Esto funciona para navegador
+        audio = new Audio(url);
         audio.play();
-        //hasta aca
-        //audio nativo
-        //this.nativeAudio.preloadSimple(this.aktivParada[i].id, 'http://soundbible.com/mp3/Censored_Beep-Mastercard-569981218.mp3')
-        //.then(() => console.log(this.aktivParada[i].id), () => console.log("error"));
-        //hasta aca audio nativo
-        console.log('beeep '+this.aktivParada[i].nombre);
+
+        /**
+         * Audio Nativo
+         * ============
+         * this.nativeAudio.preloadSimple(this.aktivParada[i].id, url)
+         *   .then(() => console.log(this.aktivParada[i].id))
+         *   .catch((e) => console.log(e));
+         */
+
+        console.log(`beeep ${actStop.nombre}`);
+
+        /**
+         * Muestra el toast si la ultima parada
+         * es distinta a la actual
+         */
+        if (this.lastStop != actStop) {
+          console.log('Mostrando toast...');
+          this.showToast(`Beep en ${actStop.nombre}`);
+          this.lastStop = actStop;
+        }
+
       }
     }
   }
 
+  showToast(msg: string) {
+
+    // Hay que hacer una especie de lock 
+    // para cuando las paradas estan muy cerca
+    this.toast = this.toastCtrl.create({
+      message: msg,
+      closeButtonText: "Ok!",
+      showCloseButton: true,
+      dismissOnPageChange: true
+    });
+    this.toast.present();
+
+    console.log('Toast creado!');
+
+    this.toast.onDidDismiss(() => {
+      console.log('Stop toasting');
+    });
+
+  }
+
   calcDistance(i: any){
-    let p2 = new google.maps.LatLng(this.aktivParada[i].point.lat, this.aktivParada[i].point.lng);
+    let p2 = new google.maps.LatLng(
+      // Aqui tambien cambie las paradas
+      // filtradas por todas
+      this.paradas[i].point.lat,
+      this.paradas[i].point.lng
+    );
     return google.maps.geometry.spherical.computeDistanceBetween(this.latLng,p2);
   }
 
@@ -129,7 +198,7 @@ export class MapaPage {
         featureType: "poi",
         elementType: "labels",
         stylers: [
-              { visibility: "off" }
+          { visibility: "off" }
         ]
       }
     ];
@@ -150,7 +219,7 @@ export class MapaPage {
       this.centerPolygon(polygon);
 
       this.subzoneProb.getZone(this.zone.id)
-      .subscribe(this.previewSubZone.bind(this), (err)=>{console.log(err);});
+        .subscribe(this.previewSubZone.bind(this), (err)=>{console.log(err);});
     }
   }
 
@@ -164,13 +233,16 @@ export class MapaPage {
 
       this.bindParadas(subZ.id);
     }
+
+    // Deberia ir esto aqui?
     this.uploadSubZone();
     this.uploadStop();
+    //
   }
 
   bindParadas(id){
     this.paradaProb.getParadas(id)
-    .subscribe(this.previewParadas.bind(this), (err)=>{console.log(err);});
+      .subscribe(this.previewParadas.bind(this), (err)=>{console.log(err);});
   }
 
   previewParadas(res){
@@ -180,8 +252,13 @@ export class MapaPage {
       let point = this.getPoint(par);
 
       this.createMarker(point,par.nombre,par.descripcion);
-      this.paradas.push({point: point, id: par.id, subzona: par.sub_zonas_id, nombre: par.nombre});
-      //console.log(par);
+      this.paradas.push({
+        point: point,
+        id: par.id,
+        subzona: par.sub_zonas_id,
+        nombre: par.nombre
+      });
+      // console.log(par);
     }
   }
 
@@ -189,7 +266,7 @@ export class MapaPage {
 
     var contentString = '<h2>'+name+'</h2>'+'<p>'+description+'</p>';
     var infowindow = new google.maps.InfoWindow({
-          content: contentString
+      content: contentString
     });
 
     var marker = new google.maps.Marker({
@@ -210,7 +287,7 @@ export class MapaPage {
   }
 
   uploadCycle(){
-    this.getGeo().then(() => {this.marker.setMap(this.map);})
+    this.getGeo().then(() => this.marker.setMap(this.map))
     this.intervalId = setInterval(this.intervalFunc.bind(this), 2000);
   }
 
@@ -227,13 +304,17 @@ export class MapaPage {
   }
 
   getGeo() {
-    return Geolocation.getCurrentPosition().then((position) => {
-      console.log("Posicion actualizada");
-      this.latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
-      }, (err) => {
+    return Geolocation.getCurrentPosition()
+      .then((position) => {
+        console.log("Posicion actualizada");
+        this.latLng = new google.maps.LatLng(
+          position.coords.latitude,
+          position.coords.longitude
+        );
+      })
+      .catch((err) => {
         console.log(err);
-    });
+      });
   }
 
   centerPolygon(polygon){
@@ -252,24 +333,24 @@ export class MapaPage {
   }
 
   previewZone(polygon, color) {
-    
+
 
     //let hola = this.zonesProvider.getZoneLatLng(polygon);
     //this.latLng = new google.maps.LatLng(hola.lat, hola.lng);
 
-      let zonePolygon = new google.maps.Polygon({
-        paths: polygon,
-        strokeColor: color,
-        strokeOpacity: 0.8,
-        strokeWeight: 3,
-        fillColor: color,
-        fillOpacity: 0.35
-      });
-      //console.log(this.zone.poligono.linestrings.pop().points);
-      //this.map.setCenter(this.latLng);
-      zonePolygon.setMap(this.map);
-      return zonePolygon;
-      /*for (let p of z.points) {
+    let zonePolygon = new google.maps.Polygon({
+      paths: polygon,
+      strokeColor: color,
+      strokeOpacity: 0.8,
+      strokeWeight: 3,
+      fillColor: color,
+      fillOpacity: 0.35
+    });
+    //console.log(this.zone.poligono.linestrings.pop().points);
+    //this.map.setCenter(this.latLng);
+    zonePolygon.setMap(this.map);
+    return zonePolygon;
+    /*for (let p of z.points) {
         new google.maps.Marker({
           animation: google.maps.Animation.DROP,
           position: p,
