@@ -33,7 +33,10 @@ export class UserZonesPage {
 
     // Obtiene las zonas (guias) del usuario
     this.zonesProvider.fetchZones() // Provider;
-      .then( (zones) => this.userGuides = zones )
+      .then( (zones) => {
+				this.userGuides = zones;
+				console.log(zones);
+			})
       .catch( () => 'Token no encontrado' );
   }
 
