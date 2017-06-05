@@ -37,6 +37,7 @@ export class Login {
 
 	private getToken(resp: Response) {
 		let body = resp.json();
+		console.log(body);
 		return body.token;
 	}
 	

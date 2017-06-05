@@ -1,7 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicStorageModule, Storage } from '@ionic/storage';
-import { SQLite } from '@ionic-native/sqlite';
 import { Http } from '@angular/http';
+import { SQLite } from '@ionic-native/sqlite';
 import { AuthHttp, AuthConfig, JwtHelper } from 'angular2-jwt';
 import { Transfer } from '@ionic-native/transfer';
 
