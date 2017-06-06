@@ -9,6 +9,7 @@ import { Transfer } from '@ionic-native/transfer';
 
 import { AuthHttp } from 'angular2-jwt';
 import { JwtHelper } from 'angular2-jwt';
+import { HttpUtils } from '../providers/custom-http';
 
 /*
 	Generated class for the UserZoneProvider provider.
@@ -27,21 +28,23 @@ export class UserZoneProvider {
 		public storage: Storage,
 		public jwt: JwtHelper,
 		public auth: AuthHttp,
-		public http: Http) {
+		public http: Http,
+		private httputils: HttpUtils) {
 
 		console.log('Hello UserZoneProvider Provider');
 
 		// Esto podria ir en otro lugar..
     // const apiUrl = "http://localhost:8000/api/";
     
-    const apiUrl = "http://digitalcook.info:8000/api/";
+    const apiUrl = this.httputils.apiUrl;
  
-		this.apiGuideUrl = apiUrl + "guia";
-		this.apiZoneUrl  = apiUrl + "zona";
+		this.apiGuideUrl = apiUrl + "/guia";
+		this.apiZoneUrl  = apiUrl + "/zona";
 	}
 
 
 	fetchZones() {
+		//poner con authheaders parece problema del helper function del back
 
 		const headers = new Headers({
 			'Content-Type': 'application/json',

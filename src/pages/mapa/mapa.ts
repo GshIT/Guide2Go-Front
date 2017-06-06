@@ -113,7 +113,7 @@ export class MapaPage {
 
 	nearStop(){
 
-		const url = 'http://soundbible.com/mp3/Censored_Beep-Mastercard-569981218.mp3';
+		const url = 'https://www.myinstants.com/media/sounds/ahhyooaaawhoaaa.mp3';
 		let actStop;
 		let i;
 		let distance;

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 
 import { AuthHttp } from 'angular2-jwt';
 import { JwtHelper } from 'angular2-jwt';
+import { HttpUtils } from '../providers/custom-http';
 
 
 @Injectable()
@@ -16,20 +16,16 @@ export class UserProvider {
 	constructor(
 		public http: Http, 
 		public authHttp: AuthHttp, 
-		public JwtHelper: JwtHelper) {
+		public JwtHelper: JwtHelper,
+		private httputils: HttpUtils) {
 
-		//this.userUrl = 'http://127.0.0.1:8000/api/user';
-		this.userUrl = 'http://digitalcook.info:8000/api/user';
+		this.userUrl = this.httputils.routes['user'];
 	}
 
 	createUser(args: {}): Observable<{}> {
 
 		let bodyString = JSON.stringify(args);
-		let headers = new Headers({ 
-			'Content-Type': 'application/json',
-			'Access-Control-Allow-Origin': '*' 
-		});
-		let options = new RequestOptions({ headers: headers });
+		let options = this.httputils.authHeaders();;
 
 		return this.http.post(this.userUrl, bodyString, options)
 		.map(this.printInside)
@@ -50,9 +46,10 @@ export class UserProvider {
 		
 		// Ya deberia funcionar sin el token de parametro
 
-		let url = `${this.userUrl}/${this.JwtHelper.decodeToken(token).sub}?token=${token}`;
+		let url = `${this.userUrl}${this.JwtHelper.decodeToken(token).sub}`;
+		let opt = this.httputils.authHeaders();
 
-		return this.authHttp.get(url)
+		return this.authHttp.get(url,opt)
 			.subscribe(
 				data => { 
 					user.nombre  = data.json().users.pop().name; 

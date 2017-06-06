@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { AuthHttp } from 'angular2-jwt';
 import { JwtHelper } from 'angular2-jwt';
+import { HttpUtils } from '../providers/custom-http';
 
 /*
 	Generated class for the ZoneProvider provider.
@@ -21,12 +22,12 @@ export class ZoneProvider {
 	constructor(
 		public http: Http, 
 		public authHttp: AuthHttp, 
-		public JwtHelper: JwtHelper) {
+		public JwtHelper: JwtHelper,
+		private httputils: HttpUtils) {
 
 		console.log('Started zones provider');
 
-		// this.zoneUrl = 'http://localhost:8000/api/zona';
-		this.zoneUrl = 'http://digitalcook.info:8000/api/zona';
+		this.zoneUrl = this.httputils.routes['zone'];
 	}
 
 	get(token): Observable<{}> {
@@ -34,12 +35,16 @@ export class ZoneProvider {
 		// Obten el token de localStorage aqui
 		// y no desde afuera
 
+		token = this.httputils.expiredToken(token);
 		let headers = new Headers({ 
 			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': '*',
 			'Authorization': `Bearer <${token}>`
 		});
 		let options = new RequestOptions({ headers: headers });
+
+		//con los auth headers no funciona noc por que revisar despues
+		//let options = this.httputils.authHeaders();
 
 		return this.http.get(this.zoneUrl, options)
 		.map(this.printInside)

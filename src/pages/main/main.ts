@@ -4,7 +4,8 @@ import {
 	LoadingController,
 	MenuController, 
 	NavController, 
-	NavParams 
+	NavParams,
+	Platform
 } from 'ionic-angular';
 
 import { 
@@ -31,7 +32,8 @@ export class MainPage {
 		public loadCtrl: LoadingController,
 		public menuCtrl: MenuController,
 		public navCtrl: NavController, 
-		public navParams: NavParams) {}
+		public navParams: NavParams,
+		public platform: Platform) {}
 
 	ionViewDidEnter() {
 		console.log('Entering to the main.');
@@ -56,11 +58,14 @@ export class MainPage {
 		// Verificar si es la primera vez
 		// inicializar base de datos y 
 		// creacion de tablas
-		this.offln.initDatabase();
+		if (this.platform.is('cordova')) {
+			this.offln.initDatabase();
 		
-		// Guarda informacion local del usuario 
-		// para estar disponible offline
-		this.offln.storeUserInfo();
+			// Guarda informacion local del usuario 
+			// para estar disponible offline
+			this.offln.storeUserInfo();
+		}
+			
 		
 		// Si no hay conexion a interne:
 		// entra en modo offline

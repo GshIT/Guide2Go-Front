@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { 
-	Headers, RequestOptions 
+	Headers, RequestOptions , Http
 } from '@angular/http';
 
 import { JwtHelper } from 'angular2-jwt';
@@ -22,6 +22,7 @@ export class HttpUtils {
 	headers: {};
 
 	constructor(
+		private http: Http,
 		private jwt: JwtHelper,
 		private storage: Storage) {
 
@@ -36,14 +37,17 @@ export class HttpUtils {
 		 * Cambia esto para debug
 		 * this.apiUrl = "http://localhost:8000/api";
 		 */
-		this.apiUrl = "http://digitalcook.info:8000/api";
+		this.apiUrl = "http://digitalcook.info:8080/api";
+		//this.apiUrl = "http://localhost:8000/api";
 
 		this.routes = {
-			'guide'	 : this.apiUrl + "/guia",
-			'user'	 : this.apiUrl + "/user",
-			'login'	 : this.apiUrl + "/login",
-			'spot'	 : this.apiUrl + "/parada/sub_zone",
-			'subZone': this.apiUrl + "/sub_zone/zone"
+			'guide'	 : this.apiUrl + "/guia/",
+			'user'	 : this.apiUrl + "/user/",
+			'login'	 : this.apiUrl + "/login/",
+			'spot'	 : this.apiUrl + "/parada/sub_zone/",
+			'subZone': this.apiUrl + "/sub_zone/zone/",
+			'tokenexp': this.apiUrl + '/tokenexp/',
+			'zone': this.apiUrl + '/zona/'
 		};
 	}
 
@@ -61,10 +65,10 @@ export class HttpUtils {
 	 * Es seguro no hacer catch aqui?
 	 */
 	authHeaders() {
-
 		return this.storage.ready()
 			.then(() => this.storage.get('token'))
 			.then((token) => {
+				token = this.expiredToken(token);
 				let h = new Headers(this.headers);
 				h.set('Authorization', `Bearer <${token}>`);
 				return new RequestOptions({ headers: h });
@@ -75,4 +79,25 @@ export class HttpUtils {
 		return this.jwt.decodeToken(token).sub;
 	}
 
+	expiredToken(token)
+	{
+		if(this.isExpired(token))
+		{
+			let url = this.routes['tokenexp'];
+			let h = new Headers(this.headers);
+			h.set('Authorization', `Bearer <${token}>`);
+			let opt = new RequestOptions({ headers: h });
+
+			this.http.get(url, opt).toPromise()
+			.then((resp) => { return resp.json().token; });
+		}
+		else{
+			console.log("token no renovado");
+			return token;
+		}
+	}
+
+	isExpired(token){	
+		return this.jwt.isTokenExpired(token);
+	}
 }

@@ -7,37 +7,37 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-file-transfer": {
-            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
-        },
-        "cordova-plugin-googleplus": {
-            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
-        },
-        "cordova-sqlite-storage": {
-            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
-        },
         "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
-        },
-        "cordova-plugin-statusbar": {
             "PACKAGE_NAME": "com.ionicframework.guide2go674784"
         },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "com.ionicframework.guide2go674784"
         },
-        "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
-        },
-        "ionic-plugin-keyboard": {
+        "cordova-plugin-file-transfer": {
             "PACKAGE_NAME": "com.ionicframework.guide2go674784"
         },
         "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "com.ionicframework.guide2go674784"
         },
+        "cordova-plugin-googleplus": {
+            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
+        },
         "cordova-plugin-nativeaudio": {
+            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
+        },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "com.ionicframework.guide2go674784"
+        },
+        "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.ionicframework.guide2go674784"
         }
     },
