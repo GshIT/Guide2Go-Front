@@ -81,7 +81,7 @@ export class HttpUtils {
 
 	expiredToken(token)
 	{
-		if(this.isExpired(token))
+		if(token && this.isExpired(token))
 		{
 			let url = this.routes['tokenexp'];
 			let h = new Headers(this.headers);
@@ -89,7 +89,12 @@ export class HttpUtils {
 			let opt = new RequestOptions({ headers: h });
 
 			this.http.get(url, opt).toPromise()
-			.then((resp) => { return resp.json().token; });
+			.then((resp) => { 
+				token = resp.json().token; 
+				this.storage.ready()
+				.then(() => {this.storage.set('token', token);});
+				return token;
+			});
 		}
 		else{
 			console.log("token no renovado");

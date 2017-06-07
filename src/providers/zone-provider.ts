@@ -48,7 +48,7 @@ export class ZoneProvider {
 
 		return this.http.get(this.zoneUrl, options)
 		.map(this.printInside)
-		.catch((error:any) => Observable.throw('Server error'));
+		.catch((error:any) => Observable.throw(error));
 	}
 
 	private printInside(res: Response) {

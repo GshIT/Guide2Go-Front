@@ -12,6 +12,7 @@ import { RecommendPage } from '../pages/recommend/recommend';
 import { UserZonesPage } from '../pages/user-zones/user-zones';
 import { MapaPage } from '../pages/mapa/mapa';
 import { PerfilPage } from '../pages/perfil/perfil';
+import { HttpUtils } from '../providers/custom-http';
 //import { GuideLoginPage } from '../pages/guide-login/guide-login';
 
 @Component({
@@ -29,7 +30,8 @@ export class MyApp {
 		public jwt: JwtHelper,
 		public storage: Storage,
 		public platform: Platform,
-		public menu: MenuController) {
+		public menu: MenuController,
+		public httputils: HttpUtils) {
 
 		this.initializeApp();
 		this.pages = [
@@ -61,9 +63,9 @@ export class MyApp {
 			.then(() => this.storage.get('token'))
 			.then((token) => {
 				console.log(`Found token => ${token}`);
-
+				this.httputils.expiredToken(token);
 				// Verifica si el token ya expiro
-				if (token && !this.jwt.isTokenExpired(token)) {
+				if (token) {
 					this.rootPage = MainPage;
 				}
 				else {
