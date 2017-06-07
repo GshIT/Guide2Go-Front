@@ -44,21 +44,20 @@ export class UserZoneProvider {
 
 
 	fetchZones() {
-		//poner con authheaders parece problema del helper function del back
-
-		const headers = new Headers({
-			'Content-Type': 'application/json',
-			'Access-Control-Allow-Origin': '*'
-		});
 
 		// Get token from localstorage
 		// whateva
 		return this.storage.get('token')
 			.then( token => {
+				const headers = new Headers({
+					'Content-Type': 'application/json',
+					'Access-Control-Allow-Origin': '*',
+					'Authorization': `Bearer <${token}>`
+				});
 				
 				console.log(this.jwt.decodeToken(token));
 			
-				const params = `?token=${token}&self=true`;
+				const params = `?self=true`;
 				const url = this.apiGuideUrl + params;
 
 				return this.http.get(url, { headers: headers })

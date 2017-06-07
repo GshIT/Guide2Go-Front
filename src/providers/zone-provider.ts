@@ -43,8 +43,6 @@ export class ZoneProvider {
 		});
 		let options = new RequestOptions({ headers: headers });
 
-		//con los auth headers no funciona noc por que revisar despues
-		//let options = this.httputils.authHeaders();
 
 		return this.http.get(this.zoneUrl, options)
 		.map(this.printInside)

@@ -46,7 +46,7 @@ export class UserProvider {
 		
 		// Ya deberia funcionar sin el token de parametro
 
-		let url = `${this.userUrl}${this.JwtHelper.decodeToken(token).sub}`;
+		let url = `${this.userUrl}${this.httputils.tokenSub(token)}`;
 		let opt = this.httputils.authHeaders();
 
 		return this.authHttp.get(url,opt)
