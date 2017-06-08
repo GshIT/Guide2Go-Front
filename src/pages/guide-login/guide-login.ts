@@ -44,9 +44,8 @@ export class GuideLoginPage {
 
 
 		this.loginService.authenticate(this.login)
-			.subscribe(
-				this.handleToken.bind(this),
-				this.handleError.bind(this));
+			.then(this.handleToken.bind(this))
+			.catch(this.handleError.bind(this));
 
 		// Redireccionar si es valido
 		// 	- Guardar token

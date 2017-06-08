@@ -22,15 +22,13 @@ export class UserProvider {
 		this.userUrl = this.httputils.routes['user'];
 	}
 
-	createUser(args: {}): Observable<{}> {
+	createUser(args: {}): Promise<{}> { 
 
 		let bodyString = JSON.stringify(args);
-		let options = this.httputils.authHeaders();;
-
-		return this.http.post(this.userUrl, bodyString, options)
-		.map(this.printInside)
-		.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
-
+		return this.httputils.authHeaders()
+		.then((options) => this.http.post(this.userUrl, bodyString, options).toPromise())
+		.then(this.printInside)
+		.catch((error:any) => Promise.resolve(error.json().error || 'Server error'));
 	}
 
 	private printInside(res: Response) {
@@ -47,18 +45,15 @@ export class UserProvider {
 		// Ya deberia funcionar sin el token de parametro
 
 		let url = `${this.userUrl}${this.httputils.tokenSub(token)}`;
-		let opt = this.httputils.authHeaders();
-
-		return this.authHttp.get(url,opt)
-			.subscribe(
-				data => { 
+		return this.httputils.authHeaders()
+		.then((opt) => this.authHttp.get(url,opt).toPromise())
+		.then(
+			data => { 
 					user.nombre  = data.json().users.pop().name; 
 					user.email   = data.json().users.pop().email; 
 					user.dolares = data.json().users.pop().dolares
-				},
-				err => console.log(err),
-				() => console.log('Request Complete')
-			);
+			}
+		).catch((err) => Promise.reject(err));
 	}
 
 }

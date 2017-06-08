@@ -47,25 +47,13 @@ export class UserZoneProvider {
 
 		// Get token from localstorage
 		// whateva
-		return this.storage.get('token')
-			.then( token => {
-				const headers = new Headers({
-					'Content-Type': 'application/json',
-					'Access-Control-Allow-Origin': '*',
-					'Authorization': `Bearer <${token}>`
-				});
-				
-				console.log(this.jwt.decodeToken(token));
-			
-				const params = `?self=true`;
-				const url = this.apiGuideUrl + params;
+		const params = `?self=true`;
+		const url = this.apiGuideUrl + params;
 
-				return this.http.get(url, { headers: headers })
-					.toPromise()
-					.then(this.handleResp)
-					.catch(this.handleError);
-
-			})
+		return this.httputils.authHeaders()
+		.then((opt) => this.http.get(url, opt).toPromise())
+		.then(this.handleResp)
+		.catch(this.handleError);
 	}
 
 	private handleResp(resp: Response) {

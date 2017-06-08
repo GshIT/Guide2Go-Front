@@ -28,9 +28,9 @@ export class RegisterPage {
 	}
 
 	createUser(){
-		this.UserProvider.createUser(this.user).subscribe(
-				respuesta => this.correcto(respuesta),
-				error =>  this.errorMsg = <any>error);
+		this.UserProvider.createUser(this.user)
+		.then((respuesta) => this.correcto(respuesta))
+		.catch((error) =>  this.errorMsg = <any>error);
 	} 
 
 	correcto(respuesta){

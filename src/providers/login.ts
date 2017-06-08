@@ -22,13 +22,10 @@ export class Login {
 	}
 
 	/* Deberia hacer dos argumentos? */
-	authenticate(args: {}): Observable<{}> {
-		let options = this.httputils.defaultHeaders();
-		console.log(this.loginUrl);
-
-		return this.http.post(this.loginUrl, args, options)
-						.map(this.getToken)
-						.catch(this.handleError);
+	authenticate(args: {}): Promise<{}> {
+		return this.httputils.defaultHeaders()
+		.then((opt) => this.http.post(this.loginUrl, args, opt).toPromise())
+		.then(this.getToken).catch(this.handleError);
 	}
 
 	private getToken(resp: Response) {
@@ -51,7 +48,7 @@ export class Login {
 			errMsg = error.message ? error.message : error.toString();
 		}
 		console.error(errMsg);
-		return Observable.throw(errMsg);
+		return Promise.reject(errMsg);
 	}
 
 	register(args: {}): Observable<{}> {

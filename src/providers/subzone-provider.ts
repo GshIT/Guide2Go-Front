@@ -25,12 +25,11 @@ export class SubzoneProvider {
 		this.zoneUrl = this.httputils.routes['subZone'];
 	}
 
-	getZone(id): Observable<{}>{
-		let options = this.httputils.authHeaders();
-
-		return this.http.get(this.zoneUrl+id, options)
-		.map(this.printInside)
-		.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+	getZone(id): Promise<{}>{
+		return this.httputils.authHeaders()
+		.then((options) => this.http.get(this.zoneUrl+id, options).toPromise())
+		.then(this.printInside)
+		.catch((error:any) => Promise.reject(error.json().error || 'Server error'));
 	}
 
 	private printInside(res: Response) {

@@ -10,12 +10,11 @@ import {
 import { Zones } from '../../providers/zones';
 import { SubzoneProvider } from '../../providers/subzone-provider';
 import { ParadaProvider } from '../../providers/parada-provider';
-import { NativeAudio } from '@ionic-native/native-audio';
 
 @Component({
 	selector: 'page-mapa',
 	templateUrl: 'mapa.html',
-	providers: [Zones,SubzoneProvider,ParadaProvider,NativeAudio]
+	providers: [Zones,SubzoneProvider,ParadaProvider]
 })
 export class MapaPage {
 
@@ -47,8 +46,7 @@ export class MapaPage {
 		public params: NavParams,
 		public navCtrl: NavController,
 		public subzoneProb: SubzoneProvider,
-		public paradaProb: ParadaProvider,
-		private nativeAudio: NativeAudio) {
+		public paradaProb: ParadaProvider) {
 
 		this.lastStop = null;
 
@@ -219,7 +217,8 @@ export class MapaPage {
 			this.centerPolygon(polygon);
 
 			this.subzoneProb.getZone(this.zone.id)
-				.subscribe(this.previewSubZone.bind(this), (err)=>{console.log(err);});
+				.then(this.previewSubZone.bind(this)) 
+				.catch((err)=>{console.log(err);}); 
 		}
 	}
 
@@ -242,7 +241,8 @@ export class MapaPage {
 
 	bindParadas(id){
 		this.paradaProb.getParadas(id)
-			.subscribe(this.previewParadas.bind(this), (err)=>{console.log(err);});
+			.then(this.previewParadas.bind(this)) 
+			.catch((err)=>{console.log(err);});
 	}
 
 	previewParadas(res){

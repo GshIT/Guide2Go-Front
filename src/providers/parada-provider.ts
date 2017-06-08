@@ -24,13 +24,12 @@ export class ParadaProvider {
 		this.zoneUrl = this.httputils.routes['spot'];
   	}
 
-  	getParadas(id): Observable<{}>{
+  	getParadas(id): Promise<{}>{
 
-		let options = this.httputils.authHeaders();
-
-		return this.http.get(this.zoneUrl+id, options)
-		.map(this.printInside)
-		.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+		return this.httputils.authHeaders()
+		.then((options) => this.http.get(this.zoneUrl+id, options).toPromise())
+		.then(this.printInside)
+		.catch((error:any) => Promise.reject(error.json().error || 'Server error'));
 	}
 
 	private printInside(res: Response) {

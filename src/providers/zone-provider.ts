@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Observable';
 
 import { AuthHttp } from 'angular2-jwt';
 import { JwtHelper } from 'angular2-jwt';
@@ -30,23 +28,11 @@ export class ZoneProvider {
 		this.zoneUrl = this.httputils.routes['zone'];
 	}
 
-	get(token): Observable<{}> {
-
-		// Obten el token de localStorage aqui
-		// y no desde afuera
-
-		token = this.httputils.expiredToken(token);
-		let headers = new Headers({ 
-			'Content-Type': 'application/json',
-			'Access-Control-Allow-Origin': '*',
-			'Authorization': `Bearer <${token}>`
-		});
-		let options = new RequestOptions({ headers: headers });
-
-
-		return this.http.get(this.zoneUrl, options)
-		.map(this.printInside)
-		.catch((error:any) => Observable.throw(error));
+	get(): Promise<{}> {
+		return this.httputils.authHeaders()
+		.then((opt) => this.http.get(this.zoneUrl, opt).toPromise())
+		.then(this.printInside)
+		.catch((error:any) => Promise.reject(error));
 	}
 
 	private printInside(res: Response) {

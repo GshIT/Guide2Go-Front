@@ -26,7 +26,6 @@ export class ZonesPage {
   /* Should not be any */
   mapPage: any;
   zones: any[];
-  token: string;
   fetchedZones: {};
 
   constructor(
@@ -42,20 +41,10 @@ export class ZonesPage {
 		
     this.mapPage = MapaPage;
 
-    // Hay q borrar el estatico y resplazarlo por este fetchedZones
 
-    this.storage.ready().then(() => {
-      this.storage.get('token').then((val) => {
-        this.token = val;
-
-        // Deberia traer las zonas
-        this.zoneProvider.get(this.token)
-          .subscribe( 
-            (res) => this.fetchedZones = res, 
-            (err) => console.log(err)
-          );
-      })
-    });
+    this.zoneProvider.get()
+      .then((res) => this.fetchedZones = res)
+      .catch((err) => console.log(err));
   }
 
   ionViewDidLoad() {
