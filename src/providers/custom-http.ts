@@ -37,17 +37,17 @@ export class HttpUtils {
 		 * Cambia esto para debug
 		 * this.apiUrl = "http://localhost:8000/api";
 		 */
-		this.apiUrl = "http://digitalcook.info:8080/api";
+		this.apiUrl = "http://www.digitalcook.info:8000/api";
 		//this.apiUrl = "http://localhost:8000/api";
 
 		this.routes = {
-			'guide'	 : this.apiUrl + "/guia/",
+			'guide'	 : this.apiUrl + "/guia",
 			'user'	 : this.apiUrl + "/user/",
-			'login'	 : this.apiUrl + "/login/",
+			'login'	 : this.apiUrl + "/login",
 			'spot'	 : this.apiUrl + "/parada/sub_zone/",
 			'subZone': this.apiUrl + "/sub_zone/zone/",
-			'tokenexp': this.apiUrl + '/tokenexp/',
-			'zone': this.apiUrl + '/zona/'
+			'tokenexp': this.apiUrl + '/tokenexp',
+			'zone': this.apiUrl + '/zona'
 		};
 	}
 
@@ -67,8 +67,8 @@ export class HttpUtils {
 	authHeaders() {
 		return this.storage.ready()
 			.then(() => this.storage.get('token'))
-			.then((token) => {
-				token = this.expiredToken(token);
+			.then((token) => this.expiredToken(token))
+			.then((token)=>{
 				let h = new Headers(this.headers);
 				h.set('Authorization', `Bearer <${token}>`);
 				return new RequestOptions({ headers: h });
@@ -93,12 +93,12 @@ export class HttpUtils {
 				token = resp.json().token; 
 				this.storage.ready()
 				.then(() => {this.storage.set('token', token);});
-				return token;
+				return Promise.resolve(token);
 			});
 		}
 		else{
 			console.log("token no renovado");
-			return token;
+			return Promise.resolve(token);
 		}
 	}
 

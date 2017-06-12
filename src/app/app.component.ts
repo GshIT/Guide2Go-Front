@@ -63,14 +63,18 @@ export class MyApp {
 			.then(() => this.storage.get('token'))
 			.then((token) => {
 				console.log(`Found token => ${token}`);
-				this.httputils.expiredToken(token);
+				this.httputils.expiredToken(token)
+				.then((token)=>{
+
+					if (token) {
+						this.rootPage = MainPage;
+					}
+					else {
+						this.rootPage = Login;
+					}
+					
+				});
 				// Verifica si el token ya expiro
-				if (token) {
-					this.rootPage = MainPage;
-				}
-				else {
-					this.rootPage = Login;
-				}
 			})
 			.catch((e) => console.log(e));
 
