@@ -35,10 +35,15 @@
 				<ion-icon class="thumb-img" name="ios-image-outline"></ion-icon>
 			</ion-thumbnail>
 			<h1>{{ guide.zona.name }}</h1>
-			<p>{{ guide.costo }} puntos</p>
+			<p>{{ guide.costo }} Dolares</p>
             
             <!-- Cuando la zonas esta descargada mostrar el boton de "Mostrar" -->
-            <button ion-button clear item-right>Mostrar</button>
+            <button ion-button clear item-right *ngIf='!isActive(guide)' (click)='activate(guide)'>
+            	Activar
+            </button>
+            <button ion-button clear item-right *ngIf='isActive(guide)' (click)='deactivate()'>	
+            	Desactivar
+            </button>
 			<button (click)="download(guide)" ion-button clear item-right>Detalles</button>
 
 		</ion-item>

@@ -22,6 +22,7 @@ import { RegisterPage } from '../pages/register/register';
 import { PerfilPage } from '../pages/perfil/perfil';
 
 import { HttpUtils } from '../providers/custom-http';
+import { ActiveProvider } from '../providers/active-provider';
 
 // Mover esto a un modulo o algo...
 //
@@ -84,7 +85,8 @@ export function getAuthHttp(http, storage) {
 		Transfer,
 		SQLite,
 		HttpUtils,
-		JwtHelper
+		JwtHelper,
+		ActiveProvider
 	]
 })
 export class AppModule {}

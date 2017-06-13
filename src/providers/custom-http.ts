@@ -47,7 +47,8 @@ export class HttpUtils {
 			'spot'	 : this.apiUrl + "/parada/sub_zone/",
 			'subZone': this.apiUrl + "/sub_zone/zone/",
 			'tokenexp': this.apiUrl + '/tokenexp',
-			'zone': this.apiUrl + '/zona'
+			'zone': this.apiUrl + '/zona',
+			'audio': this.apiUrl + '/audio/'
 		};
 	}
 
@@ -97,7 +98,7 @@ export class HttpUtils {
 			});
 		}
 		else{
-			console.log("token no renovado");
+			//console.log("token no renovado");
 			return Promise.resolve(token);
 		}
 	}

@@ -10,11 +10,12 @@ import {
 import { Zones } from '../../providers/zones';
 import { SubzoneProvider } from '../../providers/subzone-provider';
 import { ParadaProvider } from '../../providers/parada-provider';
+import { AudioProvider } from '../../providers/audio-provider';
 
 @Component({
 	selector: 'page-mapa',
 	templateUrl: 'mapa.html',
-	providers: [Zones,SubzoneProvider,ParadaProvider]
+	providers: [Zones,SubzoneProvider,ParadaProvider,AudioProvider]
 })
 export class MapaPage {
 
@@ -31,6 +32,7 @@ export class MapaPage {
 	paradas: any;
 	subPolygon: any;
 	aktivParada: any;
+	audio: any;
 
 	// Toast
 	toast: Toast;
@@ -46,7 +48,8 @@ export class MapaPage {
 		public params: NavParams,
 		public navCtrl: NavController,
 		public subzoneProb: SubzoneProvider,
-		public paradaProb: ParadaProvider) {
+		public paradaProb: ParadaProvider,
+		public audioProv: AudioProvider) {
 
 		this.lastStop = null;
 
@@ -55,6 +58,7 @@ export class MapaPage {
 		this.subPolygon = [];
 		this.zone = params.get('zone');
 		this.follow = (typeof(this.zone) !== 'undefined') ? false : true;
+		this.audio = new Audio()
 
 		//const coords = zonesProvider.getZoneLatLng(this.zone);
 		const coords = { lat: 0, lng: 0 };
@@ -75,6 +79,8 @@ export class MapaPage {
 		clearInterval(this.intervalId);
 		clearInterval(this.intervalStop);
 		clearInterval(this.intervalSubzone);
+		this.audio.pause();
+		this.audio = "";
 	}
 
 	// Revisa las subzonas y dice en cual estoy yo y 
@@ -111,11 +117,11 @@ export class MapaPage {
 
 	nearStop(){
 
-		const url = 'https://www.myinstants.com/media/sounds/ahhyooaaawhoaaa.mp3';
+		//const url = 'http://digitalcook.info:8000/storage/audios/vhbPaYBeWdRr7opp47K8spm12rPQjkf6WAQ59nj3.mpga';
+		const storageUrl = 'http://digitalcook.info:8000/storage/';
 		let actStop;
 		let i;
 		let distance;
-		var audio; // var D:
 
 		/**
 		 * Aqui cambie las paradas filtradas por todas
@@ -126,22 +132,22 @@ export class MapaPage {
 			actStop = this.paradas[i]; // for of?
 			distance = this.calcDistance(i);
 
-			console.log(actStop.point);
-			console.log(distance);
+			//console.log(actStop.point);
+			//console.log(distance);
 
 			if(distance <= 50){
+				this.audioProv.getAudio(actStop.id)
+				.then((aud) => {
+					if(this.audio.paused){
+						this.audio = new Audio(storageUrl+aud);
+						this.audio.play();
+					}
+				});
 
 				// Esto funciona para navegador
-				audio = new Audio(url);
-				audio.play();
+				
 
-				/**
-				 * Audio Nativo
-				 * ============
-				 * this.nativeAudio.preloadSimple(this.aktivParada[i].id, url)
-				 *   .then(() => console.log(this.aktivParada[i].id))
-				 *   .catch((e) => console.log(e));
-				 */
+				
 
 				console.log(`beeep ${actStop.nombre}`);
 
