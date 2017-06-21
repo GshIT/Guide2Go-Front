@@ -16,7 +16,7 @@ export class AudioProvider {
 
   constructor(public http: Http, public httputils: HttpUtils) {
     console.log('Hello AudioProvider Provider');
-    this.audioUrl = this.httputils.routes['audio'];
+    this.audioUrl = this.httputils.routes['audioParada'];
   }
 
   getAudio(parada: any){

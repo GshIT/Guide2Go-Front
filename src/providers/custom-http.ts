@@ -48,7 +48,7 @@ export class HttpUtils {
 			'subZone': this.apiUrl + "/sub_zone/zone/",
 			'tokenexp': this.apiUrl + '/tokenexp',
 			'zone': this.apiUrl + '/zona',
-			'audio': this.apiUrl + '/audio/'
+			'audioParada': this.apiUrl + '/audio/parada/'
 		};
 	}
 

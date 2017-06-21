@@ -220,7 +220,17 @@ export class MapaPage {
 		if (typeof(this.zone) !== 'undefined') {
 			let polygon = this.getPolygon(this.zone);
 			this.previewZone(polygon,'#FF0000');
-			this.centerPolygon(polygon);
+			
+
+			/* Fit polygon bounds wink wink */
+
+            let bounds = new google.maps.LatLngBounds();
+            polygon.forEach((p) => bounds.extend(p));
+
+            this.map.fitBounds(bounds);
+            this.map.setCenter(bounds.getCenter());
+
+            /********************************/
 
 			this.subzoneProb.getZone(this.zone.id)
 				.then(this.previewSubZone.bind(this)) 
@@ -332,7 +342,7 @@ export class MapaPage {
 	}
 
 	getPolygon(sub){
-		let polygon = [{}];
+		let polygon = [];
 		for (let z of sub.poligono.linestrings[0].points) {
 			polygon.push({lat: z.lat, lng: z.lon});
 		}
