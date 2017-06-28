@@ -1,37 +1,85 @@
 <ion-content>
 
+	<div class="login-content">
 	<ion-grid>
 
 		<ion-row>
 			<ion-col>
-				<div id="main">
-					<div id="inside">
-						<h1>Guide2Go</h1>
-						<p>Guias Virtuales en tu idioma</p>
-					</div>
-				</div>
+				<div class="logo"></div>
 			</ion-col>
 		</ion-row>
 
 		<ion-row>
 			<ion-col>
-				<button ion-button full id="gmail" (click)="guideLogin()">Iniciar sesion</button>
+				<p class="welcome-text">¡BIENVENIDO!</p>
+			</ion-col>
+		</ion-row>
+
+		<ion-row> 
+			<ion-col>
+			<input 
+				class="login-input" 
+				type="text" 
+				name="email"
+				placeholder="Email" />
+			</ion-col>
+		</ion-row>
+
+		<ion-row> 
+			<ion-col>
+			<input 
+				class="login-input" 
+				type="password" 
+				name="password"
+				placeholder="Contraseña" />
+			</ion-col>
+		</ion-row>
+
+		<ion-row> 
+			<ion-col>
+			<button 
+				ion-button 
+				full 
+				id="guide-btn" 
+				(click)="guideLogin()">
+				INGRESA
+			</button>
+			</ion-col>
+		</ion-row>
+
+		<ion-row> 
+			<ion-col>
+				<a class="btn-text">Recordar Contraseña</a>
 			</ion-col>
 		</ion-row>
 
 		<ion-row>
 			<ion-col>
-				<!-- el click este hay q quitarlo, hay q hacer la cosa con oAuth -->
-				<button ion-button full id="facebook" (click)="refered()">Ingresar con Facebook</button>
+
+				<!-- El click este hay q quitarlo, -->
+				<!-- hay q hacer la cosa con OAuth -->
+				<button ion-button full id="facebook" (click)="refered()">
+					Ingresar con Facebook
+				</button>
+
 			</ion-col>
 		</ion-row>
 
 		<ion-row>
 			<ion-col>
-				<button ion-button full id="gmail">Ingresar con Gmail</button>
+				<button ion-button full id="gmail">
+					Ingresar con Gmail
+				</button>
+			</ion-col>
+		</ion-row>
+
+		<ion-row> 
+			<ion-col>
+				<a class="btn-text">¿No tienes una cuenta?</a>
 			</ion-col>
 		</ion-row>
 
 	</ion-grid>
+	</div>
 
 </ion-content>

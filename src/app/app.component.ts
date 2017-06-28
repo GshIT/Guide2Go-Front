@@ -64,16 +64,16 @@ export class MyApp {
 			.then((token) => {
 				console.log(`Found token => ${token}`);
 				this.httputils.expiredToken(token)
-				.then((token)=>{
+					.then((token)=>{
 
-					if (token) {
-						this.rootPage = MainPage;
-					}
-					else {
-						this.rootPage = Login;
-					}
-					
-				});
+						if (token) {
+							this.rootPage = MainPage;
+						}
+						else {
+							this.rootPage = Login;
+						}
+
+					});
 				// Verifica si el token ya expiro
 			})
 			.catch((e) => console.log(e));
@@ -98,7 +98,7 @@ export class MyApp {
 	closeSession() {
 
 		this.menu.close();
-		
+
 		// Hacemos el root page el Login
 		this.nav.setRoot(Login, {}, {
 			animate: true,

@@ -1,25 +1,113 @@
 page-login {
 
-    #main {
-        border: 1px solid black;
-        text-align: center;
-        height: 57vh;
-    }
+	#facebook {
+		height: 50px;
 
-    #inside {
-        margin-top: 19vh;
-    }
+		background: #6081C4;
+		border-radius: 4px;
 
-    #facebook {
-        background: #3b5998;
-        border: 1px solid #4268f4;
-        height: 10vh;
-    }
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 12px;
+		line-height: 100%;
+		letter-spacing: 1.5px;
+		color: #FFFFFF;
+	}
 
-    #gmail {
-        background: #c71610;
-        border: 1px solid red;
-        height: 10vh;
-    }
+	#gmail {
+		height: 50px;
+
+		background: #E62B33;
+		border-radius: 4px;
+
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 12px;
+		line-height: 100%;
+		letter-spacing: 1.5px;
+		color: #FFFFFF;
+	}
+
+	#guide-btn {
+
+		height: 50px;
+
+		background: #612F2F;
+		border-radius: 4px;
+
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 16px;
+		line-height: 100%;
+		letter-spacing: 2px;
+
+		color: #F1F5F6;
+		border-radius: 4px;
+
+	}
+
+	.logo {
+		background-image: url(./assets/logo.svg);
+		background-size: 100% 100%;
+		width: 92px;
+		height: 117px;
+		margin: 0 auto;
+	}
+
+	.login-input {
+		height: 50px;
+		width: 100%;
+
+		background: #FFFFFF;
+		border: none;
+
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 14px;
+		line-height: 100%;
+		letter-spacing: 1.575px;
+
+		color: #8B999F;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+
+	.btn-text {
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 14px;
+		line-height: 100%;
+		letter-spacing: 1.75px;
+		text-align: center;
+
+		color: #8B999F;
+
+		display: block;
+		width: 100%;
+		margin: 0 auto;
+	}
+
+	.welcome-text {
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 20px;
+		line-height: 100%;
+		letter-spacing: 2.5px;
+		text-align: center;
+
+		color: #000000;
+	}
+
+	.login-content {
+		
+		margin-left: 20px;
+		margin-right: 20px;
+	}
 
 }
