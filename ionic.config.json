@@ -1,6 +1,5 @@
 {
   "name": "Guide2Go",
   "app_id": "bcae7c9a",
-  "v2": true,
-  "typescript": true
+  "type": "ionic-angular"
 }
