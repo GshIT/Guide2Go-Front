@@ -6,42 +6,85 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>register</ion-title>
+  <ion-navbar color="brown">
+    <ion-title>Crear cuenta</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
 
-	<h1 id="errorMsg">{{this.errorMsg}}</h1>
+	<div class="real-content">
+
+	<div>
+		<img 
+			class="logo" 
+			src="./assets/logo.svg" />
+	</div>
+
+	<h1 id="errorMsg">
+		{{ this.errorMsg }}
+	</h1>
 
 	<form (ngSubmit)="createUser()">
-		
-		<ion-item class="full-input">
-			<ion-label floating>Correo</ion-label>
-			<ion-input type="email" [(ngModel)]="this.user.email" name="email"></ion-input>
-		</ion-item>
+	
+		<div class="row-input">
+			<input 
+				[(ngModel)]="user.name"
+				class="login-input" 
+				type="text" 
+				name="nombre"
+				placeholder="Nombre" />
+		</div>	
 
-		<ion-item class="full-input">
-			<ion-label floating>Contraseña</ion-label>
-			<ion-input type="password" [(ngModel)]="this.user.password" name="password"></ion-input>
-		</ion-item>
+		<div class="row-input">
+			<input 
+				[(ngModel)]="user.email"
+				class="login-input" 
+				type="text" 
+				name="email"
+				placeholder="Email" />
+		</div>
+			
+		<div class="row-input">
+			<input 
+				[(ngModel)]="user.password"
+				class="login-input" 
+				type="password" 
+				name="password"
+				placeholder="Contraseña" />
+		</div>
 
-		<ion-item class="full-input">
-			<ion-label floating>Nombre</ion-label>
-			<ion-input [(ngModel)]="this.user.name" name="nombre"></ion-input>
-		</ion-item>
-		
-		<ion-item class="full-input">
-			<ion-label floating>Codigo de referencia (opcional)</ion-label>
-			<ion-input [(ngModel)]="this.user.referer" name="referer"></ion-input>
-		</ion-item>
+		<div class="row-input">
+			<input 
+				[(ngModel)]="user.referer"
+				class="login-input" 
+				type="text" 
+				name="referer"
+				placeholder="Codigo de referencia" />
+		</div>
 
-		<!-- Deberia ser ion-row ? -->
-		<button ion-button full type="submit">crear</button>
+		<div class="row-button">
+			<button 
+				ion-button full 
+				id="btn-register" 
+				type="submit">
+				INICIA TU AVENTURA
+			</button>
+		</div>
 
 	</form>
+
+	<div class="terms">
+		<p class="terms-text">
+			Al crear una cuenta aceptas todos los términos y condiciones.
+		</p>
+	</div>
+
+	<div class="cancel">
+		<a> Ya tengo una cuenta </a>
+	</div>
+
+	</div>
 
 </ion-content>

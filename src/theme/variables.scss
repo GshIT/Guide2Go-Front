@@ -28,7 +28,8 @@ $colors: (
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #222,
+	brown: 			#612F2F
 );
 
 
@@ -63,6 +64,15 @@ $colors: (
 @import "ionic.theme.default";
 
 $background-color: #F1F5F6;
+$text-color: #F1F5F6;
+$toolbar-ios-title-font-size: 1.1em;
+$toolbar-ios-title-font-weight: 400;
+
+$toolbar-wp-title-font-size: 1.2em;
+$toolbar-wp-title-font-weight: 400;
+
+$toolbar-md-title-font-size: 1.2em;
+$toolbar-md-title-font-weight: 400;
 
 // Ionicons
 // --------------------------------------------------

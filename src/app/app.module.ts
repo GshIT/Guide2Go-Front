@@ -55,7 +55,9 @@ export function getAuthHttp(http, storage) {
 		PerfilPage
 	],
 	imports: [
-		IonicModule.forRoot(MyApp),
+		IonicModule.forRoot(MyApp, {
+			backButtonText: ''
+		}),
 		IonicStorageModule.forRoot()
 	],
 	bootstrap: [IonicApp],
