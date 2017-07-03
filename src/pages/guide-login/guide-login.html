@@ -1,14 +1,9 @@
-<!--
-
-	Generated template for the GuideLogin page.
-
-	See http://ionicframework.com/docs/v2/components/#navigation for more info on
-	Ionic pages and navigation.
--->
 <ion-header>
 
 	<ion-navbar>
-		<ion-title>Inicia sesion</ion-title>
+		<ion-title>
+			Inicia sesion
+		</ion-title>
 	</ion-navbar>
 
 </ion-header>
@@ -16,24 +11,36 @@
 
 <ion-content padding>
 
-	<h1 id="errorMsg">{{this.errorMsg}}</h1>
+	<h1 id="errorMsg">
+		{{ this.errorMsg }}
+	</h1>
+
 	<form (ngSubmit)="authenticate()">
 		
 		<ion-item class="full-input">
 			<ion-label floating>Correo</ion-label>
-			<ion-input type="email" [(ngModel)]="login.email" name="email"></ion-input>
+			<ion-input 
+				[(ngModel)]="login.email" 
+				type="email" 
+				name="email">
+			</ion-input>
 		</ion-item>
 
 		<ion-item class="full-input">
 			<ion-label floating>Contraseña</ion-label>
-			<ion-input type="password" [(ngModel)]="login.password" name="password"></ion-input>
+			<ion-input 
+				[(ngModel)]="login.password" 
+				type="password" 
+				name="password">
+			</ion-input>
 		</ion-item>
 		
 		<!-- Deberia ser ion-row ? -->
 		<button ion-button full type="submit">Ingresar</button>
 		
 	</form>
-	<button ion-button full (click)="register()">Registrarse</button>
 
+	<button ion-button full (click)="register()">Registrarse</button>
 	
 </ion-content>
+

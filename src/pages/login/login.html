@@ -17,41 +17,44 @@
 			</ion-col>
 		</ion-row>
 
-		<ion-row> 
+		<ion-row>
 			<ion-col>
-			<input 
-				class="login-input" 
-				type="text" 
-				name="email"
-				placeholder="Email" />
+
+				<form 
+					(ngSubmit)="authenticate()"
+					class="login-form">
+
+						<input 
+							[(ngModel)]="login.email"
+							class="login-input" 
+							type="email" 
+							name="email"
+							placeholder="Email" />
+
+						<input 
+							[(ngModel)]="login.password"
+							class="login-input" 
+							type="password" 
+							name="password"
+							placeholder="Contraseña" />
+
+						<button 
+							ion-button 
+							full 
+							id="guide-btn">
+							INGRESA
+						</button>
+
+				</form>
+
 			</ion-col>
 		</ion-row>
 
-		<ion-row> 
+		<ion-row>
 			<ion-col>
-			<input 
-				class="login-input" 
-				type="password" 
-				name="password"
-				placeholder="Contraseña" />
-			</ion-col>
-		</ion-row>
 
-		<ion-row> 
-			<ion-col>
-			<button 
-				ion-button 
-				full 
-				id="guide-btn" 
-				(click)="guideLogin()">
-				INGRESA
-			</button>
-			</ion-col>
-		</ion-row>
-
-		<ion-row> 
-			<ion-col>
 				<a class="btn-text">Recordar Contraseña</a>
+
 			</ion-col>
 		</ion-row>
 
@@ -60,26 +63,41 @@
 
 				<!-- El click este hay q quitarlo, -->
 				<!-- hay q hacer la cosa con OAuth -->
-				<button ion-button full id="facebook" (click)="refered()">
+				<button 
+					(click)="refered()"
+					ion-button full 
+					id="facebook">
 					<span class="fa fa-facebook"></span>
 					Ingresar con Facebook
 				</button>
-
+	
 			</ion-col>
 		</ion-row>
 
+			
 		<ion-row>
 			<ion-col>
-				<button ion-button full id="gmail">
+	
+				<button 
+					ion-button full 
+					id="gmail">
 					<span class="fa fa-google-plus"></span>
 					Ingresar con Gmail
 				</button>
+
 			</ion-col>
 		</ion-row>
 
-		<ion-row> 
+
+		<ion-row>
 			<ion-col>
-				<a class="btn-text register">¿No tienes una cuenta?</a>
+
+				<a 
+					(click)="register()"
+					class="btn-text register">
+					¿No tienes una cuenta?
+				</a>
+
 			</ion-col>
 		</ion-row>
 

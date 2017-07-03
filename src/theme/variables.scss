@@ -37,22 +37,26 @@ $colors: (
 // --------------------------------------------------
 // iOS only Sass variables can go here
 
-
-
+$toolbar-ios-title-font-size: 1.1em;
+$toolbar-ios-title-font-weight: 400;
+$menu-ios-background: #612F2F;
 
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 
-
+$toolbar-wp-title-font-size: 1.2em;
+$toolbar-wp-title-font-weight: 400;
+$menu-md-background: #612F2F;
 
 
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here
 
-
-
+$toolbar-md-title-font-size: 1.2em;
+$toolbar-md-title-font-weight: 400;
+$menu-wp-background: #612F2F;
 
 // App Theme
 // --------------------------------------------------
@@ -65,14 +69,6 @@ $colors: (
 
 $background-color: #F1F5F6;
 $text-color: #F1F5F6;
-$toolbar-ios-title-font-size: 1.1em;
-$toolbar-ios-title-font-weight: 400;
-
-$toolbar-wp-title-font-size: 1.2em;
-$toolbar-wp-title-font-weight: 400;
-
-$toolbar-md-title-font-size: 1.2em;
-$toolbar-md-title-font-weight: 400;
 
 // Ionicons
 // --------------------------------------------------

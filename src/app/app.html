@@ -1,26 +1,61 @@
-<ion-menu [content]="content">
+<ion-menu 
+	[content]="content"
+	id="side-menu" type="push">
 
+	<!-- Header 
   <ion-header>
     <ion-toolbar>
-      <ion-title>Menu</ion-title>
+      <ion-title>Guide2Go</ion-title>
     </ion-toolbar>
   </ion-header>
+	-->
 
+	<div class="side-menu-wrapper">
+
+		<div>
+			<div 
+				*ngFor="let p of pages"
+				class="side-menu-item">
+				<button 
+					(click)="openPage(p)">
+					{{ p.title }}
+				</button>
+			</div>
+		</div>
+
+		<div class="side-menu-logout">
+			<button ion-button full
+				(click)="closeSession()">
+				Cerrar Sesion
+			</button>
+		</div>
+
+	</div>
+
+	<!--
   <ion-content>
     <ion-list>
-      <button ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
+      <button ion-item 
+				(click)="openPage(p)"
+				*ngFor="let p of pages">
+        {{ p.title }}
       </button>
     </ion-list>
 
+	-->
 		<!-- Cerrar Sesion -->
+		<!--
 		<ion-list>
 			<button ion-item (click)="closeSession()">
 				Cerrar Sesion
 			</button>
 		</ion-list>
   </ion-content>
+		-->
 
 </ion-menu>
 
-<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+<ion-nav #content 
+	[root]="rootPage" 
+	swipeBackEnabled="false">
+</ion-nav>

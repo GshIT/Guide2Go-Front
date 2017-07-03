@@ -124,7 +124,7 @@ page-login {
 
 		color: #000000;
 
-		margin: 22px 0px 15px 0px;
+		margin: 22px 0px 7px 0px;
 	}
 
 	.login-content {
@@ -136,6 +136,14 @@ page-login {
 		margin-right: 27px;
 	}
 
+	.login-form > input {
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+
+	.login-form > button {
+		margin-top: 15px;
+	}
 
 	@media screen and (max-height: 655px) {
 		.logo {
@@ -144,7 +152,7 @@ page-login {
 		}
 
 		.welcome-text {
-			margin: 17px 0px 15px;
+			margin: 17px 0px 8px;
 			font-size: 18px;
 		}
 
@@ -157,7 +165,14 @@ page-login {
 			margin-top: 5px;
 		}
 
-	}
+		.login-form > input {
+			margin-top: 2.5px;
+			margin-bottom: 2.5px;
+		}
 
+		.login-form > button {
+			margin-top: 8px;
+		}
+	}
 }
 
