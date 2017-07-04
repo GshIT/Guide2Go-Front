@@ -1,17 +1,11 @@
-<!--
-  Generated template for the Zones page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-
 <!-- 
   Posiblemente este header 
   pueda ser reutilizado 
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="brown">
+
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -19,31 +13,48 @@
 
     <!-- Right Side -->
     <ion-buttons end>
-      <button (click)="goToProfile()" ion-button>
-        <ion-icon class="profile-img" name="contact"></ion-icon>
+      <button ion-button 
+				(click)="goToProfile()" >
+        <ion-icon 
+					class="profile-img" 
+					name="settings">
+				</ion-icon>
       </button>
     </ion-buttons>
 
   </ion-navbar>
-
 </ion-header>
 
-<ion-content padding>
+<ion-content>
 
-  <ion-list>
+	<div class="zone-list">
+	<div 
+		 class="zone-card" 
+		 *ngFor="let zone of fetchedZones">
 
-    <ion-item *ngFor="let zone of fetchedZones">
-      <ion-thumbnail item-left>
-        <ion-icon class="thumb-img" name="ios-image-outline"></ion-icon>
-      </ion-thumbnail>
-      <h1>{{ zone.name }}</h1>
+	<ion-card 
+	 	(click)="setZone(zone)"
+		class="clickable-card" >
 
-      <!-- Cambiar este boton de mostrar de uno para comprar -->
-      <!-- Mover este boton a "Mis Zonas" -->
-      <button (click)="setZone(zone)" ion-button clear item-right>Mostrar</button>
-      <button ion-button clear item-right>Comprar</button>
-    </ion-item>
+		<img 
+			class="zone-img"
+			src="./assets/Default.png" />
 
-  </ion-list>
+		<div class="zone-detail">
+
+			<h2 class="zone-title"> 
+				{{ zone.name }} 
+			</h2>
+
+			<div class="zone-footer">
+				<p> 300$ </p> <!-- Price -->
+			</div>
+
+		</div>
+
+	</ion-card>
+	</div>
+	</div>
 
 </ion-content>
+
