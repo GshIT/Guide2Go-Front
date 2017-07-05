@@ -73,7 +73,7 @@ export class MapaPage {
 
 
 		const iconSelf = {
-			url: '/assets/self.png',
+			url: './assets/self.png',
 			anchor: new google.maps.Point(16, 16)
 		};
 
@@ -330,7 +330,7 @@ export class MapaPage {
 		});
 
 		const logoMarker = {
-			url: '/assets/marker.png',
+			url: './assets/marker.png',
 			scaledSize: new google.maps.Size(29, 37)
 		}
 
