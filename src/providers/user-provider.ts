@@ -43,7 +43,7 @@ export class UserProvider {
 		
 		// Ya deberia funcionar sin el token de parametro
 
-		let url = `${this.userUrl}${this.httputils.tokenSub(token)}`;
+		let url = `${this.userUrl}/${this.httputils.tokenSub(token)}`;
 		return this.httputils.authHeaders()
 		.then((opt) => this.authHttp.get(url,opt).toPromise())
 		.then(

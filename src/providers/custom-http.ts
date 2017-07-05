@@ -42,7 +42,7 @@ export class HttpUtils {
 
 		this.routes = {
 			'guide'	 : this.apiUrl + "/guia",
-			'user'	 : this.apiUrl + "/user/",
+			'user'	 : this.apiUrl + "/user",
 			'login'	 : this.apiUrl + "/login",
 			'spot'	 : this.apiUrl + "/parada/sub_zone/",
 			'subZone': this.apiUrl + "/sub_zone/zone/",
