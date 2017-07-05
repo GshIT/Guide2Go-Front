@@ -95,7 +95,8 @@ export class MapaPage {
 		clearInterval(this.intervalId);
 		clearInterval(this.intervalStop);
 		clearInterval(this.intervalSubzone);
-		if(!this.audio.sonido.paused) this.audio.sonido.pause();
+		//if(!this.audio.sonido.paused && !this.audio.sonido.ended) this.audio.sonido.pause();
+		this.audio.sonido = new Audio();
 		this.audio = undefined;
 	}
 
@@ -150,8 +151,7 @@ export class MapaPage {
 
 			//console.log(actStop.point);
 			//console.log(distance);
-
-			if(distance <= 50){
+			if(distance <= actStop.metros){
 				this.audioProv.getAudio(actStop.id)
 				.then((aud) => {
 					if(this.audio.sonido.paused && aud.id != this.audio.id){
@@ -298,7 +298,8 @@ export class MapaPage {
 				point: point,
 				id: par.id,
 				subzona: par.sub_zonas_id,
-				nombre: par.nombre
+				nombre: par.nombre,
+				metros: par.metros
 			});
 			// console.log(par);
 		}
