@@ -63,7 +63,6 @@ export class MapaPage {
 			'sonido': new Audio(),
 			'id': undefined
 		};
-		this.audio.id = undefined;
 
 		//const coords = zonesProvider.getZoneLatLng(this.zone);
 		const coords = { lat: 0, lng: 0 };
@@ -397,10 +396,10 @@ export class MapaPage {
 		let zonePolygon = new google.maps.Polygon({
 			paths: polygon,
 			strokeColor: color,
-			strokeOpacity: 0.8,
+			strokeOpacity: 0,
 			strokeWeight: 3,
 			fillColor: color,
-			fillOpacity: 0.35
+			fillOpacity: 0
 		});
 		//console.log(this.zone.poligono.linestrings.pop().points);
 		//this.map.setCenter(this.latLng);
