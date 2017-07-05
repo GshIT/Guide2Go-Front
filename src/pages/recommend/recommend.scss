@@ -4,4 +4,52 @@ page-recommend {
 		padding: 0px;
 	}
 
+	ion-navbar {
+		font-family: Roboto;
+		letter-spacing: 1px;
+	}
+
+	.login-input {
+		height: 50px;
+		width: 100%;
+
+		background: #FFFFFF;
+		border-radius: 4px;
+		border: none;
+
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 14px;
+		line-height: 100%;
+		letter-spacing: 1.575px;
+
+		color: #8B999F;
+		padding-left: 20px;
+		padding-right: 20px;
+
+	}
+
+	.btn-recommend {
+		height: 50px;
+
+		background: #612F2F;
+		border-radius: 4px;
+
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 16px;
+		line-height: 100%;
+		letter-spacing: 2px;
+
+		color: #F1F5F6;
+		border-radius: 4px;
+	}
+
+	.row-input {
+		margin: 15px 15px;
+	}
+
+
 }

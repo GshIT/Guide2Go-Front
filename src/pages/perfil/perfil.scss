@@ -1,5 +1,39 @@
 page-perfil {
+
 	.center{
 		text-align: center;
 	}
+
+	ion-navbar {
+		font-family: Roboto;
+		letter-spacing: 1px;
+	}
+
+	ion-item {
+
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 14px;
+		line-height: 100%;
+		letter-spacing: 2.47059px;
+
+	}
+
+	ion-item-divider {
+		color: #ffffff;
+	}
+
+	ion-label {
+		color: #8B999F;
+	}
+
+	ion-select {
+		color: #8B999F;
+	}
+
+	.item-info {
+		color: #8B999F;
+	}
+
 }

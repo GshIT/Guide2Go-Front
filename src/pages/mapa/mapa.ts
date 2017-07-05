@@ -68,7 +68,7 @@ export class MapaPage {
 
 		const iconSelf = {
 			url: '/assets/self.png',
-			anchor: new google.maps.Point(0, 16)
+			anchor: new google.maps.Point(16, 16)
 		};
 
 		this.marker = new google.maps.Marker({

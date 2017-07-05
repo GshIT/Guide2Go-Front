@@ -6,24 +6,34 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="brown">
+
   	<button ion-button menuToggle>
 			<ion-icon name="menu"></ion-icon>
 		</button>
     <ion-title>Guide2Go</ion-title>
+
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
 
-	<div>
-	  <ion-item class="full-input">
-	    <ion-label floating>Correo</ion-label>
-	    <ion-input type="text"></ion-input>
-	  </ion-item>
-  	</div>
+	<div class="row-input">
+		<input 
+			class="login-input" 
+			type="email" 
+			name="email"
+			placeholder="Email" />
+	</div>
 
-	<button ion-button full>Recomendar</button>
+	<div class="row-input">
+		<button 
+			ion-button full 
+			class="btn-recommend" 
+			type="submit">
+			Recomendar
+		</button>
+	</div>
 
 </ion-content>

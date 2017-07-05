@@ -6,30 +6,78 @@
 -->
 <ion-header>
 
- <ion-navbar>
+ <ion-navbar color="brown">
+
   	<button ion-button menuToggle>
 			<ion-icon name="menu"></ion-icon>
 		</button>
     <ion-title>Perfil</ion-title>
+
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-<h2 class="center">Nombre: {{this.user.nombre}}</h2>
-<h2 class="center">Email: {{this.user.email}}</h2>
-<h2 class="center">Dolares: {{this.user.dolares}}</h2>
-<hr>
-<ion-list>
-  <ion-item>
-    <ion-label>Idioma</ion-label>
-    <ion-select cancelText="Cancelar" okText="Okay!">
-      <ion-option>Ingles</ion-option>
-      <ion-option>Frances</ion-option>
-      <ion-option selected="true">Español</ion-option>
-      <ion-option>Aleman</ion-option>
-    </ion-select>
-  </ion-item>
-</ion-list>
+<ion-content>
+
+	<ion-list>
+
+		<ion-item-group>
+
+			<ion-item-divider color="light">
+				Detalles
+			</ion-item-divider>
+
+			<ion-item>
+				<ion-label>
+					Nombre
+				</ion-label>
+				<div item-content
+					class="item-info">
+					{{ user.nombre }} 
+				</div>
+			</ion-item>
+
+			<ion-item>
+				<ion-label>
+					Email
+				</ion-label>
+				<div item-content
+					class="item-info">
+					{{ user.email }} 
+				</div>
+			</ion-item>
+
+			<ion-item>
+				<ion-label>
+					Dinero
+				</ion-label>
+				<div item-content
+					class="item-info">
+					{{ user.dolares }} 
+				</div>
+			</ion-item>
+
+		</ion-item-group>
+
+		<ion-item-group>
+
+			<ion-item-divider color="light">
+				Configuracion
+			</ion-item-divider>
+
+			<ion-item>
+				<ion-label>Idioma</ion-label>
+				<ion-select cancelText="Cancelar" okText="Okay!">
+					<ion-option>Ingles</ion-option>
+					<ion-option>Frances</ion-option>
+					<ion-option selected="true">Español</ion-option>
+					<ion-option>Aleman</ion-option>
+				</ion-select>
+			</ion-item>
+
+		</ion-item-group>
+
+	</ion-list>
+
 </ion-content>
