@@ -11,6 +11,7 @@ import { Zones } from '../../providers/zones';
 import { SubzoneProvider } from '../../providers/subzone-provider';
 import { ParadaProvider } from '../../providers/parada-provider';
 import { AudioProvider } from '../../providers/audio-provider';
+import { PhotoProvider } from '../../providers/photo/photo';
 
 @Component({
 	selector: 'page-mapa',
@@ -50,7 +51,8 @@ export class MapaPage {
 		public navCtrl: NavController,
 		public subzoneProb: SubzoneProvider,
 		public paradaProb: ParadaProvider,
-		public audioProv: AudioProvider) {
+		public audioProv: AudioProvider,
+		public photoProv: PhotoProvider) {
 
 		this.lastStop = null;
 
@@ -93,7 +95,7 @@ export class MapaPage {
 		clearInterval(this.intervalId);
 		clearInterval(this.intervalStop);
 		clearInterval(this.intervalSubzone);
-		this.audio.sonido.pause();
+		if(!this.audio.sonido.paused) this.audio.sonido.pause();
 		this.audio = undefined;
 	}
 
@@ -289,7 +291,9 @@ export class MapaPage {
 			let par = res[parada];
 			let point = this.getPoint(par);
 
-			this.createMarker(point,par.nombre,par.descripcion);
+			this.photoProv.getPhoto(par.id).then((photo)=>{this.createMarker(point,par.nombre,par.descripcion,photo);})
+			.catch((error) => {this.createMarker(point,par.nombre,par.descripcion,-1);});
+		
 			this.paradas.push({
 				point: point,
 				id: par.id,
@@ -300,17 +304,25 @@ export class MapaPage {
 		}
 	}
 
-	createMarker(point, name, description){
+	createMarker(point, name, description, photo){
 
 		let contentString = "";
 		
-		contentString += `
+		if(photo == -1){
+			contentString += `
+			<h2 class="spot-title">${name}</h2>
+			<p class="spot-text">${description}</p>`;
+		}
+		else{
+			contentString += `
 			<h2 class="spot-title">${name}</h2>
 			<p class="spot-text">${description}</p>
 			<img 
-				src="http://digitalcook.info:8000/storage/photos/mb2uv0bN57OHdfVOE1AVoUzhdR0XUu6BgPZDsfrT.jpeg" 
+				src="http://digitalcook.info:8000/storage/${photo}" 
 				width="${window.innerWidth/2}" 
 				class="image">`;
+		}
+		
 
 		var infowindow = new google.maps.InfoWindow({
 			content: contentString

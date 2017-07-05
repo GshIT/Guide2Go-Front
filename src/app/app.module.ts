@@ -23,6 +23,7 @@ import { PerfilPage } from '../pages/perfil/perfil';
 
 import { HttpUtils } from '../providers/custom-http';
 import { ActiveProvider } from '../providers/active-provider';
+import { PhotoProvider } from '../providers/photo/photo';
 
 // Mover esto a un modulo o algo...
 //
@@ -88,7 +89,8 @@ export function getAuthHttp(http, storage) {
 		SQLite,
 		HttpUtils,
 		JwtHelper,
-		ActiveProvider
+		ActiveProvider,
+    PhotoProvider
 	]
 })
 export class AppModule {}
