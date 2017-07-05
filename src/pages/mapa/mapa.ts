@@ -33,6 +33,7 @@ export class MapaPage {
 	subPolygon: any;
 	aktivParada: any;
 	audio: any;
+	controlUI:any;
 
 	// Toast
 	toast: Toast;
@@ -58,7 +59,11 @@ export class MapaPage {
 		this.subPolygon = [];
 		this.zone = params.get('zone');
 		this.follow = (typeof(this.zone) !== 'undefined') ? false : true;
-		this.audio = new Audio()
+		this.audio = {
+			'sonido': new Audio(),
+			'id': undefined
+		};
+		this.audio.id = undefined;
 
 		//const coords = zonesProvider.getZoneLatLng(this.zone);
 		const coords = { lat: 0, lng: 0 };
@@ -89,8 +94,8 @@ export class MapaPage {
 		clearInterval(this.intervalId);
 		clearInterval(this.intervalStop);
 		clearInterval(this.intervalSubzone);
-		this.audio.pause();
-		this.audio = "";
+		this.audio.sonido.pause();
+		this.audio = undefined;
 	}
 
 	// Revisa las subzonas y dice en cual estoy yo y 
@@ -148,9 +153,11 @@ export class MapaPage {
 			if(distance <= 50){
 				this.audioProv.getAudio(actStop.id)
 				.then((aud) => {
-					if(this.audio.paused){
-						this.audio = new Audio(storageUrl+aud);
-						this.audio.play();
+					if(this.audio.sonido.paused && aud.id != this.audio.id){
+						this.audio.sonido = new Audio(storageUrl+aud.path);
+						this.audio.sonido.play();
+						this.audio.id = aud.id;
+						console.log("dandole al play");
 					}
 				});
 
@@ -167,7 +174,7 @@ export class MapaPage {
 				 */
 				if (this.lastStop != actStop) {
 					console.log('Mostrando toast...');
-					this.showToast(`Beep en ${actStop.nombre}`);
+					this.showToast(`Bienvenido a ${actStop.nombre}`);
 					this.lastStop = actStop;
 				}
 
@@ -226,6 +233,12 @@ export class MapaPage {
 		};
 
 		this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+
+
+		//Audio Control
+		var centerControlDiv = document.createElement('div');
+       	this.CenterControl(centerControlDiv);
+        this.map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
 
 		if (typeof(this.zone) !== 'undefined') {
 			let polygon = this.getPolygon(this.zone);
@@ -290,7 +303,9 @@ export class MapaPage {
 
 	createMarker(point,name,description){
 
-		var contentString = '<h2>'+name+'</h2>'+'<p>'+description+'</p>';
+		var contentString = '<h2>'+name+'</h2>'+'<p>'+description+'</p>'+
+		`<img src="http://digitalcook.info:8000/storage/photos/mb2uv0bN57OHdfVOE1AVoUzhdR0XUu6BgPZDsfrT.jpeg" 
+		width="${window.innerWidth/2}" class="image">`;
 		var infowindow = new google.maps.InfoWindow({
 			content: contentString
 		});
@@ -399,4 +414,49 @@ export class MapaPage {
 
 	}
 
+	CenterControl(controlDiv) {
+
+        // Set CSS for the control border.
+        this.controlUI = document.createElement('div');
+        this.controlUI.style.backgroundColor = '#fff';
+        this.controlUI.style.border = '2px solid #fff';
+        this.controlUI.style.borderRadius = '3px';
+        this.controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+        this.controlUI.style.marginBottom = '22px';
+        this.controlUI.style.textAlign = 'center';
+        controlDiv.appendChild(this.controlUI);
+
+        // Set CSS for the control interior.
+        var controlText = document.createElement('div');
+        controlText.style.color = 'rgb(25,25,25)';
+        controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+        controlText.style.fontSize = '16px';
+        controlText.style.lineHeight = '38px';
+        controlText.style.paddingLeft = '5px';
+        controlText.style.paddingRight = '5px';
+        controlText.innerHTML = 
+        `	<div>
+        		<button ion-button id="playButton">PLAY</button>
+        	</div>
+        `;
+        this.controlUI.appendChild(controlText);
+
+        this.controlUI.addEventListener('click', this.eventPause.bind(this));
+
+      }
+
+      eventPause(event){
+      	if((<Element>event.target).id == "playButton"){
+        	this.playPause();
+        }
+      }
+
+      playPause(){
+      	if(this.audio.sonido.paused){
+      		this.audio.sonido.play();
+      	}
+      	else{
+      		this.audio.sonido.pause();
+      	}
+      }
 }

@@ -89,12 +89,12 @@ export class HttpUtils {
 			h.set('Authorization', `Bearer <${token}>`);
 			let opt = new RequestOptions({ headers: h });
 
-			this.http.get(url, opt).toPromise()
+			return this.http.get(url, opt).toPromise()
 			.then((resp) => { 
 				token = resp.json().token; 
 				this.storage.ready()
 				.then(() => {this.storage.set('token', token);});
-				return Promise.resolve(token);
+				return token;
 			});
 		}
 		else{
