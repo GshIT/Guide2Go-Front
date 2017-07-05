@@ -3,6 +3,7 @@ import { Storage } from '@ionic/storage';
 import { 
 	MenuController,
 	NavController,
+	ToastController
 } from 'ionic-angular';
 
 import { GuideLoginPage } from '../guide-login/guide-login';
@@ -27,7 +28,9 @@ export class Login {
 		private storage: Storage,
 		private loginServ: LoginService,
 		private menu: MenuController, 
-		private navCtrl : NavController) {
+		private navCtrl : NavController,
+		private toastCtrl: ToastController
+	) {
 		this.errorMsg = "";
 		this.login = {};
 	}
@@ -75,11 +78,22 @@ export class Login {
 	}
 
 	private handleError(error: any) {
+		
 		// Modificar la vista para que haga
 		// algo mas bonito aqui
 		this.errorMsg = error;
 		console.log('Ups, hubo un error intenta de nuevo');
 		console.log(error);
+
+		const toast = this.toastCtrl.create({
+			message: 'Correo o contraseña incorrectos',
+			closeButtonText: "Ok!",
+			showCloseButton: true,
+			dismissOnPageChange: true,
+			duration: 3500
+		});
+		toast.present();
+
 	}
 
 	register(){

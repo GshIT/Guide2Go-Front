@@ -301,11 +301,18 @@ export class MapaPage {
 		}
 	}
 
-	createMarker(point,name,description){
+	createMarker(point, name, description){
 
-		var contentString = '<h2>'+name+'</h2>'+'<p>'+description+'</p>'+
-		`<img src="http://digitalcook.info:8000/storage/photos/mb2uv0bN57OHdfVOE1AVoUzhdR0XUu6BgPZDsfrT.jpeg" 
-		width="${window.innerWidth/2}" class="image">`;
+		let contentString = "";
+		
+		contentString += `
+			<h2 class="spot-title">${name}</h2>
+			<p class="spot-text">${description}</p>
+			<img 
+				src="http://digitalcook.info:8000/storage/photos/mb2uv0bN57OHdfVOE1AVoUzhdR0XUu6BgPZDsfrT.jpeg" 
+				width="${window.innerWidth/2}" 
+				class="image">`;
+
 		var infowindow = new google.maps.InfoWindow({
 			content: contentString
 		});
