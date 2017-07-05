@@ -64,9 +64,19 @@ export class MapaPage {
 		const coords = { lat: 0, lng: 0 };
 		/* -13.163109, -72.544961 */
 		this.latLng = new google.maps.LatLng(coords.lat, coords.lng);
+
+
+		const iconSelf = {
+			url: '/assets/self.png',
+			anchor: new google.maps.Point(0, 16)
+		};
+
 		this.marker = new google.maps.Marker({
-			position: this.latLng
+			position: this.latLng,
+			icon: iconSelf
 		});
+
+
 	}
 
 	ionViewDidLoad() {
@@ -285,11 +295,17 @@ export class MapaPage {
 			content: contentString
 		});
 
+		const logoMarker = {
+			url: '/assets/marker.png',
+			scaledSize: new google.maps.Size(29, 37)
+		}
+
 		var marker = new google.maps.Marker({
 			position: point,
 			map: this.map,
 			title: name,
-			animation: google.maps.Animation.DROP
+			animation: google.maps.Animation.DROP,
+			icon: logoMarker
 		});
 
 		marker.addListener('click', function() {
