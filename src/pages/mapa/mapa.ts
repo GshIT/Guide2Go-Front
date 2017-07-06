@@ -344,7 +344,7 @@ export class MapaPage {
 
 		marker.addListener('click', function() {
 			infowindow.open(this.map, marker);
-			this.map.setZoom(13);
+			//this.map.setZoom(13);
 			this.map.setCenter(marker.getPosition());
 		});
 
