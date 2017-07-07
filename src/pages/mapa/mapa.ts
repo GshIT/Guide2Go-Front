@@ -34,7 +34,7 @@ export class MapaPage {
 	subPolygon: any;
 	aktivParada: any;
 	audio: any;
-	controlUI:any;
+	closeParada:any;
 
 	// Toast
 	toast: Toast;
@@ -62,10 +62,11 @@ export class MapaPage {
 		this.zone = params.get('zone');
 		this.follow = (typeof(this.zone) !== 'undefined') ? false : true;
 		this.audio = {
-			'sonido': new Audio(),
-			'id': undefined
+			"sonidos": [{}],
+			'idSonando': undefined
 		};
-
+		this.closeParada= 0;
+		this.audio.sonidos.pop();
 		//const coords = zonesProvider.getZoneLatLng(this.zone);
 		const coords = { lat: 0, lng: 0 };
 		/* -13.163109, -72.544961 */
@@ -95,9 +96,10 @@ export class MapaPage {
 		clearInterval(this.intervalId);
 		clearInterval(this.intervalStop);
 		clearInterval(this.intervalSubzone);
-		//if(!this.audio.sonido.paused && !this.audio.sonido.ended) this.audio.sonido.pause();
-		this.audio.sonido = new Audio();
-		this.audio = undefined;
+		//el this.audio mandarlo como output, para pararlo desde fuera.
+		let aktiv = this.objectOfIndex(this.audio.sonidos,this.audio.idSonando).sonido;
+		if(!aktiv.paused) aktiv.pause();
+		//esto hay q quitarlo
 	}
 
 	// Revisa las subzonas y dice en cual estoy yo y 
@@ -139,6 +141,9 @@ export class MapaPage {
 		let actStop;
 		let i;
 		let distance;
+		let closeP = 0;
+		let sonidos = new Array();
+		let PArray = [];
 
 		/**
 		 * Aqui cambie las paradas filtradas por todas
@@ -149,30 +154,23 @@ export class MapaPage {
 			actStop = this.paradas[i]; // for of?
 			distance = this.calcDistance(i);
 
-			//console.log(actStop.point);
-			//console.log(distance);
 			if(distance <= actStop.metros){
-				this.audioProv.getAudio(actStop.id)
+
+				PArray.push(this.audioProv.getAudio(actStop.id)
 				.then((aud) => {
-					if(this.audio.sonido.paused && aud.id != this.audio.id){
-						this.audio.sonido = new Audio(storageUrl+aud.path);
-						this.audio.sonido.play();
-						this.audio.id = aud.id;
-						console.log("dandole al play");
+					closeP = closeP +1;
+					for(let audio in aud){
+
+						sonidos.push({
+							"nombreParada" : actStop.nombre,
+							"idParada": actStop.id,
+							"idSonido": aud[audio].id,
+							"sonido": new Audio(storageUrl+aud[audio].path)
+						});
 					}
-				});
+					
+				}));
 
-				// Esto funciona para navegador
-				
-
-				
-
-				console.log(`beeep ${actStop.nombre}`);
-
-				/**
-				 * Muestra el toast si la ultima parada
-				 * es distinta a la actual
-				 */
 				if (this.lastStop != actStop) {
 					console.log('Mostrando toast...');
 					this.showToast(`Bienvenido a ${actStop.nombre}`);
@@ -181,6 +179,76 @@ export class MapaPage {
 
 			}
 		}
+
+		Promise.all(PArray).then(()=>{
+			let haySonido;
+			this.closeParada = closeP;
+			if(this.audio.sonidos.length == 0 && closeP != 0) {
+				this.audio.idSonando = sonidos[0].idSonido;
+				haySonido = true;
+			}
+			else{ 
+				this.filterDiferent(this.audio.sonidos,sonidos);
+			}
+			this.putDiferent(this.audio.sonidos,sonidos);
+			if(haySonido){this.objectOfIndex(this.audio.sonidos,this.audio.idSonando).sonido.play()}
+		});
+
+	}
+
+	filterDiferent(arr1,arr2){
+		let existe;
+		let sonar = false;
+		for(let i in arr1){
+			existe = false;
+			for(let j in arr2){
+				if(arr1[j].idSonido == arr2[i].idSonido){
+					existe = true;
+				}
+			}
+			if(!existe){
+				arr1.splice(i, 1);
+				if(arr1.length != 0){
+					this.audio.idSonando = arr1[0].idSonido;
+				}
+				sonar = true;
+			}
+		}
+	}
+
+	putDiferent(arr1,arr2){
+		let existe;
+		for(let i in arr2){
+			existe = false;
+			for(let j in arr1){
+				if(arr1[j].idSonido == arr2[i].idSonido){
+					existe = true;
+				}
+			}
+			if(!existe){
+				arr1.push(arr2[i]);
+			}
+		}
+	}
+
+	objectOfIndex(arr,id){
+		let objeto;
+		for(let i in arr){
+			if(arr[i].idSonido == id){
+				objeto = arr[i]
+			}
+		}
+		return objeto;
+	}
+
+	indexOfIndex(arr,id){
+		let index;
+		for(let i in arr){
+			if(arr[i].idSonido == id){
+				index = i
+			}
+		}
+		return index;
 	}
 
 	showToast(msg: string) {
@@ -436,14 +504,14 @@ export class MapaPage {
 	CenterControl(controlDiv) {
 
         // Set CSS for the control border.
-        this.controlUI = document.createElement('div');
-        this.controlUI.style.backgroundColor = '#fff';
-        this.controlUI.style.border = '2px solid #fff';
-        this.controlUI.style.borderRadius = '3px';
-        this.controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-        this.controlUI.style.marginBottom = '22px';
-        this.controlUI.style.textAlign = 'center';
-        controlDiv.appendChild(this.controlUI);
+        let controlUI = document.createElement('div');
+        controlUI.style.backgroundColor = '#fff';
+        controlUI.style.border = '2px solid #fff';
+        controlUI.style.borderRadius = '3px';
+        controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+        controlUI.style.marginBottom = '22px';
+        controlUI.style.textAlign = 'center';
+        controlDiv.appendChild(controlUI); 
 
         // Set CSS for the control interior.
         var controlText = document.createElement('div');
@@ -455,12 +523,14 @@ export class MapaPage {
         controlText.style.paddingRight = '5px';
         controlText.innerHTML = 
         `	<div>
-        		<button ion-button id="playButton">PLAY</button>
+        		<button ion-button id="previusButton"><<</button>
+        		<button ion-button id="playButton">|></button>
+        		<button ion-button id="nextButton">>></button>
         	</div>
         `;
-        this.controlUI.appendChild(controlText);
+        controlUI.appendChild(controlText);
 
-        this.controlUI.addEventListener('click', this.eventPause.bind(this));
+        controlUI.addEventListener('click', this.eventPause.bind(this));
 
       }
 
@@ -468,14 +538,52 @@ export class MapaPage {
       	if((<Element>event.target).id == "playButton"){
         	this.playPause();
         }
+        else if((<Element>event.target).id == "nextButton"){
+        	this.next();
+        }
+        else{
+        	this.prev();
+        }
+      }
+
+      prev(){
+      	if(this.audio.sonidos.length != 0){
+      		let i = this.indexOfIndex(this.audio.sonidos,this.audio.idSonando);
+      		let aktivsound = this.objectOfIndex(this.audio.sonidos,this.audio.idSonando).sonido;
+      		i = i - 1;
+      		if(i < 0) i = this.audio.sonidos.length -1;
+      		this.audio.idSonando = this.audio.sonidos[i].idSonido;
+      		if(!aktivsound.paused){
+      			aktivsound.pause();
+      			aktivsound.load();
+      		};
+      		this.objectOfIndex(this.audio.sonidos,this.audio.idSonando).sonido.play();
+      	}
+      }
+
+      next(){
+      	if(this.audio.sonidos.length != 0){
+      		let i = this.indexOfIndex(this.audio.sonidos,this.audio.idSonando);
+      		let aktivsound = this.objectOfIndex(this.audio.sonidos,this.audio.idSonando).sonido;
+      		this.audio.idSonando = this.audio.sonidos[((i+1)%(this.audio.sonidos.length))].idSonido;
+      		if(!aktivsound.paused){
+      			aktivsound.pause();
+      			aktivsound.load();
+      		};
+      		this.objectOfIndex(this.audio.sonidos,this.audio.idSonando).sonido.play();
+      	}
       }
 
       playPause(){
-      	if(this.audio.sonido.paused){
-      		this.audio.sonido.play();
-      	}
-      	else{
-      		this.audio.sonido.pause();
-      	}
+      	if(this.audio.sonidos.length != 0){
+      		let aktivsound = this.objectOfIndex(this.audio.sonidos,this.audio.idSonando).sonido;
+
+	      	if(aktivsound.paused){
+	      		aktivsound.play();
+	      	}
+	      	else{
+	      		aktivsound.pause();
+	      	}
+	    }
       }
 }
