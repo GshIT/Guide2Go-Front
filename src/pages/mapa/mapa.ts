@@ -555,8 +555,8 @@ export class MapaPage {
       		this.audio.idSonando = this.audio.sonidos[i].idSonido;
       		if(!aktivsound.paused){
       			aktivsound.pause();
-      			aktivsound.load();
       		};
+      		aktivsound.load();
       		this.objectOfIndex(this.audio.sonidos,this.audio.idSonando).sonido.play();
       	}
       }
@@ -568,8 +568,8 @@ export class MapaPage {
       		this.audio.idSonando = this.audio.sonidos[((i+1)%(this.audio.sonidos.length))].idSonido;
       		if(!aktivsound.paused){
       			aktivsound.pause();
-      			aktivsound.load();
       		};
+      		aktivsound.load();
       		this.objectOfIndex(this.audio.sonidos,this.audio.idSonando).sonido.play();
       	}
       }
