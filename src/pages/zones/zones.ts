@@ -9,6 +9,7 @@ import { Storage } from '@ionic/storage';
 
 import { Zones } from '../../providers/zones';
 import { ZoneProvider as ZoneProvider } from '../../providers/zone-provider';
+import { ActiveProvider } from '../../providers/active-provider';
 
 /*
   Generated class for the Zones page.
@@ -34,7 +35,8 @@ export class ZonesPage {
     public zonesProvider: Zones,
     public navCtrl: NavController, 
     public navParams: NavParams,
-    private zoneProvider: ZoneProvider) {
+    private zoneProvider: ZoneProvider,
+    public activProv: ActiveProvider) {
 		
 		// Ya hay que borrar este viejo provider
     // this.zones = zonesProvider.getZones();

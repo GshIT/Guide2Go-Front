@@ -7,11 +7,15 @@ import {
 	ToastController,
 } from 'ionic-angular';
 
+import {Observable} from 'rxjs/Observable'
+
+
 import { Zones } from '../../providers/zones';
 import { SubzoneProvider } from '../../providers/subzone-provider';
 import { ParadaProvider } from '../../providers/parada-provider';
 import { AudioProvider } from '../../providers/audio-provider';
 import { PhotoProvider } from '../../providers/photo/photo';
+import { ActiveProvider } from '../../providers/active-provider';
 
 @Component({
 	selector: 'page-mapa',
@@ -35,6 +39,7 @@ export class MapaPage {
 	aktivParada: any;
 	audio: any;
 	closeParada:any;
+	obs: any;
 
 	// Toast
 	toast: Toast;
@@ -52,7 +57,8 @@ export class MapaPage {
 		public subzoneProb: SubzoneProvider,
 		public paradaProb: ParadaProvider,
 		public audioProv: AudioProvider,
-		public photoProv: PhotoProvider) {
+		public photoProv: PhotoProvider,
+		public activProv: ActiveProvider) {
 
 		this.lastStop = null;
 
@@ -83,7 +89,7 @@ export class MapaPage {
 			icon: iconSelf
 		});
 
-
+		this.obs = undefined;
 	}
 
 	ionViewDidLoad() {
@@ -97,9 +103,16 @@ export class MapaPage {
 		clearInterval(this.intervalStop);
 		clearInterval(this.intervalSubzone);
 		//el this.audio mandarlo como output, para pararlo desde fuera.
-		let aktiv = this.objectOfIndex(this.audio.sonidos,this.audio.idSonando).sonido;
-		if(!aktiv.paused) aktiv.pause();
-		//esto hay q quitarlo
+		
+		if(this.obs != undefined){
+			console.log("Desuscribiendo");
+			this.obs.unsubscribe();
+		}
+
+		if(this.audio.idSonando != undefined){
+			let aktivsound = this.objectOfIndex(this.audio.sonidos,this.audio.idSonando).sonido;
+			if(!aktivsound.paused) aktivsound.pause();
+		}
 	}
 
 	// Revisa las subzonas y dice en cual estoy yo y 
@@ -171,16 +184,18 @@ export class MapaPage {
 					
 				}));
 
-				if (this.lastStop != actStop) {
+				/*if (this.lastStop != actStop) {
 					console.log('Mostrando toast...');
 					this.showToast(`Bienvenido a ${actStop.nombre}`);
 					this.lastStop = actStop;
-				}
+				}*/
 
 			}
 		}
 
-		Promise.all(PArray).then(()=>{
+		console.log("HECHA PA TRASSSSS");
+
+		this.obs = Observable.fromPromise(Promise.all(PArray)).subscribe(()=>{
 			let haySonido;
 			this.closeParada = closeP;
 			if(this.audio.sonidos.length == 0 && closeP != 0) {
@@ -248,7 +263,7 @@ export class MapaPage {
 				index = i
 			}
 		}
-		return index;
+		return parseInt(index);
 	}
 
 	showToast(msg: string) {
@@ -565,7 +580,10 @@ export class MapaPage {
       	if(this.audio.sonidos.length != 0){
       		let i = this.indexOfIndex(this.audio.sonidos,this.audio.idSonando);
       		let aktivsound = this.objectOfIndex(this.audio.sonidos,this.audio.idSonando).sonido;
-      		this.audio.idSonando = this.audio.sonidos[((i+1)%(this.audio.sonidos.length))].idSonido;
+      		i = i + 1;
+      		console.log(i);
+      		if(i == this.audio.sonidos.length) i = 0;
+      		this.audio.idSonando = this.audio.sonidos[i].idSonido;  
       		if(!aktivsound.paused){
       			aktivsound.pause();
       		};
