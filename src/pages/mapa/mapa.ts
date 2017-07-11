@@ -40,6 +40,7 @@ export class MapaPage {
 	audio: any;
 	closeParada:any;
 	obs: any;
+	nombreParadaAudio: any;
 
 	// Toast
 	toast: Toast;
@@ -151,7 +152,6 @@ export class MapaPage {
 
 		//const url = 'http://digitalcook.info:8000/storage/audios/vhbPaYBeWdRr7opp47K8spm12rPQjkf6WAQ59nj3.mpga';
 		const storageUrl = 'http://digitalcook.info:8000/storage/';
-		let actStop;
 		let i;
 		let distance;
 		let closeP = 0;
@@ -164,16 +164,13 @@ export class MapaPage {
 		 */
 		for (i = 0; i < this.paradas.length; i++){
 
-			actStop = this.paradas[i]; // for of?
+			let actStop = this.paradas[i]; // for of?
 			distance = this.calcDistance(i);
-
-			if(distance <= actStop.metros){
-
+			if(distance <= actStop.metros){ 
 				PArray.push(this.audioProv.getAudio(actStop.id)
 				.then((aud) => {
-					closeP = closeP +1;
 					for(let audio in aud){
-
+						closeP = closeP +1;
 						sonidos.push({
 							"nombreParada" : actStop.nombre,
 							"idParada": actStop.id,
@@ -181,7 +178,6 @@ export class MapaPage {
 							"sonido": new Audio(storageUrl+aud[audio].path)
 						});
 					}
-					
 				}));
 
 				/*if (this.lastStop != actStop) {
@@ -206,7 +202,11 @@ export class MapaPage {
 				this.filterDiferent(this.audio.sonidos,sonidos);
 			}
 			this.putDiferent(this.audio.sonidos,sonidos);
-			if(haySonido){this.objectOfIndex(this.audio.sonidos,this.audio.idSonando).sonido.play()}
+			if(haySonido){
+				let aktivS = this.objectOfIndex(this.audio.sonidos,this.audio.idSonando);
+				aktivS.sonido.play();
+				this.nombreParadaAudio = aktivS.nombreParada;
+			}
 		});
 
 	}
@@ -317,12 +317,6 @@ export class MapaPage {
 		};
 
 		this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-
-
-		//Audio Control
-		var centerControlDiv = document.createElement('div');
-       	this.CenterControl(centerControlDiv);
-        this.map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
 
 		if (typeof(this.zone) !== 'undefined') {
 			let polygon = this.getPolygon(this.zone);
@@ -515,52 +509,7 @@ export class MapaPage {
 		//}
 
 	}
-
-	CenterControl(controlDiv) {
-
-        // Set CSS for the control border.
-        let controlUI = document.createElement('div');
-        controlUI.style.backgroundColor = '#fff';
-        controlUI.style.border = '2px solid #fff';
-        controlUI.style.borderRadius = '3px';
-        controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-        controlUI.style.marginBottom = '22px';
-        controlUI.style.textAlign = 'center';
-        controlDiv.appendChild(controlUI); 
-
-        // Set CSS for the control interior.
-        var controlText = document.createElement('div');
-        controlText.style.color = 'rgb(25,25,25)';
-        controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
-        controlText.style.fontSize = '16px';
-        controlText.style.lineHeight = '38px';
-        controlText.style.paddingLeft = '5px';
-        controlText.style.paddingRight = '5px';
-        controlText.innerHTML = 
-        `	<div>
-        		<button ion-button id="previusButton"><<</button>
-        		<button ion-button id="playButton">|></button>
-        		<button ion-button id="nextButton">>></button>
-        	</div>
-        `;
-        controlUI.appendChild(controlText);
-
-        controlUI.addEventListener('click', this.eventPause.bind(this));
-
-      }
-
-      eventPause(event){
-      	if((<Element>event.target).id == "playButton"){
-        	this.playPause();
-        }
-        else if((<Element>event.target).id == "nextButton"){
-        	this.next();
-        }
-        else{
-        	this.prev();
-        }
-      }
-
+ 
       prev(){
       	if(this.audio.sonidos.length != 0){
       		let i = this.indexOfIndex(this.audio.sonidos,this.audio.idSonando);
@@ -572,9 +521,11 @@ export class MapaPage {
       			aktivsound.pause();
       		};
       		aktivsound.load();
-      		this.objectOfIndex(this.audio.sonidos,this.audio.idSonando).sonido.play();
+      		aktivsound =this.objectOfIndex(this.audio.sonidos,this.audio.idSonando);
+      		aktivsound.sonido.play();
+      		this.nombreParadaAudio = aktivsound.nombreParada;
       	}
-      }
+      } 
 
       next(){
       	if(this.audio.sonidos.length != 0){
@@ -588,7 +539,9 @@ export class MapaPage {
       			aktivsound.pause();
       		};
       		aktivsound.load();
-      		this.objectOfIndex(this.audio.sonidos,this.audio.idSonando).sonido.play();
+      		aktivsound =this.objectOfIndex(this.audio.sonidos,this.audio.idSonando);
+      		aktivsound.sonido.play();
+      		this.nombreParadaAudio = aktivsound.nombreParada;
       	}
       }
 

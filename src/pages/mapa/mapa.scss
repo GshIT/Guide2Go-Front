@@ -2,7 +2,7 @@ page-mapa {
 
 	#map {
 		width: 100%;
-		height: 100%;
+		height: 90%;
 	}
 
 	ion-navbar {
@@ -39,6 +39,16 @@ page-mapa {
 
 		color: #612F2F;
 
+	}
+
+	.musicButtons{
+		color: black;
+		height: 60%;
+	}
+
+	#controls{
+		background-color: #612F2F;
+		height: 10%;
 	}
 
 }
