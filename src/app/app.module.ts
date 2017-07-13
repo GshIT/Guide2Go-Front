@@ -20,6 +20,7 @@ import { MapaPage } from '../pages/mapa/mapa';
 import { GuideLoginPage } from '../pages/guide-login/guide-login';
 import { RegisterPage } from '../pages/register/register';
 import { PerfilPage } from '../pages/perfil/perfil';
+import { ModalPagePage } from '../pages/modal/modal';
 
 import { HttpUtils } from '../providers/custom-http';
 import { ActiveProvider } from '../providers/active-provider';
@@ -53,7 +54,8 @@ export function getAuthHttp(http, storage) {
 		MapaPage,
 		GuideLoginPage,
 		RegisterPage,
-		PerfilPage
+		PerfilPage,
+		ModalPagePage
 	],
 	imports: [
 		IonicModule.forRoot(MyApp, {
@@ -74,7 +76,8 @@ export function getAuthHttp(http, storage) {
 		MapaPage,
 		GuideLoginPage,
 		RegisterPage,
-		PerfilPage
+		PerfilPage,
+		ModalPagePage
 	],
 	providers: [
 		{

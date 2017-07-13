@@ -6,9 +6,10 @@ import {
 	Toast,
 	ToastController,
 } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
 
 import {Observable} from 'rxjs/Observable'
-
+import { ModalPagePage } from '../modal/modal';
 
 import { Zones } from '../../providers/zones';
 import { SubzoneProvider } from '../../providers/subzone-provider';
@@ -59,7 +60,8 @@ export class MapaPage {
 		public paradaProb: ParadaProvider,
 		public audioProv: AudioProvider,
 		public photoProv: PhotoProvider,
-		public activProv: ActiveProvider) {
+		public activProv: ActiveProvider,
+		public modalCtrl: ModalController) {
 
 		this.lastStop = null;
 
@@ -384,28 +386,6 @@ export class MapaPage {
 
 	createMarker(point, name, description, photo){
 
-		let contentString = "";
-		
-		if(photo == -1){
-			contentString += `
-			<h2 class="spot-title">${name}</h2>
-			<p class="spot-text">${description}</p>`;
-		}
-		else{
-			contentString += `
-			<h2 class="spot-title">${name}</h2>
-			<p class="spot-text">${description}</p>
-			<img 
-				src="http://digitalcook.info:8000/storage/${photo}" 
-				width="${window.innerWidth/2}" 
-				class="image">`;
-		}
-		
-
-		var infowindow = new google.maps.InfoWindow({
-			content: contentString
-		});
-
 		const logoMarker = {
 			url: './assets/marker.png',
 			scaledSize: new google.maps.Size(29, 37)
@@ -420,12 +400,20 @@ export class MapaPage {
 		});
 
 		marker.addListener('click', function() {
-			infowindow.open(this.map, marker);
-			//this.map.setZoom(13);
-			this.map.setCenter(marker.getPosition());
-		});
+			//infowindow.open(this.map, marker);
+			this.openModal(name,description,photo);
+			//this.map.setCenter(marker.getPosition());
+		}.bind(this));
 
 	}
+
+	openModal(name,description,photo) {
+    	let myModal = this.modalCtrl.create(ModalPagePage, 
+    		{titulo: name,
+    		 desc: description, 
+    		 url: `http://digitalcook.info:8000/storage/${photo}`});
+    	myModal.present();
+  	}
 
 	getPoint(sub){
 		return {lat: sub.punto.lat, lng: sub.punto.lon};
