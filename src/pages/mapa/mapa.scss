@@ -2,7 +2,7 @@ page-mapa {
 
 	#map {
 		width: 100%;
-		height: 90%;
+		height: 85%;
 	}
 
 	ion-navbar {
@@ -41,14 +41,36 @@ page-mapa {
 
 	}
 
-	.musicButtons{
-		color: black;
-		height: 60%;
+	.audio-buttons {
+		display: flex;
+		justify-content: center;
 	}
 
-	#controls{
-		background-color: #612F2F;
-		height: 10%;
+	.audio-buttons > button {
+		color: #612F2F;
+		font-size: 1.8em;
+	}
+
+	.play-button {
+		font-size: 2.7em;
+	}
+
+	.bottom-controls {
+		height: 15%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.info {
+		position: absolute;
+		top: 5px;
+		right: 5px;
+	}
+
+	.info > ion-badge {
+		border-radius: 8px;
+		text-align: center;
 	}
 
 }

@@ -106,7 +106,7 @@ export class MapaPage {
 		clearInterval(this.intervalStop);
 		clearInterval(this.intervalSubzone);
 		//el this.audio mandarlo como output, para pararlo desde fuera.
-		
+
 		if(this.obs != undefined){
 			console.log("Desuscribiendo");
 			this.obs.unsubscribe();
@@ -170,17 +170,17 @@ export class MapaPage {
 			distance = this.calcDistance(i);
 			if(distance <= actStop.metros){ 
 				PArray.push(this.audioProv.getAudio(actStop.id)
-				.then((aud) => {
-					for(let audio in aud){
-						closeP = closeP +1;
-						sonidos.push({
-							"nombreParada" : actStop.nombre,
-							"idParada": actStop.id,
-							"idSonido": aud[audio].id,
-							"sonido": new Audio(storageUrl+aud[audio].path)
-						});
-					}
-				}));
+					.then((aud) => {
+						for(let audio in aud){
+							closeP = closeP +1;
+							sonidos.push({
+								"nombreParada" : actStop.nombre,
+								"idParada": actStop.id,
+								"idSonido": aud[audio].id,
+								"sonido": new Audio(storageUrl+aud[audio].path)
+							});
+						}
+					}));
 
 				/*if (this.lastStop != actStop) {
 					console.log('Mostrando toast...');
@@ -323,17 +323,17 @@ export class MapaPage {
 		if (typeof(this.zone) !== 'undefined') {
 			let polygon = this.getPolygon(this.zone);
 			this.previewZone(polygon,'#FF0000');
-			
+
 
 			/* Fit polygon bounds wink wink */
 
-            let bounds = new google.maps.LatLngBounds();
-            polygon.forEach((p) => bounds.extend(p));
+			let bounds = new google.maps.LatLngBounds();
+			polygon.forEach((p) => bounds.extend(p));
 
-            this.map.fitBounds(bounds);
-            this.map.setCenter(bounds.getCenter());
+			this.map.fitBounds(bounds);
+			this.map.setCenter(bounds.getCenter());
 
-            /********************************/
+			/********************************/
 
 			this.subzoneProb.getZone(this.zone.id)
 				.then(this.previewSubZone.bind(this)) 
@@ -371,8 +371,8 @@ export class MapaPage {
 			let point = this.getPoint(par);
 
 			this.photoProv.getPhoto(par.id).then((photo)=>{this.createMarker(point,par.nombre,par.descripcion,photo);})
-			.catch((error) => {this.createMarker(point,par.nombre,par.descripcion,-1);});
-		
+				.catch((error) => {this.createMarker(point,par.nombre,par.descripcion,-1);});
+
 			this.paradas.push({
 				point: point,
 				id: par.id,
@@ -408,15 +408,19 @@ export class MapaPage {
 	}
 
 	openModal(name,description,photo) {
-    	let myModal = this.modalCtrl.create(ModalPagePage, 
-    		{titulo: name,
-    		 desc: description, 
-    		 url: `http://digitalcook.info:8000/storage/${photo}`});
-    	myModal.present();
-  	}
+		let myModal = this.modalCtrl.create(ModalPagePage, {
+			titulo: name,
+			desc: description, 
+			url: `http://digitalcook.info:8000/storage/${photo}`
+		});
+		myModal.present();
+	}
 
-	getPoint(sub){
-		return {lat: sub.punto.lat, lng: sub.punto.lon};
+	getPoint(sub) {
+		return {
+			lat: sub.punto.lat, 
+			lng: sub.punto.lon
+		};
 	}
 
 	uploadCycle(){
@@ -485,64 +489,64 @@ export class MapaPage {
 		return zonePolygon;
 		/*for (let p of z.points) {
 		new google.maps.Marker({
-		  animation: google.maps.Animation.DROP,
-		  position: p,
-		  clickable: true,
-		  map: this.map,
-		  title: 'Nombre de la parada' 
-		  Aqui deberia haber un nombre de la parada 
+			animation: google.maps.Animation.DROP,
+			position: p,
+			clickable: true,
+			map: this.map,
+			title: 'Nombre de la parada' 
+			Aqui deberia haber un nombre de la parada 
 		});
-	  }*/
+		}*/
 
 		//}
 
 	}
- 
-      prev(){
-      	if(this.audio.sonidos.length != 0){
-      		let i = this.indexOfIndex(this.audio.sonidos,this.audio.idSonando);
-      		let aktivsound = this.objectOfIndex(this.audio.sonidos,this.audio.idSonando).sonido;
-      		i = i - 1;
-      		if(i < 0) i = this.audio.sonidos.length -1;
-      		this.audio.idSonando = this.audio.sonidos[i].idSonido;
-      		if(!aktivsound.paused){
-      			aktivsound.pause();
-      		};
-      		aktivsound.load();
-      		aktivsound =this.objectOfIndex(this.audio.sonidos,this.audio.idSonando);
-      		aktivsound.sonido.play();
-      		this.nombreParadaAudio = aktivsound.nombreParada;
-      	}
-      } 
 
-      next(){
-      	if(this.audio.sonidos.length != 0){
-      		let i = this.indexOfIndex(this.audio.sonidos,this.audio.idSonando);
-      		let aktivsound = this.objectOfIndex(this.audio.sonidos,this.audio.idSonando).sonido;
-      		i = i + 1;
-      		console.log(i);
-      		if(i == this.audio.sonidos.length) i = 0;
-      		this.audio.idSonando = this.audio.sonidos[i].idSonido;  
-      		if(!aktivsound.paused){
-      			aktivsound.pause();
-      		};
-      		aktivsound.load();
-      		aktivsound =this.objectOfIndex(this.audio.sonidos,this.audio.idSonando);
-      		aktivsound.sonido.play();
-      		this.nombreParadaAudio = aktivsound.nombreParada;
-      	}
-      }
+	prev(){
+		if(this.audio.sonidos.length != 0){
+			let i = this.indexOfIndex(this.audio.sonidos,this.audio.idSonando);
+			let aktivsound = this.objectOfIndex(this.audio.sonidos,this.audio.idSonando).sonido;
+			i = i - 1;
+			if(i < 0) i = this.audio.sonidos.length -1;
+			this.audio.idSonando = this.audio.sonidos[i].idSonido;
+			if(!aktivsound.paused){
+				aktivsound.pause();
+			};
+			aktivsound.load();
+			aktivsound =this.objectOfIndex(this.audio.sonidos,this.audio.idSonando);
+			aktivsound.sonido.play();
+			this.nombreParadaAudio = aktivsound.nombreParada;
+		}
+	} 
 
-      playPause(){
-      	if(this.audio.sonidos.length != 0){
-      		let aktivsound = this.objectOfIndex(this.audio.sonidos,this.audio.idSonando).sonido;
+	next(){
+		if(this.audio.sonidos.length != 0){
+			let i = this.indexOfIndex(this.audio.sonidos,this.audio.idSonando);
+			let aktivsound = this.objectOfIndex(this.audio.sonidos,this.audio.idSonando).sonido;
+			i = i + 1;
+			console.log(i);
+			if(i == this.audio.sonidos.length) i = 0;
+			this.audio.idSonando = this.audio.sonidos[i].idSonido;  
+			if(!aktivsound.paused){
+				aktivsound.pause();
+			};
+			aktivsound.load();
+			aktivsound =this.objectOfIndex(this.audio.sonidos,this.audio.idSonando);
+			aktivsound.sonido.play();
+			this.nombreParadaAudio = aktivsound.nombreParada;
+		}
+	}
 
-	      	if(aktivsound.paused){
-	      		aktivsound.play();
-	      	}
-	      	else{
-	      		aktivsound.pause();
-	      	}
-	    }
-      }
+	playPause(){
+		if(this.audio.sonidos.length != 0){
+			let aktivsound = this.objectOfIndex(this.audio.sonidos,this.audio.idSonando).sonido;
+
+			if(aktivsound.paused){
+				aktivsound.play();
+			}
+			else{
+				aktivsound.pause();
+			}
+		}
+	}
 }
