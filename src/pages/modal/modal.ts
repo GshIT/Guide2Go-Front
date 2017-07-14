@@ -23,8 +23,13 @@ export class ModalPagePage {
   	this.titulo = navParams.get("titulo");
   	this.descripcion = navParams.get("desc");
   	this.urlFoto = navParams.get("url");
-  	this.keyFoto = Object.keys(this.urlFoto); 
-    this.lUrl = this.urlFoto.length;
+    if(this.urlFoto != -1){
+  	  this.keyFoto = Object.keys(this.urlFoto); 
+      this.lUrl = this.urlFoto.length;
+    }
+    else{
+      this.lUrl = 0;
+    }
     console.log(this.urlFoto);
   }
  
