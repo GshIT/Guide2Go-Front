@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ViewController } from 'ionic-angular';
-
 /*
   Generated class for the ModalPage page.
 
@@ -25,8 +24,9 @@ export class ModalPagePage {
   	console.log(this.titulo);
   	console.log(this.descripcion);
   	console.log(this.urlFoto);
+  	
   }
-
+ 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ModalPagePage');
   }

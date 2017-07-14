@@ -41,6 +41,15 @@ export function getAuthHttp(http, storage) {
 	return new AuthHttp(config, http);
 }
 
+import { SwiperModule } from 'ngx-swiper-wrapper';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+
+const SWIPER_CONFIG: SwiperConfigInterface = {
+  direction: 'horizontal',
+  slidesPerView: 'auto',
+  keyboardControl: true
+};
+
 @NgModule({
 	declarations: [
 		MyApp,
@@ -61,7 +70,8 @@ export function getAuthHttp(http, storage) {
 		IonicModule.forRoot(MyApp, {
 			backButtonText: ''
 		}),
-		IonicStorageModule.forRoot()
+		IonicStorageModule.forRoot(),
+		SwiperModule.forRoot(SWIPER_CONFIG)
 	],
 	bootstrap: [IonicApp],
 	entryComponents: [

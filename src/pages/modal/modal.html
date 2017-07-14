@@ -23,7 +23,13 @@
 		{{ descripcion }}
 	</p>
 
-	<img src="{{ urlFoto }}">
+	
 
+	<swiper [config]="config">
+  		<div>
+    		<img class="fotoC" src="{{ urlFoto }}">
+  		</div>
+	</swiper>
 </ion-content>
+
 
