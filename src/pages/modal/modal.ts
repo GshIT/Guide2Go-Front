@@ -17,16 +17,15 @@ export class ModalPagePage {
 	descripcion: any;
 	urlFoto: any;
 	keyFoto: any;
+  lUrl: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
   	this.titulo = navParams.get("titulo");
   	this.descripcion = navParams.get("desc");
   	this.urlFoto = navParams.get("url");
-  	this.keyFoto = Object.keys(this.urlFoto);
-  	console.log(this.titulo);
-  	console.log(this.descripcion);
-  	console.log(this.urlFoto[this.keyFoto[0]].path);  
-  	   
+  	this.keyFoto = Object.keys(this.urlFoto); 
+    this.lUrl = this.urlFoto.length;
+    console.log(this.urlFoto);
   }
  
   ionViewDidLoad() {
