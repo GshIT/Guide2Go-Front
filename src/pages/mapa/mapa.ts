@@ -411,7 +411,7 @@ export class MapaPage {
 		let myModal = this.modalCtrl.create(ModalPagePage, {
 			titulo: name,
 			desc: description, 
-			url: `http://digitalcook.info:8000/storage/${photo}`
+			url: photo
 		});
 		myModal.present();
 	}
