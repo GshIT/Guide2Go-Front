@@ -25,7 +25,7 @@ export class ModalPagePage {
   	this.keyFoto = Object.keys(this.urlFoto);
   	console.log(this.titulo);
   	console.log(this.descripcion);
-  	console.log(this.urlFoto[this.keyFoto[0]].path); 
+  	console.log(this.urlFoto[this.keyFoto[0]].path);  
   	   
   }
  
