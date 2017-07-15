@@ -47,12 +47,17 @@ page-mapa {
 	}
 
 	.audio-buttons > button {
-		color: #612F2F;
-		font-size: 1.8em;
+		color: #ccc;
+		font-size: 1.7em;
+
+		border-radius: 13px;
+		height: 60px;
+		opacity: 0.6;
 	}
 
-	.play-button {
-		font-size: 2.7em;
+	#play-button {
+		color: #fff;
+		font-size: 2.4em;
 	}
 
 	.bottom-controls {
@@ -60,6 +65,8 @@ page-mapa {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+
+		background-color: #612F2F;
 	}
 
 	.info {
@@ -71,6 +78,16 @@ page-mapa {
 	.info > ion-badge {
 		border-radius: 8px;
 		text-align: center;
+	}
+
+	.playlist-menu {
+		background-color: #fff;
+		height: 100%;
+		width: 100%;
+	}
+
+	.playlist-icon {
+		font-size: 1.7em;
 	}
 
 }

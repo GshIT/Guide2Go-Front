@@ -5,10 +5,11 @@ import {
 	NavController,
 	Toast,
 	ToastController,
+	ModalController,
+	MenuController
 } from 'ionic-angular';
-import { ModalController } from 'ionic-angular';
 
-import {Observable} from 'rxjs/Observable'
+import { Observable } from 'rxjs/Observable'
 import { ModalPagePage } from '../modal/modal';
 
 import { Zones } from '../../providers/zones';
@@ -47,6 +48,8 @@ export class MapaPage {
 	toast: Toast;
 	lastStop: Object;
 
+	// Playlist menu
+
 	/**
 	 * Este componente lo que tiene
 	 * e esteroides no jo
@@ -61,7 +64,8 @@ export class MapaPage {
 		public audioProv: AudioProvider,
 		public photoProv: PhotoProvider,
 		public activProv: ActiveProvider,
-		public modalCtrl: ModalController) {
+		public modalCtrl: ModalController,
+		public menuCtrl: MenuController) {
 
 		this.lastStop = null;
 
@@ -71,16 +75,17 @@ export class MapaPage {
 		this.zone = params.get('zone');
 		this.follow = (typeof(this.zone) !== 'undefined') ? false : true;
 		this.audio = {
-			"sonidos": [{}],
+			"sonidos": [],
 			'idSonando': undefined
 		};
-		this.closeParada= 0;
-		this.audio.sonidos.pop();
+
+		this.closeParada = 0;
+
 		//const coords = zonesProvider.getZoneLatLng(this.zone);
 		const coords = { lat: 0, lng: 0 };
+
 		/* -13.163109, -72.544961 */
 		this.latLng = new google.maps.LatLng(coords.lat, coords.lng);
-
 
 		const iconSelf = {
 			url: './assets/self.png',
@@ -204,7 +209,7 @@ export class MapaPage {
 				this.filterDiferent(this.audio.sonidos,sonidos);
 			}
 			this.putDiferent(this.audio.sonidos,sonidos);
-			if(haySonido){
+			if(haySonido) {
 				let aktivS = this.objectOfIndex(this.audio.sonidos,this.audio.idSonando);
 				aktivS.sonido.play();
 				this.nombreParadaAudio = aktivS.nombreParada;
@@ -519,8 +524,8 @@ export class MapaPage {
 		}
 	} 
 
-	next(){
-		if(this.audio.sonidos.length != 0){
+	next() {
+		if(this.audio.sonidos.length != 0) {
 			let i = this.indexOfIndex(this.audio.sonidos,this.audio.idSonando);
 			let aktivsound = this.objectOfIndex(this.audio.sonidos,this.audio.idSonando).sonido;
 			i = i + 1;
@@ -549,4 +554,39 @@ export class MapaPage {
 			}
 		}
 	}
+
+	openPlaylistMenu() {
+		this.menuCtrl.open('playlist');
+		console.log(this.audio);
+	}
+
+	setAudioByObject(aud) {
+		console.log('Aqui cabeza de galapago');
+
+		let actAud = this.getCurrentAudio()
+		let sound = aud.sonido
+
+		this.audio.idSonando = aud.idSonido;
+		this.nombreParadaAudio = aud.nombreParada;
+
+		/* Pausa si se esta reproduciendo */
+		if (actAud !== undefined) {
+			if (!actAud.paused) actAud.pause();
+			actAud.load();
+		}
+
+		sound.play();
+	}
+
+	getCurrentAudio() {
+		const audios = this.audio.sonidos as Array<any>;
+		const actAud = this.audio.idSonando as number;
+
+		/* Busca el audio con el id correspondiente */
+		let aud = audios.find((e) => e.idSonido == actAud);
+
+		return aud.sonido;
+	}
+
+
 }

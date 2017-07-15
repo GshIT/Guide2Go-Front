@@ -1,3 +1,33 @@
+
+<!-- Side right menu -->
+<!-- Podemos mover esto a otro componente? -->
+
+<ion-menu 
+	id="playlist"
+	side="right" 
+	type="overlay"
+ 	[swipeEnabled]="false" 
+	[content]="mapContent">
+
+	<div class="side-menu-wrapper playlist-menu">
+
+		<div>
+			<div 
+				*ngFor="let aud of audio.sonidos"
+				class="side-menu-item">
+				<button 
+					(click)="setAudioByObject(aud)">
+					Audio {{ aud.idSonido }} 
+				</button>
+			</div>
+		</div>
+
+	</div>
+
+</ion-menu>
+
+<!-- -->
+
 <ion-header>
 
   <ion-navbar color="brown">
@@ -10,11 +40,22 @@
       Mapa
     </ion-title>
 
+		<ion-buttons end>
+			<button ion-button
+				(click)="openPlaylistMenu()">
+				<ion-icon 
+					class="playlist-icon"
+					name="more">
+				</ion-icon>
+			</button>
+		</ion-buttons>
+
   </ion-navbar>
 
 </ion-header>
 
-<ion-content>
+<ion-content #mapContent>
+
 	<div #map id="map"></div>
 	<div class="info">
 		<ion-badge color="brown">{{ closeParada }}</ion-badge>
@@ -26,18 +67,18 @@
 
 			<button ion-button clear 
 				(click)="prev()">
-				<ion-icon name="rewind"></ion-icon>
+				<ion-icon name="skip-backward"></ion-icon>
 			</button>
 
 			<button ion-button clear 
-				class="play-button"
+				id="play-button"
 				(click)="playPause()">
 				<ion-icon name="play"></ion-icon>
 			</button>
 
 			<button ion-button clear 
 				(click)="next()">
-				<ion-icon name="fastforward"></ion-icon>
+				<ion-icon name="skip-forward"></ion-icon>
 			</button>
 
 		</div>
