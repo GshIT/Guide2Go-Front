@@ -11,6 +11,8 @@ import { Zones } from '../../providers/zones';
 import { ZoneProvider as ZoneProvider } from '../../providers/zone-provider';
 import { ActiveProvider } from '../../providers/active-provider';
 
+import { ModalController } from 'ionic-angular';
+import { ModalPaymentPagePage } from '../modal-payment/modal-payment';
 /*
   Generated class for the Zones page.
 
@@ -36,7 +38,8 @@ export class ZonesPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     private zoneProvider: ZoneProvider,
-    public activProv: ActiveProvider) {
+    public activProv: ActiveProvider,
+    public modalCtrl: ModalController) {
 		
 		// Ya hay que borrar este viejo provider
     // this.zones = zonesProvider.getZones();
@@ -60,6 +63,13 @@ export class ZonesPage {
   // Hay que ver como reusamos esto 
   goToProfile() {
     this.navCtrl.push(PerfilPage);
+  }
+
+  comprar(zone){
+    let myModal = this.modalCtrl.create(ModalPaymentPagePage, {
+      zone: zone.id
+    });
+    myModal.present();
   }
 }
 

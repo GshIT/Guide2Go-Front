@@ -26,6 +26,10 @@ import { HttpUtils } from '../providers/custom-http';
 import { ActiveProvider } from '../providers/active-provider';
 import { PhotoProvider } from '../providers/photo/photo';
 
+import { ModalPaymentPagePage } from '../pages/modal-payment/modal-payment';
+
+
+
 // Mover esto a un modulo o algo...
 //
 export function getAuthHttp(http, storage) {
@@ -64,7 +68,8 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
 		GuideLoginPage,
 		RegisterPage,
 		PerfilPage,
-		ModalPagePage
+		ModalPagePage,
+		ModalPaymentPagePage
 	],
 	imports: [
 		IonicModule.forRoot(MyApp, {
@@ -87,7 +92,8 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
 		GuideLoginPage,
 		RegisterPage,
 		PerfilPage,
-		ModalPagePage
+		ModalPagePage,
+		ModalPaymentPagePage
 	],
 	providers: [
 		{
