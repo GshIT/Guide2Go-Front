@@ -26,7 +26,7 @@ export class PerfilPage {
   	public navParams: NavParams) {
 
   	this.user = {
-			nombre: 'Wait', 
+			nombre: 'Wait',  
 			email: 'Wait', 
 			dolares: 'Wait'
 		};
