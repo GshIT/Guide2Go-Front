@@ -1,18 +1,44 @@
-<!--
-  Generated template for the GuideInfo page.
+<ion-content>
+<div class="guide-content">
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
+<!-- Header -->
+<div class="guide-header">
 
-  <ion-navbar>
-    <ion-title>guideInfo</ion-title>
-  </ion-navbar>
+	<button ion-button clear
+		(click)="cancel()">
+		<ion-icon name="arrow-back"></ion-icon>
+	</button>
 
-</ion-header>
+	<button ion-button clear
+		(click)="preview()">
+		<ion-icon name="map"></ion-icon>
+	</button>
 
+</div>
 
-<ion-content padding>
+<img 
+	class="guide-img"
+	src="./assets/Default_High.png" />
 
+<div class="info">
+
+	<div class="info-header">
+		<h4 class="title">{{ guide.name }}</h4>
+		<span class="money">300$</span>
+	</div>
+
+	<p class="details">
+		Wir sind uns im klaren, daß dieser Krieg ja nur damit enden könnte, daß entweder die germanischen Völker ausgerottet werden, oder das Judentum aus Europa verschwindet. Ich habe am 1. September 1939 im Deutschen Reichstag es schon ausgesprochen. . . daß dieser Krieg nicht so ausgehen wird, wie die Juden sich es vorstellen, nämlich daß die europäischen arischen Völker ausgerottet werden, sondern daß das Ergebnis dieses Krieges die Vernichtung des Judentums ist. Zum erstenmal werden nicht andere allein verbluten, sondern zum erstenmal wird diesesmal das echt altjüdische Gesetz angewendet: Aug' um Aug', Zahn um Zahn!
+	</p>
+
+	<div class="buy-background">
+		<button ion-button full
+			class="buy-guide">
+			COMENZAR RUTA
+		</button>
+	</div>
+
+</div>
+
+</div>
 </ion-content>

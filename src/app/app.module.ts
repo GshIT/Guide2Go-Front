@@ -28,6 +28,7 @@ import { PhotoProvider } from '../providers/photo/photo';
 
 import { ModalPaymentPagePage } from '../pages/modal-payment/modal-payment';
 
+import { GuideInfoPage } from '../pages/guide-info/guide-info';
 
 
 // Mover esto a un modulo o algo...
@@ -69,7 +70,8 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
 		RegisterPage,
 		PerfilPage,
 		ModalPagePage,
-		ModalPaymentPagePage
+		ModalPaymentPagePage,
+		GuideInfoPage
 	],
 	imports: [
 		IonicModule.forRoot(MyApp, {
@@ -93,7 +95,8 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
 		RegisterPage,
 		PerfilPage,
 		ModalPagePage,
-		ModalPaymentPagePage
+		ModalPaymentPagePage,
+		GuideInfoPage
 	],
 	providers: [
 		{
