@@ -23,13 +23,12 @@
 		{{ descripcion }}
 	</p>
 
-	
-
 	<swiper [config]="config" *ngIf="lUrl != 0">
   		<div *ngFor="let key of keyFoto">
       		<img class="fotoC" src="http://digitalcook.info:8000/storage/{{ urlFoto[key].path }}"> 
   		</div>
 	</swiper>
+
 </ion-content>
 
 
