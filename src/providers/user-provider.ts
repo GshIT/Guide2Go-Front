@@ -21,6 +21,15 @@ export class UserProvider {
 		this.userUrl = this.httputils.routes['user'];
 	}
 
+	GuideUser(guideId){
+		let args = {id: guideId};
+		let bodyString = JSON.stringify(args);
+		return this.httputils.authHeaders()
+		.then((options) => this.http.post(this.userUrl+'/guia', bodyString, options).toPromise())
+		.then(this.printInside)
+		.catch((error:any) => Promise.resolve(error.json().error || 'Server error'));
+	}
+
 	createUser(args: {}): Promise<{}> { 
 
 		let bodyString = JSON.stringify(args);
