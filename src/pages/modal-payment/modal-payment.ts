@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { 
+	NavController, 
+	NavParams, 
+	ViewController 
+} from 'ionic-angular';
 
 /*
   Generated class for the ModalPaymentPage page.
@@ -13,7 +17,10 @@ import { NavController, NavParams, ViewController } from 'ionic-angular';
 })
 export class ModalPaymentPagePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {}
+  constructor(
+		public navCtrl: NavController, 
+		public navParams: NavParams, 
+		public viewCtrl: ViewController) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ModalPaymentPagePage');

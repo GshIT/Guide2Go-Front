@@ -22,7 +22,12 @@ import { ActiveProvider } from '../../providers/active-provider';
 @Component({
 	selector: 'page-mapa',
 	templateUrl: 'mapa.html',
-	providers: [Zones,SubzoneProvider,ParadaProvider,AudioProvider]
+	providers: [
+		Zones,
+		SubzoneProvider,
+		ParadaProvider,
+		AudioProvider
+	]
 })
 export class MapaPage {
 
@@ -507,7 +512,7 @@ export class MapaPage {
 
 	}
 
-	prev(){
+	prev() {
 		if(this.audio.sonidos.length != 0){
 			let i = this.indexOfIndex(this.audio.sonidos,this.audio.idSonando);
 			let aktivsound = this.objectOfIndex(this.audio.sonidos,this.audio.idSonando).sonido;

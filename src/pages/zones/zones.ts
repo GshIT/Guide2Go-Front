@@ -13,6 +13,9 @@ import { ActiveProvider } from '../../providers/active-provider';
 
 import { ModalController } from 'ionic-angular';
 import { ModalPaymentPagePage } from '../modal-payment/modal-payment';
+
+import { GuideInfoPage } from '../guide-info/guide-info';
+
 /*
   Generated class for the Zones page.
 
@@ -57,7 +60,12 @@ export class ZonesPage {
   }
 
   setZone(zone) {
-    this.navCtrl.push(MapaPage, {zone: zone});
+		/* (Guide = Zone) huehue */
+		let modal = this.modalCtrl.create(
+			GuideInfoPage, {
+				guide: zone
+			})
+		modal.present();
   }
 
   // Hay que ver como reusamos esto 
