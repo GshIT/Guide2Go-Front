@@ -16,7 +16,9 @@
 				*ngFor="let aud of audio.sonidos"
 				class="side-menu-item">
 				<button 
-					(click)="setAudioByObject(aud)">
+					(click)="setAudioByObject(aud)"
+					[class.listening]="true">
+					<!-- [class.listening]="aud.id == audio.idSonando" -->
 					Audio {{ aud.idSonido }} 
 				</button>
 			</div>
