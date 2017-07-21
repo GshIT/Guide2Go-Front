@@ -96,4 +96,8 @@
     <plugin name="cordova-plugin-whitelist" spec="1.3.1" />
     <plugin name="cordova-sqlite-storage" spec="^2.0.4" />
     <plugin name="ionic-plugin-keyboard" spec="~2.2.1" />
+    <plugin name="cordova-plugin-inapppurchase" spec="^1.1.0" />
+    <plugin name="cc.fovea.cordova.purchase" spec="^6.1.2">
+        <variable name="BILLING_KEY" value="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzOXeWmD6dUPiyyver3a3mDfYN3zlOLNYdu1FJ1t8D8p+2Nq1L9a4w1zBSTmn2xURepLyg4skHEjPkjYVKc2xbiLmxTrc/eYsqX3DPz5mS/7mFM9HOUygGU8JyrkjoEdluawvXEPxxCSK8x7oBkiSqCSU+zzTO72eYJuybxqfb3rv298SK2win1lsysjGszt1OwfB0DfBXmQqMgJVeuYrESIWHFkF+OYsLaP++BWdwzvvkVETotJnGjovgX++HS8Lb1YqW2Sl3iv2whgS+DusVrX3OoAW5t8Icx/L74h7LTG0FL365BLajNk+iHPqZSAh22aawTkci1ECb9aiRoJIuQIDAQAB" />
+    </plugin>
 </widget>

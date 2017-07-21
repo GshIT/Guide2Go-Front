@@ -59,7 +59,8 @@ export class UserProvider {
 			data => { 
 					user.nombre  = data.json().users.pop().name; 
 					user.email   = data.json().users.pop().email; 
-					user.dolares = data.json().users.pop().dolares
+					user.dolares = data.json().users.pop().dolares;
+          user.ref_code = data.json().users.pop().refer_code;
 			}
 		).catch((err) => Promise.reject(err));
 	}

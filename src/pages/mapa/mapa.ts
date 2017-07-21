@@ -328,7 +328,7 @@ export class MapaPage {
 			disableDefaultUI: true
 		};
 
-		this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+		this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions as any);
 
 		if (typeof(this.zone) !== 'undefined') {
 			let polygon = this.getPolygon(this.zone);

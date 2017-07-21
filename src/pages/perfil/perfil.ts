@@ -28,7 +28,8 @@ export class PerfilPage {
   	this.user = {
 			nombre: 'Wait',  
 			email: 'Wait', 
-			dolares: 'Wait'
+			dolares: 'Wait',
+      ref_code: 'Wait'
 		};
 
     this.storage.ready().then(() => {
