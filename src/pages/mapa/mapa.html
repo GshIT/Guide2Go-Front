@@ -9,19 +9,30 @@
  	[swipeEnabled]="false" 
 	[content]="mapContent">
 
-	<div class="side-menu-wrapper playlist-menu">
+	<div class="playlist-menu">
 
 		<div>
-			<div 
-				*ngFor="let aud of audio.sonidos"
-				class="side-menu-item">
-				<button 
+
+			<div *ngFor="let spot of nearSpots">
+
+				<div class="spot-item">
+					<span>{{ spot.name }}</span>
+					<i class="fa fa-volume-up" aria-hidden="true"></i>
+				</div>
+
+				<div 
+					*ngFor="let aud of spot.auds; let i = index"
 					(click)="setAudioByObject(aud)"
-					[class.listening]="true">
-					<!-- [class.listening]="aud.id == audio.idSonando" -->
-					Audio {{ aud.idSonido }} 
-				</button>
+					class="aud-item"
+					[class.listening]="aud.idSonido == audio.idSonando">
+
+					<span>Audio {{ i+1 }}</span>
+					<i class="fa fa-check" aria-hidden="true"></i>
+
+				</div>
+
 			</div>
+
 		</div>
 
 	</div>

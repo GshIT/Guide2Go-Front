@@ -54,6 +54,7 @@ export class MapaPage {
 	lastStop: Object;
 
 	// Playlist menu
+	nearSpots: Array<any>;
 
 	/**
 	 * Este componente lo que tiene
@@ -103,6 +104,8 @@ export class MapaPage {
 		});
 
 		this.obs = undefined;
+
+		this.nearSpots = [];
 	}
 
 	ionViewDidLoad() {
@@ -201,7 +204,11 @@ export class MapaPage {
 			}
 		}
 
-		console.log("HECHA PA TRASSSSS");
+		/* Andres no se donde poner esto en
+		 * todo este desorden
+		 */
+		this.groupAudBySpot();
+		//
 
 		this.obs = Observable.fromPromise(Promise.all(PArray)).subscribe(()=>{
 			let haySonido;
@@ -215,7 +222,10 @@ export class MapaPage {
 			}
 			this.putDiferent(this.audio.sonidos,sonidos);
 			if(haySonido) {
-				let aktivS = this.objectOfIndex(this.audio.sonidos,this.audio.idSonando);
+				let aktivS = this.objectOfIndex(
+					this.audio.sonidos,
+					this.audio.idSonando
+				);
 				aktivS.sonido.play();
 				this.nombreParadaAudio = aktivS.nombreParada;
 			}
@@ -591,6 +601,32 @@ export class MapaPage {
 		let aud = audios.find((e) => e.idSonido == actAud);
 
 		return aud.sonido;
+	}
+
+	groupAudBySpot() {
+
+		let spots = {};
+		let auds = this.audio.sonidos;
+
+		for (let aud of auds) {
+			let p = spots[aud.idParada];
+
+			if (p !== undefined) {
+				p.auds.push(aud);
+			}
+			else {
+				p = {
+					name: aud.nombreParada,
+					auds: [aud]
+				};
+			}
+
+			spots[aud.idParada] = p;
+		}
+
+		console.log(spots);
+		this.nearSpots = Object.keys(spots).map((k) => spots[k]);
+
 	}
 
 
