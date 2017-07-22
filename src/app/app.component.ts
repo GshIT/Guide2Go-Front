@@ -13,6 +13,8 @@ import { UserZonesPage } from '../pages/user-zones/user-zones';
 import { MapaPage } from '../pages/mapa/mapa';
 import { PerfilPage } from '../pages/perfil/perfil';
 import { HttpUtils } from '../providers/custom-http';
+import { LangProvider } from '../providers/lang/lang';
+
 //import { GuideLoginPage } from '../pages/guide-login/guide-login';
 
 @Component({
@@ -31,7 +33,8 @@ export class MyApp {
 		public storage: Storage,
 		public platform: Platform,
 		public menu: MenuController,
-		public httputils: HttpUtils) {
+		public httputils: HttpUtils,
+    public langProv: LangProvider) {
 
 		this.initializeApp();
 		this.pages = [
@@ -47,11 +50,24 @@ export class MyApp {
 	initializeApp() {
 		this.platform.ready()
 			.then(() => this.verifyToken())
-			.then(() => {
+			.then(() => this.setOrContinue())
+      .then(() =>{
 				StatusBar.styleDefault();
 				Splashscreen.hide();
-			});
+      });
 	}
+
+  setOrContinue(){
+    if(localStorage.getItem('lang') == null){
+      return this.langProv.get().then((resp)=>{
+        let lan: any;
+        for(lan of resp){
+          if(lan.name = "english") localStorage.setItem("lang",lan.id);
+        } 
+      });
+    }
+    else return Promise.resolve();
+  }
 
 	verifyToken() {
 

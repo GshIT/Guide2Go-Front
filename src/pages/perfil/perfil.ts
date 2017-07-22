@@ -3,6 +3,8 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { Storage } from '@ionic/storage';
 import { UserProvider } from '../../providers/user-provider'
+import { LangProvider } from '../../providers/lang/lang'
+
 /*
   Generated class for the Zones page.
 
@@ -12,17 +14,20 @@ import { UserProvider } from '../../providers/user-provider'
 @Component({
   selector: 'page-perfil',
   templateUrl: 'perfil.html',
-  providers: [UserProvider]
+  providers: [UserProvider,LangProvider]
 })
 export class PerfilPage {
 
   user: {};
+  lang: any;
+  acLang: any;
 
   constructor(
   	public UserProvider: UserProvider,
     public storage: Storage,
   	public navCtrl: NavController, 
-  	public navParams: NavParams) {
+  	public navParams: NavParams,
+    public langProv: LangProvider) {
 
   	this.user = {
 			nombre: 'Wait',  
@@ -30,6 +35,10 @@ export class PerfilPage {
 			dolares: 'Wait',
       ref_code: 'Wait'
 		};
+
+   this.langProv.get().then((res)=>{this.lang = res});
+
+   this.acLang = localStorage.getItem("lang");
 
     this.storage.ready().then(() => {
     	this.storage.get('token').then((val) => {
@@ -46,4 +55,8 @@ export class PerfilPage {
 
   }
 
+  onChange(value){
+    this.acLang = value;
+    localStorage.setItem("lang",this.acLang); 
+  }
 }

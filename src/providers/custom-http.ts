@@ -49,7 +49,8 @@ export class HttpUtils {
 			'tokenexp': this.apiUrl + '/tokenexp',
 			'zone': this.apiUrl + '/zona',
 			'audioParada': this.apiUrl + '/audio/parada/',
-			'photoParada': this.apiUrl + '/photo/parada/'
+			'photoParada': this.apiUrl + '/photo/parada/',
+      'language': this.apiUrl + '/idioma'
 		};
 	}
 
