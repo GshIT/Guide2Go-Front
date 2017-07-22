@@ -3,7 +3,6 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { Storage } from '@ionic/storage';
 import { UserProvider } from '../../providers/user-provider'
-
 /*
   Generated class for the Zones page.
 
@@ -41,6 +40,10 @@ export class PerfilPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PerfilPage');
+  }
+
+  inAppPayment(){
+
   }
 
 }

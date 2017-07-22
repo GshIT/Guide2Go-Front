@@ -105,22 +105,12 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-inapppurchase": {
+    "cordova-plugin-email-composer": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-inapppurchase"
+            "id": "cordova-plugin-email-composer"
         },
         "is_top_level": true,
         "variables": {}
-    },
-    "cc.fovea.cordova.purchase": {
-        "source": {
-            "type": "registry",
-            "id": "cc.fovea.cordova.purchase@^6.1.2"
-        },
-        "is_top_level": true,
-        "variables": {
-            "BILLING_KEY": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzOXeWmD6dUPiyyver3a3mDfYN3zlOLNYdu1FJ1t8D8p+2Nq1L9a4w1zBSTmn2xURepLyg4skHEjPkjYVKc2xbiLmxTrc/eYsqX3DPz5mS/7mFM9HOUygGU8JyrkjoEdluawvXEPxxCSK8x7oBkiSqCSU+zzTO72eYJuybxqfb3rv298SK2win1lsysjGszt1OwfB0DfBXmQqMgJVeuYrESIWHFkF+OYsLaP++BWdwzvvkVETotJnGjovgX++HS8Lb1YqW2Sl3iv2whgS+DusVrX3OoAW5t8Icx/L74h7LTG0FL365BLajNk+iHPqZSAh22aawTkci1ECb9aiRoJIuQIDAQAB"
-        }
     }
 }

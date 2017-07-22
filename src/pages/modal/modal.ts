@@ -42,7 +42,7 @@ export class ModalPagePage {
   }
 
   closeModal() {
-    this.viewCtrl.dismiss();
+    this.viewCtrl.dismiss(); 
   }
 
 }

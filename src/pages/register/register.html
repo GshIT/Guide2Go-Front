@@ -41,7 +41,7 @@
 			<input 
 				[(ngModel)]="user.email"
 				class="login-input" 
-				type="text" 
+				type="email" 
 				name="email"
 				placeholder="Email" />
 		</div>
@@ -81,7 +81,7 @@
 		</p>
 	</div>
 
-	<div class="cancel">
+	<div class="cancel" (click)="goBack()">
 		<a> Ya tengo una cuenta </a>
 	</div>
 

@@ -20,7 +20,7 @@
 <ion-content padding>
 
 	<div class="row-input">
-		<input 
+		<input [(ngModel)]="email"
 			class="login-input" 
 			type="email" 
 			name="email"
@@ -28,7 +28,7 @@
 	</div>
 
 	<div class="row-input">
-		<button 
+		<button (click) = "sendMail()"
 			ion-button full 
 			class="btn-recommend" 
 			type="submit">

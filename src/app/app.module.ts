@@ -48,6 +48,8 @@ export function getAuthHttp(http, storage) {
 
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { LanguajeProvider } from '../providers/languaje/languaje';
+import { LangProvider } from '../providers/lang/lang';
 
 const SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -112,7 +114,9 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
 		HttpUtils,
 		JwtHelper,
 		ActiveProvider,
-    PhotoProvider
+    PhotoProvider,
+    LanguajeProvider,
+    LangProvider
 	]
 })
 export class AppModule {}

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { UserProvider } from '../../providers/user-provider'
+import { ViewController } from 'ionic-angular';
 
 /*
   Generated class for the Register page.
@@ -18,7 +19,7 @@ export class RegisterPage {
 	user: {};
 	errorMsg: string;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, public UserProvider: UserProvider){
+	constructor(public navCtrl: NavController, public navParams: NavParams, public UserProvider: UserProvider, public viewCtrl: ViewController){
 		this.user = {};
 		this.errorMsg = "";
 	}
@@ -37,6 +38,10 @@ export class RegisterPage {
 		console.log(respuesta);
 		this.navCtrl.pop();
 	}
+
+  goBack(){
+   this.viewCtrl.dismiss();
+  }
 
 }
 //jenny
