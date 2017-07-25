@@ -11,12 +11,16 @@
 		<button ion-button menuToggle>
 			<ion-icon name="menu"></ion-icon>
 		</button>
-    <ion-title>Guide2Go</ion-title>
+    <ion-title>Mis Zonas</ion-title>
 
     <!-- Right Side -->
     <ion-buttons end>
-    	<button ion-button>
-				<ion-icon class="profile-img" name="contact"></ion-icon>
+    	<button ion-button
+				(click)="goToProfile()">
+				<ion-icon 
+					class="profile-img" 
+					name="settings">
+				</ion-icon>
 			</button>
     </ion-buttons>
 
@@ -24,31 +28,60 @@
 
 </ion-header>
 
+<!--
+<button 
+	ion-button clear item-right 
+	*ngIf='!isActive(guide)' 
+	(click)='activate(guide)'>
+	Activar
+</button>
 
-<ion-content padding>
+<button 
+	ion-button clear item-right 
+	*ngIf='isActive(guide)' 
+	(click)='deactivate()'>	
+	Desactivar
+</button>
 
-	<ion-list>
-		
-		<ion-item *ngFor="let guide of userGuides">
-			
-			<!-- Todavia no hay fotos :( -->
-			<ion-thumbnail item-left>
-				<ion-icon class="thumb-img" name="ios-image-outline"></ion-icon>
-			</ion-thumbnail>
-			<h1>{{ guide.zona.name }}</h1>
-			<p>{{ guide.costo }} Dolares</p>
-            
-            <!-- Cuando la zonas esta descargada mostrar el boton de "Mostrar" -->
-            <button ion-button clear item-right *ngIf='!isActive(guide)' (click)='activate(guide)'>
-            	Activar
-            </button>
-            <button ion-button clear item-right *ngIf='isActive(guide)' (click)='deactivate()'>	
-            	Desactivar
-            </button>
-			<button (click)="download(guide)" ion-button clear item-right>Detalles</button>
+<button 
+	(click)="download(guide)" 
+	ion-button clear item-right>
+	Detalles
+</button>
+-->
 
-		</ion-item>
+<ion-content>
 
-	</ion-list>
+	<div class="zone-list">
+	<div 
+		 class="zone-card" 
+		 *ngFor="let guide of userGuides">
+
+	<!-- On click show modal to active guide -->
+	<ion-card 
+	 	(click)="guideDetails(guide)"
+		class="clickable-card" >
+
+		<img 
+			class="zone-img"
+			src="./assets/Default.png" />
+
+		<div class="zone-detail">
+
+			<h2 class="zone-title"> 
+				{{ guide.zona.name }} 
+			</h2>
+
+			<div class="zone-footer">
+				<p> {{ guide.costo }}$ </p> <!-- Price -->
+			</div>
+
+		</div>
+
+	</ion-card>
+
+	</div>
+	</div>
 
 </ion-content>
+

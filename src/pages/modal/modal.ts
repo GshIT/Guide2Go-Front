@@ -11,7 +11,7 @@ import { ViewController } from 'ionic-angular';
   selector: 'page-modal',
   templateUrl: 'modal.html'
 })
-export class ModalPagePage {
+export class ModalPage {
 
 	titulo: any;
 	descripcion: any;
@@ -38,11 +38,11 @@ export class ModalPagePage {
   }
  
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ModalPagePage');
+    console.log('ModalPagePagePage');
   }
 
   closeModal() {
-    this.viewCtrl.dismiss(); 
+    this.navCtrl.pop(); 
   }
 
 }

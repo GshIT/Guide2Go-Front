@@ -20,13 +20,15 @@ import { MapaPage } from '../pages/mapa/mapa';
 import { GuideLoginPage } from '../pages/guide-login/guide-login';
 import { RegisterPage } from '../pages/register/register';
 import { PerfilPage } from '../pages/perfil/perfil';
-import { ModalPagePage } from '../pages/modal/modal';
 
 import { HttpUtils } from '../providers/custom-http';
 import { ActiveProvider } from '../providers/active-provider';
 import { PhotoProvider } from '../providers/photo/photo';
 
-import { ModalPaymentPagePage } from '../pages/modal-payment/modal-payment';
+/* ModalPagePage...... */
+import { ModalPaymentPage } from '../pages/modal-payment/modal-payment';
+import { ModalPage } from '../pages/modal/modal';
+import { ActiveGuidePage } from '../pages/active-guide/active-guide';
 
 import { GuideInfoPage } from '../pages/guide-info/guide-info';
 
@@ -70,9 +72,10 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
 		GuideLoginPage,
 		RegisterPage,
 		PerfilPage,
-		ModalPagePage,
-		ModalPaymentPagePage,
-		GuideInfoPage
+		ModalPage,
+		ModalPaymentPage,
+		GuideInfoPage,
+		ActiveGuidePage
 	],
 	imports: [
 		IonicModule.forRoot(MyApp, {
@@ -95,9 +98,10 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
 		GuideLoginPage,
 		RegisterPage,
 		PerfilPage,
-		ModalPagePage,
-		ModalPaymentPagePage,
-		GuideInfoPage
+		ModalPage,
+		ModalPaymentPage,
+		GuideInfoPage,
+		ActiveGuidePage
 	],
 	providers: [
 		{

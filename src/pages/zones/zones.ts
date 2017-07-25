@@ -12,7 +12,7 @@ import { ZoneProvider as ZoneProvider } from '../../providers/zone-provider';
 import { ActiveProvider } from '../../providers/active-provider';
 
 import { ModalController } from 'ionic-angular';
-import { ModalPaymentPagePage } from '../modal-payment/modal-payment';
+import { ModalPaymentPage } from '../modal-payment/modal-payment';
 
 import { GuideInfoPage } from '../guide-info/guide-info';
 
@@ -49,7 +49,6 @@ export class ZonesPage {
 		
     this.mapPage = MapaPage;
 
-
     this.zoneProvider.get()
       .then((res) => this.fetchedZones = res)
       .catch((err) => console.log(err));
@@ -73,8 +72,11 @@ export class ZonesPage {
     this.navCtrl.push(PerfilPage);
   }
 
-  comprar(zone){
-    let myModal = this.modalCtrl.create(ModalPaymentPagePage, {
+	/* Creo que esto ya no se usa y 
+	 * no deberia ir aqui 
+	 */
+  comprar(zone) {
+    let myModal = this.modalCtrl.create(ModalPaymentPage, {
       zone: zone.id
     });
     myModal.present();

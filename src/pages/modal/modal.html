@@ -1,12 +1,11 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="brown">
 
-    <button 
-			ion-button clear 
-			style="color: black;" 
-			(click)="closeModal()">
-			<ion-icon name="close"></ion-icon>
+    <button ion-button clear 
+			(click)="closeModal()"
+			class="cancel">
+			<ion-icon name="arrow-back"></ion-icon>
 		</button>
 
   </ion-navbar>
@@ -15,19 +14,27 @@
 
 <ion-content padding>
 
-	<h2 style="color:black;">
-		{{ titulo }}
-	</h2>
+	<ion-card class="spot-card">
 
-	<p style="color:black;">
+	<h4 class="title">
+		{{ titulo }}
+	</h4>
+
+	<p class="details"> 
 		{{ descripcion }}
 	</p>
 
-	<swiper [config]="config" *ngIf="lUrl != 0">
+	<swiper 
+		[config]="config" 
+		*ngIf="lUrl != 0">
   		<div *ngFor="let key of keyFoto">
-      		<img class="fotoC" src="http://digitalcook.info:8000/storage/{{ urlFoto[key].path }}"> 
+      		<img 
+						class="fotoC" 
+						src="http://digitalcook.info:8000/storage/{{ urlFoto[key].path }}"> 
   		</div>
 	</swiper>
+
+	</ion-card>
 
 </ion-content>
 

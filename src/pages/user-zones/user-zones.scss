@@ -1,10 +1,83 @@
 page-user-zones {
-	
+
+	ion-navbar {
+		font-family: Roboto;
+		letter-spacing: 1px;
+	}
+
+	.zone-list {
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+
 	.thumb-img {
 		font-size: 70px;
 	}
 
 	.profile-img {
-		font-size: 30px;
+		font-size: 23px;
 	}
+
+	.zone-card {
+		margin-top: 15px;
+		margin-bottom: 15px;
+	}
+
+	.zone-img {
+		float: left;
+		width: 163px;
+		height: 101px;
+	}
+
+	.zone-title {
+
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 14px;
+		line-height: 100%;
+		letter-spacing: 1.575px;
+
+		color: #612F2F;
+
+	}
+
+	.zone-footer {
+		display: flex;
+		flex-direction: row-reverse;
+
+		text-align: end
+	}
+
+	.zone-footer > p {
+
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 14px;
+		line-height: 100%;
+		letter-spacing: 1.575px;
+
+		color: #612F2F;
+
+	}
+
+	.zone-detail {
+		padding: 20px 15px 15px 20px;
+		height: 101px;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	// Hay que ver si el tamaño de la imagen 
+	// siempre sera igual
+
+	.clickable-card:hover {
+		background-color: #F9F9F9;
+		transition: background-color 0.2s;
+	}
+
+
 }

@@ -10,7 +10,7 @@ import {
 } from 'ionic-angular';
 
 import { Observable } from 'rxjs/Observable'
-import { ModalPagePage } from '../modal/modal';
+import { ModalPage } from '../modal/modal';
 
 import { Zones } from '../../providers/zones';
 import { SubzoneProvider } from '../../providers/subzone-provider';
@@ -428,7 +428,7 @@ export class MapaPage {
 	}
 
 	openModal(name,description,photo) {
-		let myModal = this.modalCtrl.create(ModalPagePage, {
+		let myModal = this.modalCtrl.create(ModalPage, {
 			titulo: name,
 			desc: description, 
 			url: photo

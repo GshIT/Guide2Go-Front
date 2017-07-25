@@ -15,7 +15,7 @@ import {
   selector: 'page-modal-payment',
   templateUrl: 'modal-payment.html'
 })
-export class ModalPaymentPagePage {
+export class ModalPaymentPage {
 
   constructor(
 		public navCtrl: NavController, 
@@ -23,7 +23,7 @@ export class ModalPaymentPagePage {
 		public viewCtrl: ViewController) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ModalPaymentPagePage');
+    console.log('Shut up and take my money!');
   }
 
   closeModal() {
