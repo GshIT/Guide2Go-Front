@@ -4,6 +4,7 @@ import { Http } from '@angular/http';
 import { SQLite } from '@ionic-native/sqlite';
 import { AuthHttp, AuthConfig, JwtHelper } from 'angular2-jwt';
 import { Transfer } from '@ionic-native/transfer';
+import { GooglePlus } from '@ionic-native/google-plus';
 
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
@@ -118,7 +119,8 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
 		JwtHelper,
 		ActiveProvider,
     PhotoProvider, 
-    LangProvider
+    LangProvider,
+		GooglePlus
 	]
 })
 export class AppModule {}

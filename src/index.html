@@ -30,7 +30,11 @@
   <!-- Ionic's root component and where the app will load -->
   <ion-app></ion-app>
 
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpaKSc7AD8Q8HJYdyzfpx8EnaxYkAGsqo&libraries=geometry"></script>
+	<!-- Quitar esto de aqui y usar el lazy loader de Angular Google Maps -->
+  <script 
+		type="text/javascript" 
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpaKSc7AD8Q8HJYdyzfpx8EnaxYkAGsqo&libraries=geometry">
+	</script>
 
   <!-- The polyfills js is generated during the build process -->
   <script src="build/polyfills.js"></script>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GooglePlus } from '@ionic-native/google-plus';
 import { Storage } from '@ionic/storage';
 import { 
 	MenuController,
@@ -29,7 +30,8 @@ export class Login {
 		private loginServ: LoginService,
 		private menu: MenuController, 
 		private navCtrl : NavController,
-		private toastCtrl: ToastController
+		private toastCtrl: ToastController,
+		private googlePlus: GooglePlus
 	) {
 		this.errorMsg = "";
 		this.login = {};
@@ -44,6 +46,7 @@ export class Login {
 		this.navCtrl.push(ReferedPage);
 	}
 
+	/* Ya no es usado... */
 	guideLogin() {
 		this.navCtrl.push(GuideLoginPage);
 	}
@@ -98,6 +101,18 @@ export class Login {
 
 	register(){
 		this.navCtrl.push(RegisterPage);
+	}
+
+	/* Google Auth */
+	googleAuth() {
+
+		this.googlePlus.login({
+			"webClientId": "1092787362861-9ncl8m072o20elimluignnbpvuff8caa.apps.googleusercontent.com",
+			'offline': true
+		})
+			.then((res) => console.log(res))
+			.catch((err) => console.log(err));
+
 	}
 
 }

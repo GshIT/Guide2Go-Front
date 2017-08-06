@@ -45,16 +45,19 @@
             "id": "cordova-plugin-geolocation@^2.4.3"
         },
         "is_top_level": true,
-        "variables": {}
+        "variables": {
+            "GEOLOCATION_USAGE_DESCRIPTION": " "
+        }
     },
     "cordova-plugin-googleplus": {
         "source": {
-            "type": "registry",
-            "id": "cordova-plugin-googleplus@^5.1.1"
+            "type": "git",
+            "url": "https://github.com/EddyVerbruggen/cordova-plugin-googleplus",
+            "subdir": "."
         },
         "is_top_level": true,
         "variables": {
-            "REVERSED_CLIENT_ID": "com.googleusercontent.apps.96779452065-aor0s70an43k2i901aa29j2abmtpcn5c"
+            "REVERSED_CLIENT_ID": "com.googleusercontent.apps.1092787362861-0mvf0ijo4rhp61a0p08sbkkbpc304k1k"
         }
     },
     "cordova-plugin-nativeaudio": {
@@ -108,7 +111,7 @@
     "cordova-plugin-email-composer": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-email-composer"
+            "id": "cordova-plugin-email-composer@^0.8.7"
         },
         "is_top_level": true,
         "variables": {}
