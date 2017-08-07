@@ -9,23 +9,27 @@ import { HttpUtils } from '../providers/custom-http';
 	Generated class for the Login provider.
 
 	See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-	for more info on providers and Angular 2 DI.
- */
+	for more info on providers and Angular 2 DI.  */
 @Injectable()
 export class Login {
 
 	loginUrl: string;
+	googleLoginUrl: string;
 
 	constructor(public http: Http, private httputils: HttpUtils) {
 		console.log('Hello Login Provider');
 		this.loginUrl = this.httputils.routes['login'];
+
+		/* Deberia ir aqui, perdon */
+		this.googleLoginUrl = this.httputils.apiUrl + "/login/google";
 	}
 
 	/* Deberia hacer dos argumentos? */
 	authenticate(args: {}): Promise<{}> {
 		return this.httputils.defaultHeaders()
 		.then((opt) => this.http.post(this.loginUrl, args, opt).toPromise())
-		.then(this.getToken).catch(this.handleError);
+		.then(this.getToken)
+		.catch(this.handleError);
 	}
 
 	private getToken(resp: Response) {
@@ -33,7 +37,7 @@ export class Login {
 		console.log(body);
 		return body.token;
 	}
-	
+
 	// Si ya existe el usuario...
 	// O otra clase de error
 	//
@@ -54,15 +58,30 @@ export class Login {
 	register(args: {}): Observable<{}> {
 
 		let options = this.httputils.authHeaders();
-		
+
 		// Obten el token al crear la cuenta
 		// Verifica que ya existe el usuario
 		//
 		return this.http.post(this.loginUrl, args, options)
-						.map(this.getToken)
-						.catch(this.handleError);
+		.map(this.getToken)
+		.catch(this.handleError);
 
 	}
-		
+
+	/* Args:
+	 * idToken: string
+	 * referer_id: string
+	 */
+	googleAuth(args: {}) {
+
+		return this.httputils.defaultHeaders()
+			.then((opt) => {
+				return this.http.post(this.googleLoginUrl, args, opt)
+					.toPromise()
+			})
+			.then(this.getToken)
+			.catch(this.handleError);	
+
+	}
 
 }

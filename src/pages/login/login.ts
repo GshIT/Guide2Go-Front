@@ -17,7 +17,7 @@ import { Login as LoginService } from '../../providers/login'
 @Component({
 	selector: 'page-login',
 	templateUrl: 'login.html',
-	providers: [LoginService]
+	providers: [ LoginService ]
 })
 export class Login {
 
@@ -50,7 +50,7 @@ export class Login {
 	guideLogin() {
 		this.navCtrl.push(GuideLoginPage);
 	}
-	
+
 	authenticate() {
 		// Obtener data del form
 		console.log(this.login);
@@ -81,7 +81,7 @@ export class Login {
 	}
 
 	private handleError(error: any) {
-		
+
 		// Modificar la vista para que haga
 		// algo mas bonito aqui
 		this.errorMsg = error;
@@ -106,11 +106,16 @@ export class Login {
 	/* Google Auth */
 	googleAuth() {
 
+		/* Debo mover esto a un provider */
 		this.googlePlus.login({
 			"webClientId": "1092787362861-9ncl8m072o20elimluignnbpvuff8caa.apps.googleusercontent.com",
-			'offline': true
 		})
-			.then((res) => console.log(res))
+			.then((res) => {
+				/* Debo añadir aqui el referer id */
+				let req = { 'token': res.idToken } 
+				return this.loginServ.googleAuth(req);
+			})
+			.then((token) => this.handleToken(token))
 			.catch((err) => console.log(err));
 
 	}
