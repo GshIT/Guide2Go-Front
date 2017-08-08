@@ -57,27 +57,20 @@ export class Login {
 		console.log('Validando...');
 
 		this.loginServ.authenticate(this.login)
-			.then(this.handleToken.bind(this))
+			.then(this.handleSuccess.bind(this))
 			.catch(this.handleError.bind(this));
-
-		// Redireccionar si es valido
-		// 	- Guardar token
-		//
-		// Mostrar error si es incorrecto
-		// 	- (Agregar funcion fashion para esto)
 	}
 
-	// Quiza deberia ir en un proveedor
-	private handleToken(token: {}) {
-		this.token = token;
-		this.saveToken(); 
+	/* Google OAuth Flow */
+	googleAuth() {
+		this.loginServ.googleAuth()
+			.then(() => this.handleSuccess())
+			.catch((err) => this.handleError(err));
+	}
+
+
+	private handleSuccess() {
 		this.navCtrl.push(MainPage);
-	}
-
-	private saveToken(){
-		this.storage.ready().then(() => {
-			this.storage.set('token', this.token);
-		});
 	}
 
 	private handleError(error: any) {
@@ -101,23 +94,6 @@ export class Login {
 
 	register(){
 		this.navCtrl.push(RegisterPage);
-	}
-
-	/* Google Auth */
-	googleAuth() {
-
-		/* Debo mover esto a un provider */
-		this.googlePlus.login({
-			"webClientId": "1092787362861-9ncl8m072o20elimluignnbpvuff8caa.apps.googleusercontent.com",
-		})
-			.then((res) => {
-				/* Debo añadir aqui el referer id */
-				let req = { 'token': res.idToken } 
-				return this.loginServ.googleAuth(req);
-			})
-			.then((token) => this.handleToken(token))
-			.catch((err) => console.log(err));
-
 	}
 
 }

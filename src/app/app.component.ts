@@ -13,12 +13,15 @@ import { UserZonesPage } from '../pages/user-zones/user-zones';
 import { MapaPage } from '../pages/mapa/mapa';
 import { PerfilPage } from '../pages/perfil/perfil';
 import { HttpUtils } from '../providers/custom-http';
+
 import { LangProvider } from '../providers/lang/lang';
+import { Login as LoginService } from '../providers/login';
 
 //import { GuideLoginPage } from '../pages/guide-login/guide-login';
 
 @Component({
-	templateUrl: 'app.html'
+	templateUrl: 'app.html',
+	providers: [ LoginService ]
 })
 export class MyApp {
 
@@ -34,7 +37,9 @@ export class MyApp {
 		public platform: Platform,
 		public menu: MenuController,
 		public httputils: HttpUtils,
-    public langProv: LangProvider) {
+		public langProv: LangProvider,
+		public loginServ: LoginService
+	) {
 
 		this.initializeApp();
 		this.pages = [
@@ -51,23 +56,23 @@ export class MyApp {
 		this.platform.ready()
 			.then(() => this.verifyToken())
 			.then(() => this.setOrContinue())
-      .then(() =>{
+			.then(() =>{
 				StatusBar.styleDefault();
 				Splashscreen.hide();
-      });
+			});
 	}
 
-  setOrContinue(){
-    if(localStorage.getItem('lang') == null){
-      return this.langProv.get().then((resp)=>{
-        let lan: any;
-        for(lan of resp){
-          if(lan.name = "english") localStorage.setItem("lang",lan.id);
-        } 
-      });
-    }
-    else return Promise.resolve();
-  }
+	setOrContinue(){
+		if(localStorage.getItem('lang') == null){
+			return this.langProv.get().then((resp)=>{
+				let lan: any;
+				for(lan of resp){
+					if(lan.name = "english") localStorage.setItem("lang",lan.id);
+				} 
+			});
+		}
+		else return Promise.resolve();
+	}
 
 	verifyToken() {
 
@@ -79,18 +84,19 @@ export class MyApp {
 			.then(() => this.storage.get('token'))
 			.then((token) => {
 				console.log(`Found token => ${token}`);
-				this.httputils.expiredToken(token)
-					.then((token)=>{
 
-						if (token) {
-							this.rootPage = MainPage;
-						}
-						else {
-							this.rootPage = Login;
-						}
-
-					});
 				// Verifica si el token ya expiro
+				this.httputils.expiredToken(token)
+					.then((token)=> {
+						this.rootPage = token ? MainPage : Login;
+					})
+				/* Tienes que agregar un catch para que 
+				 * no explote la app concho
+				 */
+					.catch((err) => {
+						console.log(err);
+						this.rootPage = Login;
+					});
 			})
 			.catch((e) => console.log(e));
 
@@ -124,10 +130,6 @@ export class MyApp {
 
 		// No hay problema con hacer esto
 		// asincrono?
-		this.storage.ready()
-			.then(() => this.storage.remove('token'))
-			.then(() => this.storage.remove('user'))
-			.catch((e) => console.log(e));
-
+		this.loginServ.logout();
 	}
 }

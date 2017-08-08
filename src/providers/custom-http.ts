@@ -50,7 +50,7 @@ export class HttpUtils {
 			'zone': this.apiUrl + '/zona',
 			'audioParada': this.apiUrl + '/audio/parada/',
 			'photoParada': this.apiUrl + '/photo/parada/',
-      'language': this.apiUrl + '/idioma'
+			'language': this.apiUrl + '/idioma'
 		};
 	}
 
@@ -82,27 +82,29 @@ export class HttpUtils {
 		return this.jwt.decodeToken(token).sub;
 	}
 
-	expiredToken(token)
-	{
-		if(token && this.isExpired(token))
-		{
+	expiredToken(token) {
+
+		if(token && this.isExpired(token)) {
+
 			let url = this.routes['tokenexp'];
 			let h = new Headers(this.headers);
 			h.set('Authorization', `Bearer <${token}>`);
 			let opt = new RequestOptions({ headers: h });
 
 			return this.http.get(url, opt).toPromise()
-			.then((resp) => { 
-				token = resp.json().token; 
-				this.storage.ready()
-				.then(() => {this.storage.set('token', token);});
-				return token;
-			});
+				.then((resp) => { 
+					token = resp.json().token; 
+					this.storage.ready()
+						.then(() => this.storage.set('token', token));
+					return token;
+				});
+
 		}
-		else{
-			//console.log("token no renovado");
+
+		else {
 			return Promise.resolve(token);
 		}
+
 	}
 
 	isExpired(token){	
